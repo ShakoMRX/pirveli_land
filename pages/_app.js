@@ -12,8 +12,11 @@ function MyApp(ctx) {
   </Layout>
 }
 
-MyApp.getInitialProps = async function () {
-  const appDataResp = await fetch('http://localhost:3000/api/hello');
+MyApp.getInitialProps = async function ({ctx: {req}}) {
+  const protocol = req.headers['x-forwarded-proto'] || 'http'
+  const baseUrl = req ? `${protocol}://${req.headers.host}` : ''
+  console.log('ctx', baseUrl)
+  const appDataResp = await fetch(baseUrl + '/api/hello');
   const appData = await appDataResp.json();
 
   return {

@@ -10,7 +10,6 @@ import { motion, useInView, useScroll, useTransform, useVelocity } from 'framer-
 import styles from '../styles/components/Home.module.scss'
 import variables, { getRGBdiff, hexToRgb } from '../src'
 
-console.log('variables', variables)
 
 export function AppNavigation({ navigation }) {
   const [hoverNav, setHoverNav] = useState(null);
@@ -152,10 +151,6 @@ export function AppNavigation({ navigation }) {
       </div>
     </div>
   )
-}
-
-function useParallax(value, distance) {
-  return useTransform(value, [0, 1], [distance, -distance]);
 }
 
 export default function Home(props) {
