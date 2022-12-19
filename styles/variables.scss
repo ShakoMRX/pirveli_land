@@ -1,0 +1,35 @@
+
+
+//
+$color-gray: #EDEEEF;
+$color-primary: #DB0060;
+$color-yellow: #EDC520;
+
+//
+$HEADER_SIZE: 80;
+
+$VOUCHERS_BRAND_COLOR: #9766F0;
+$MEDICAL_BRAND_COLOR: #FFBBB6;
+$SHOP_BRAND_COLOR: #5DB039;
+$LOTTERY_BRAND_COLOR: #DB0060;
+$GAMES_BRAND_COLOR: #EDC520;
+
+$brands: (
+  voucher: $VOUCHERS_BRAND_COLOR,
+  medical: $MEDICAL_BRAND_COLOR,
+  shop: $SHOP_BRAND_COLOR,
+  winning: $LOTTERY_BRAND_COLOR,
+  game: $GAMES_BRAND_COLOR,
+);
+
+$BP_TABLET_SM: 768;
+$BP_LAPTOP_MD: 1366;
+$BP_LAPTOP_XL: 1440;
+$BP_LAPTOP_SM: 1080;
+
+$divides: (2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 30, 40, 50,80, 200);
+
+
+
+//
+$LAYOUT_WRAP: 1530;

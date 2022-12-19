@@ -1,0 +1,423 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $color-gray;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+@import 'classes';
+@import 'sassync/sass/_default/_theme/reset';
+
+html,
+body {
+  font-family: 'Avenir Next Georgian';
+}
+
+.app-navigation {
+  // background-color: aquamarine;
+  width: 100%;
+  height: initial;
+
+  @include max-min(min px($BP_TABLET_SM)) {
+    height: 100px;
+  }
+
+  .layout-wrap-out {
+    // @include layout-wrap-out();
+    margin-left: -16px;
+    margin-right: -16px;
+
+    @include max-min(min px($BP_TABLET_SM)) {
+      margin-left: initial;
+      margin-right: initial;
+    }
+  }
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+    top: 100%;
+    // transform: translateX(-50%) translateY(-40px);
+  }
+
+  20% {
+    opacity: .1;
+    top: 50%;
+    // transform: translateX(-50%) translateY(-40px);
+  }
+
+  50% {
+    opacity: .5;
+    top: 20%;
+    // transform: translateX(-50%) translateY(-40px);
+  }
+
+  100% {
+    opacity: 1;
+    top: 0%;
+    transform: translateX(-50%) translateY(-40px);
+  }
+}
+
+.navigation2 {
+  &-bg {
+    display: none;
+
+    @include max-min(min px($BP_TABLET_SM)) {
+      display: block;
+    }
+  }
+
+  &--item {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    flex-shrink: 0;
+
+    @include max-min(min px($BP_TABLET_SM)) {
+      width: initial;
+      height: initial;
+    }
+
+  }
+
+  &--target {
+    height: 100%;
+    cursor: default;
+
+    .title {
+      z-index: 2;
+      width: 100%;
+      cursor: pointer;
+      line-height: 100px;
+
+      span {
+        position: relative;
+        z-index: 2;
+      }
+
+      &:hover {
+
+        @include max-min(min px($BP_TABLET_SM)) {
+          color: #FFF;
+          overflow: visible;
+
+          >div {
+            top: -100%;
+            transform: translateX(-50%) translateY(-40px);
+            opacity: 1;
+          }
+        }
+
+      }
+    }
+
+    .image-area {
+      width: 300px;
+      height: 300px;
+      transform: translateY(-100px);
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      >div {
+        width: inherit;
+        height: inherit;
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+
+      @include max-min(min px($BP_TABLET_SM)) {
+        width: initial;
+        height: initial;
+        width: 180px;
+        height: 180px;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        transition: all .7s cubic-bezier(0.075, 0.82, 0.165, 1);
+        opacity: 0;
+        @include flex-all;
+      }
+
+    }
+
+
+    &:hover {}
+  }
+}
+
+
+.navigation {
+  &-bg {
+    display: none;
+
+    @include max-min(min px($BP_TABLET_SM)) {
+      display: block;
+    }
+  }
+
+  &-list {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    padding-top: 100px;
+    // padding-inline: 16px;
+
+    @include max-min(min px($BP_TABLET_SM)) {
+      padding-top: 0;
+      overflow: initial;
+      // height: initial;
+      height: 100px;
+      justify-content: space-between;
+      padding-inline: initial;
+    }
+
+    @include max-min(min px($BP_TABLET_SM)) {
+      .simple-bg {
+        position: absolute;
+        height: 0;
+        width: 100%;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        transition: all .7s ease-in-out, height .7s cubic-bezier(.5, -0.95, .44, 1.69);
+
+        &::before {
+          // content: '';
+          // height: 100%;
+          // background-color: inherit;
+          // position: absolute;
+          // top: 0;
+          // left: 0;
+          // width: 100%;
+          // z-index: 1;
+          // transition: all .3s ease-in-out;
+          // filter: grayscale(1);
+        }
+
+        &.active {
+          height: 100%;
+          background-color: transparent;
+        }
+      }
+    }
+
+  }
+
+  &--item {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    flex-shrink: 0;
+    z-index: 2;
+
+    @include max-min(min px($BP_TABLET_SM)) {
+      width: initial;
+      height: 100%;
+      // flex: 1;
+    }
+
+
+    @each $platform,
+    $color in $brands {
+      &.bg {
+        &-#{$platform} {
+          background-color: $color;
+
+          @include max-min(min px($BP_TABLET_SM)) {
+            background-color: transparent;
+          }
+
+          &:hover {
+
+            // .image-area {
+
+            //   @include max-min(min px($BP_TABLET_SM)) {
+            //     top: -100%;
+            //     transform: translateX(-50%) translateY(-40px);
+            //     opacity: 1;
+            //   }
+            // }
+
+            ~div {
+              height: 100%;
+              background-color: $color !important;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &--target {
+    height: 100%;
+    // cursor: default;
+    width: 100%;
+    // height: initial;
+    @include flex;
+
+    @include max-min(min px($BP_TABLET_SM)) {
+      width: initial;
+      height: initial;
+    }
+
+    .title {
+      position: absolute;
+      bottom: 28px;
+      right: 44px;
+      color: #FFF;
+      z-index: 5;
+
+      &:hover {}
+
+      @include max-min(min px($BP_TABLET_SM)) {
+        position: unset;
+        margin: auto;
+        color: #000;
+        width: 100%;
+
+        &:hover {
+          color: #FFF;
+        }
+      }
+    }
+
+    .image-area {
+      width: 300px;
+      height: 300px;
+      transform: translateY(-100px);
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      >div {
+        width: inherit;
+        height: inherit;
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+
+      @include max-min(min px($BP_TABLET_SM)) {
+        width: initial;
+        height: initial;
+        width: 180px;
+        height: 180px;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        transition: all .7s cubic-bezier(0.075, 0.82, 0.165, 1), opacity .25s ease-in-out;
+        opacity: 0;
+        @include flex-all;
+        pointer-events: none;
+
+      }
+
+    }
+
+
+    &:hover {
+      .title {
+        color: #FFF;
+      }
+
+      .image-area {
+        @include max-min(min px($BP_TABLET_SM)) {
+          transition: all .7s cubic-bezier(0.075, 0.82, 0.165, 1), opacity .4s ease-in-out;
+          pointer-events: fill;
+
+          top: -100%;
+          transform: translateX(-50%) translateY(-40px);
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+.page-bg {
+  // display: none;
+
+  // @include max-min(min px($BP_TABLET_SM)) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  // overflow: hidden;
+
+  .bird {
+    width: 573px;
+    height: 746px;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .bird-top {
+    position: absolute;
+    top: - px(248 + 84);
+    left: calc(100% - 130px);
+  }
+
+  .bird-bottom {
+    position: absolute;
+    top: 300px;
+    right: calc(100% + 180px);
+  }
+
+  // }
+}
+
+.btn {
+  &--wrap {
+    background: #DB0060;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+}
+
+.video-container {
+
+  width: 100%;
+  height: 209px;
+  /* White */
+  background: #FFFFFF;
+  box-shadow: 0px 0px 32px rgba(0, 0, 0, 0.1);
+
+  @include max-min(min px($BP_TABLET_SM)) {
+    width: 100%;
+    height: 535px;
+  }
+}

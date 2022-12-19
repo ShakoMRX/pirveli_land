@@ -1,0 +1,22 @@
+.header {
+  // background-color: lightgray;
+  // padding: 25px 50px;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+
+  :global {
+    .header {
+      &--wrap {
+        @extend %layout-wrap;
+        min-height: px($HEADER_SIZE);
+      }
+    }
+  }
+}
+
+.userInfoBlock {
+  
+}

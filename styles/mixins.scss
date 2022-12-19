@@ -1,0 +1,75 @@
+@function px($s) {
+  @return #{$s}px
+};
+
+@mixin layoutWrap($bp: false) {
+  margin: 0 auto;
+  max-width: px($LAYOUT_WRAP);
+  width: 100%;
+  padding-inline: 16px;
+
+  @if($bp==true) {
+    @include max-min(min px(768)) {
+      padding-inline: 35px;
+    }
+
+    @include max-min(min px($BP_LAPTOP_XL)) {
+      padding-left: 50px;
+      padding-right: 50px;
+    }
+    
+    @include max-min(min px($LAYOUT_WRAP + 20)) {
+      padding-inline: 0;
+    }
+  }
+
+}
+
+
+@mixin _layoutWrap($selector, $value) {
+  #{selector}: -16px;
+
+  @if($bp==true) {
+    @include max-min(min px(768)) {
+      #{selector}: $value;
+    }
+
+    @include max-min(min px($BP_LAPTOP_XL)) {
+      #{selector}: $value;
+    }
+
+    
+    @include max-min(min px($LAYOUT_WRAP + 20)) {
+      #{selector}: $value;
+    }
+  }
+
+}
+
+@mixin layoutWrapOut($bp: false) {
+  margin-left: -16px;
+  margin-right: -16px;
+
+  @if($bp==true) {
+    @include max-min(min px(768)) {
+      margin-left: -35px;
+      margin-right: -35px;
+    }
+
+    @include max-min(min px($BP_LAPTOP_XL)) {
+      margin-left: -50px;
+      margin-right: -50px;
+    }
+
+    
+    @include max-min(min px($LAYOUT_WRAP + 20)) {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+}
+
+%layout-wrap {
+  @include layoutWrap(true);
+}
