@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from 'react'
 import ImageComponent from '../src/Components/ImageComponent'
 import { BirdTop } from '../src/Icons'
 import Button from '../src/Shared/Button'
-import { motion, useInView, useScroll, useTransform, useVelocity } from 'framer-motion'
+import { animate, motion, useInView, useMotionValue, useScroll, useSpring, useTransform, useVelocity, useViewportScroll } from 'framer-motion'
 import styles from '../styles/components/Home.module.scss'
 import variables, { getRGBdiff, hexToRgb } from '../src'
 
@@ -123,15 +123,17 @@ export function AppNavigation({ navigation }) {
       <div className='layout-wrap flx h-full'>
 
         <ul
-          onMouseMove={(e) => onMouseMove(e)}
-          onMouseLeave={() => showBg(null, false)}
+          // onMouseMove={(e) => onMouseMove(e)}
+          // onMouseLeave={() => showBg(null, false)}
           className='navigation-list flx m-block-auto gap-10 md-gap-0'>
           {navigation.map((nav) => {
             return <li key={nav.slug}
               data-name={nav.slug}
-              onMouseEnter={(e) => showBg(e, true)}
+
               className={classNames('navigation--item text-center size-full flx flx-all', `bg-${nav.slug}`)}>
               <Link
+                onMouseEnter={(e) => showBg(e, true)}
+                onMouseLeave={() => showBg(null, false)}
                 href={nav.slug}
                 className='navigation--target flx'>
                 <div
@@ -157,16 +159,37 @@ export default function Home(props) {
   const ref = useRef();
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["end end", "start start"]
-  });
-  // const { scrollYProgress } = useScroll();
-  // const y = useParallax(scrollYProgress, 165);
-  const isInView = useInView(ref)
-  const opacity = useVelocity(scrollYProgress, [1, 0], [1, 0]);
+    offset: ['end start', 'start start']
+  })
+  const isInView = useInView(ref);
 
+  const opacity = useMotionValue(0);
+  const velocity = useVelocity(scrollYProgress);
+
+  const baseX = useMotionValue(0);
+  const { scrollY } = useScroll();
+  const scrollVelocity = useVelocity(scrollYProgress);
+  const smoothVelocity = useSpring(scrollYProgress);
+  const skewVelocity = useSpring(scrollVelocity, {
+    stiffness: 100,
+    damping: 30,
+  });
+
+  const skewVelocityFactor = useTransform(
+    smoothVelocity,
+    [0, 1],
+    [-500, 500]
+  );
+
+  const x = useTransform(scrollYProgress, [0, 1], [2500, 0])
+
+  const y = useTransform(scrollYProgress, [0, 1], [-2500, 0])
+  const z = useTransform(scrollYProgress, [0, 1], [2500, 0])
   useEffect(() => {
-    console.log("isInView", isInView)
-  }, [isInView])
+    return skewVelocityFactor.onChange((latest) => {
+      console.log("Page scroll: ", latest)
+    })
+  }, [])
 
   return (
     <div className={''}>
@@ -176,24 +199,44 @@ export default function Home(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <div className='full-page-md relative'>
+        {/* {rotate } */}
+        <motion.div
+          ref={ref}
 
 
-      <div ref={ref}  className='full-page-md relative'>
-        <motion.div className='section-md-full md-flx md-flx-col md-flx-all justify-content-evenly'>
-          <div className='section section-md-auto divide-h flx flx-all flx-col relative'>
+          className='section-md-full md-flx md-flx-col md-flx-all justify-content-evenly'>
+          <div
+
+            className='section section-md-auto divide-h flx flx-all flx-col relative'>
+            <svg id="progress" width="75" height="75" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="30" pathLength="1" className="bg" />
+              <motion.circle
+                cx="50"
+                cy="50"
+                r="30"
+                pathLength="1"
+                className="indicator"
+                style={{ pathLength: scrollYProgress }}
+              />
+            </svg>
+
             <div className='page-bg'>
-              <div className='bird bird-top'>
-                <svg>
+              <motion.div
+                style={{ x, z, y }}
+                className='bird bird-top svg-clipped'>
+                {/* <svg>
                   <use href="#svg_bird_top" />
-                </svg>
-              </div>
-              <div className='bird bird-bottom'>
-                <svg>
+                </svg> */}
+              </motion.div>
+              <motion.div style={{ x, z, y }} className='bird bird-bottom svg-clipped'>
+                {/* <svg id={'bird'}>
                   <use href="#svg_bird_bottom" />
-                </svg>
-              </div>
+                </svg> */}
+              </motion.div>
             </div>
-            <motion.div   className='top intro-section text-center relative'>
+            <motion.div
+              className='top intro-section text-center relative'>
               <div className='intro-header w-max-747 text-s-26 md-text-s-40 md-l-text-s-55 text-weight-700'>
                 <p><span>დააგროვე და გადაცვალე</span> <spam className='text-color-primary'>მონეტები</spam></p>
               </div>
@@ -205,6 +248,7 @@ export default function Home(props) {
               </div>
             </motion.div>
           </div>
+
           <div className='section section-md-auto divide-h flx flx-all flx-col w-wide'>
             <div className='w-wide'>
               <AppNavigation navigation={props.appData.platforms} />
@@ -214,6 +258,7 @@ export default function Home(props) {
       </div>
 
       <div className='full-page-md relative'>
+
         <div
           className='section-md-full md-flx md-flx-all size-full p-top-80 layout-wrap'>
           <div className='md-flx md-flx-row gap-30 w-wide'>

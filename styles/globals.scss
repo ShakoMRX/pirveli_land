@@ -170,6 +170,12 @@ body {
 }
 
 
+$animation_time: .4s;
+$bg_animation: all $animation_time ease-in-out, height $animation_time ease-in-out;
+$bg_animation_active: all $animation_time ease-in-out, height $animation_time cubic-bezier(0.175,  0.885, 0.320, 1.15);
+$img_animation: transform $animation_time cubic-bezier(0.175,  0.885, 0.320, 1.15),top $animation_time ease-in-out, opacity $animation_time ease-out;
+$img_animation_active: transform $animation_time cubic-bezier(0.175,  0.885, 0.320, 1.15),top $animation_time ease-in-out, opacity $animation_time ease-in;
+
 .navigation {
   &-bg {
     display: none;
@@ -190,7 +196,7 @@ body {
       padding-top: 0;
       overflow: initial;
       // height: initial;
-      height: 100px;
+      height: initial;
       justify-content: space-between;
       padding-inline: initial;
     }
@@ -203,7 +209,7 @@ body {
         top: 50%;
         left: 0;
         transform: translateY(-50%);
-        transition: all .7s ease-in-out, height .7s cubic-bezier(.5, -0.95, .44, 1.69);
+        transition: $bg_animation;
 
         &::before {
           // content: '';
@@ -221,6 +227,7 @@ body {
         &.active {
           height: 100%;
           background-color: transparent;
+          transition: $bg_animation_active;
         }
       }
     }
@@ -236,7 +243,7 @@ body {
 
     @include max-min(min px($BP_TABLET_SM)) {
       width: initial;
-      height: 100%;
+      height: initial;
       // flex: 1;
     }
 
@@ -323,7 +330,6 @@ body {
         }
       }
 
-
       @include max-min(min px($BP_TABLET_SM)) {
         width: initial;
         height: initial;
@@ -332,12 +338,11 @@ body {
         position: absolute;
         top: 100%;
         left: 50%;
-        transform: translateX(-50%);
-        transition: all .7s cubic-bezier(0.075, 0.82, 0.165, 1), opacity .25s ease-in-out;
+        transform: translateX(-50%) translateY(0px);
+        transition: $img_animation;
         opacity: 0;
         @include flex-all;
         pointer-events: none;
-
       }
 
     }
@@ -350,11 +355,11 @@ body {
 
       .image-area {
         @include max-min(min px($BP_TABLET_SM)) {
-          transition: all .7s cubic-bezier(0.075, 0.82, 0.165, 1), opacity .4s ease-in-out;
+          // transition: all .7s cubic-bezier(0.075, 0.82, 0.165, 1), opacity .4s ease-in-out;
           pointer-events: fill;
-
-          top: -100%;
-          transform: translateX(-50%) translateY(-40px);
+          transition: $img_animation_active;
+          top: 0%;
+          transform: translateX(-50%) translateY(-180px);
           opacity: 1;
         }
       }
@@ -420,4 +425,10 @@ body {
     width: 100%;
     height: 535px;
   }
+}
+
+.svg-clipped {
+  -webkit-clip-path: url(#svgPath);
+  clip-path: url(#svgPath);
+  background-color: rgba($color-primary, .2);
 }
