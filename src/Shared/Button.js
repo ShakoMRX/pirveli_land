@@ -17,7 +17,9 @@ export default function Button({
         [`variant-${variant}`]: variant,
         [`size-${size}`]: size,
         [`reset`]: reset,
-      }, className)}>
+      }, className)}
+      {...props}
+      >
         {text ? text : children}
       </button>
     </div>

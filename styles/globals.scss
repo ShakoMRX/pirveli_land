@@ -15,10 +15,19 @@ a {
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+  width: 100%;
+}
+
 body {
   background-color: $color-gray;
   max-width: 100%;
   overflow-x: hidden;
+  > div { // !!!
+    height: 100vh;
+    width: 100%;
+  }
 }
 
 @import 'classes';
