@@ -25,8 +25,6 @@ MyApp.getInitialProps = async function ({ ctx: { req } }) {
   // const appDataResp = await fetch('http://localhost:3000' + '/api/hello');
   // const appData = await appDataResp.json();
 
-  console.log('process.env.SHOP_LINK', process.env)
-
   const navigation = [
     { name: 'მაღაზია', url: process.env.SHOP_LINK, slug: 'shop' },
     { name: 'მედიქალი', url: process.env.MEDICAL_LINK, slug: 'medical' },
@@ -36,13 +34,43 @@ MyApp.getInitialProps = async function ({ ctx: { req } }) {
   ]
   let resp;
 
-  try {
-    const userResp = await fetch(process.env.API_URL + '/racoon-transactions/user');
-    const data = await userResp.text();
-    resp = userResp.status == 200 ? {id: data} : null
-  } catch {
-    resp = null
+  const userResp = await fetch(`${process.env.API_URL}/racoon-transactions/user`, {
+    headers: {
+      'Authorization': `Bearer ${process.env.appToken}`
+    }
+  });
+  const data = await userResp.text();
+  resp = userResp.status == 200 ? { id: data } : null;
+
+  console.log('[---]', userResp.status)
+
+
+  if (userResp.status == 200) {
+    const userAvatarResp = await fetch(`${process.env.API_URL}/user/user/get-auth-user-avatar`,
+      {
+        headers: {
+          'Authorization': `Bearer ${process.env.appToken}`
+        }
+      })
+    const userPointsResp = await fetch(`${process.env.API_URL}/racoon-transactions/vouchers/get-user-points`,
+      {
+        headers: {
+          'Authorization': `Bearer ${process.env.appToken}`
+        }
+      })
+
+
+    if (userAvatarResp.status == 200) {
+      const userAvatar = await userAvatarResp.json();
+      resp = Object.assign(resp, { avatar: userAvatar })
+    }
+    if (userPointsResp.status == 200) {
+      console.log('----------------')
+      const userPoints = await userPointsResp.json();
+      resp = Object.assign(resp, { points: userPoints })
+    }
   }
+
 
   return {
     appData: {

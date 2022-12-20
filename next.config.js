@@ -22,6 +22,7 @@ const nextConfig = {
     VOUCHER_LINK: 'https://vouchers.pirveli.com/',
     WIN_LINK: 'https://win.pirveli.com/',
     GAME_LINK: 'https://pirveli.pirveli.com/',
+    appToken
   },
   sassOptions: {
     includePaths: [

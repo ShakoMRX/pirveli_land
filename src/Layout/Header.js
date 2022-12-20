@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
 import styles from '../../styles/components/Header.module.scss';
@@ -9,6 +10,8 @@ import { useUser } from '../store';
 
 export default function Header() {
   const [user,] = useUser();
+
+  console.log('user', user)
 
   return (
     <div className={classNames(styles.header, 'absolute top-0 w-full')}>
@@ -26,9 +29,13 @@ export default function Header() {
                 <div className='p-left-16'>
                   <ImageComponent width={20} height={20} src={'/assets/img/coin.png'} />
                 </div>
-                <div>40,076</div>
-                <div className='w-40 h-40 b-radius-inherit bg-color-yellow flx flx-all'>
-                  <ImageComponent width={20} height={20} src={'/assets/img/avatar.png'} />
+                <div>{user?.points ? user?.points?.amountOfPoints : '0'}</div>
+                <div className='w-40 h-40 b-radius-inherit bg-color-yellow flx flx-all'
+                  style={user?.avatar && user?.avatar?.code ? {
+                    backgroundColor: `#${user?.avatar?.code}`
+                  } : {}}
+                >
+                  <Image alt='' width={15} height={20} src={`/assets/img/avatars/avatar${user.avatar ? user.avatar.path : '1' }.png`} />
                 </div>
               </Button>
             </Link>

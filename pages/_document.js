@@ -7,7 +7,6 @@ import SvgElements from '../src/Icons/SvgElements';
 export default function MyDocument() {
   const ref = useRef();
   const { scrollYProgress } = useScroll({ target: ref });
-  console.log('y', scrollYProgress)
 
   return (
     <Html>
