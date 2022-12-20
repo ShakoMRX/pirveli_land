@@ -34,41 +34,27 @@ MyApp.getInitialProps = async function ({ ctx: { req } }) {
   ]
   let resp;
 
-  const userResp = await fetch(`${process.env.API_URL}/racoon-transactions/user`, {
-    headers: {
-      'Authorization': `Bearer ${process.env.appToken}`
-    }
-  });
+  const userResp = await fetch(`${process.env.API_URL}/racoon-transactions/user`);
   const data = await userResp.text();
   resp = userResp.status == 200 ? { id: data } : null;
 
-  console.log('[---]', userResp.status)
-
 
   if (userResp.status == 200) {
-    const userAvatarResp = await fetch(`${process.env.API_URL}/user/user/get-auth-user-avatar`,
-      {
-        headers: {
-          'Authorization': `Bearer ${process.env.appToken}`
-        }
-      })
-    const userPointsResp = await fetch(`${process.env.API_URL}/racoon-transactions/vouchers/get-user-points`,
-      {
-        headers: {
-          'Authorization': `Bearer ${process.env.appToken}`
-        }
-      })
+    const userAvatarResp = await fetch(`${process.env.API_URL}/user/user/get-auth-user-avatar`)
+    const userPointsResp = await fetch(`${process.env.API_URL}/racoon-transactions/vouchers/get-user-points`)
 
 
     if (userAvatarResp.status == 200) {
       const userAvatar = await userAvatarResp.json();
       resp = Object.assign(resp, { avatar: userAvatar })
     }
+
     if (userPointsResp.status == 200) {
-      console.log('----------------')
       const userPoints = await userPointsResp.json();
       resp = Object.assign(resp, { points: userPoints })
     }
+
+    // resp = Object.assign(resp, { id: data });
   }
 
 
