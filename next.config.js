@@ -14,7 +14,8 @@ const nextConfig = {
   },
   env: {
     API_URL: 'https://pirveli.pirveli.com/api',
-    AUTH_LINK: 'https://auth.pirveli.com/realms/xracoon-demo/protocol/openid-connect/auth?client_id=demo-client&response_type=code&scope=email&redirect_uri=http://pirveli.pirveli.com',
+    AUTH_LINK: 'https://auth.pirveli.com/realms/xracoon-demo/protocol/openid-connect/auth?client_id=demo-client&response_type=code&scope=email&redirect_uri=https://pirveli.com',
+    REGISTER_LINK: 'https://auth.pirveli.com/realms/xracoon-demo/protocol/openid-connect/auth?client_id=demo-client&response_type=code&scope=email&redirect_uri=https://pirveli.com',
     PROFILE_LINK: 'https://profile.pirveli.com/',
     SHOP_LINK: 'https://shop.pirveli.com/',
     MEDICAL_LINK: 'https://medical.pirveli.com/',

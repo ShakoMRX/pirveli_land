@@ -136,6 +136,7 @@ export function AppNavigation({ navigation }) {
                 onMouseEnter={(e) => showBg(e, true)}
                 onMouseLeave={() => showBg(null, false)}
                 href={nav.url || '/'}
+                target={'_self'}
                 className='navigation--target flx'>
                 <div
                   onMouseEnter={(e) => onMouseEnter(e, nav.slug)}
@@ -164,7 +165,7 @@ let options = {
   scrollBar: false,
   navigation: false,
   verticalAlign: false,
-  sectionPaddingTop: '80px',
+  sectionPaddingTop: '0',
   // sectionPaddingBottom: '80px',
   // arrowNavigation: true,
   onLeave: function () {
@@ -279,7 +280,7 @@ export function Home2(props) {
               <div className='intro-action p-top-40'>
                 <Button
                   onClick={() => {
-                    containerViewRef.current.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+                    // containerViewRef.current.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
                   }}
                   text={'დაწყება'} variant={'primary'} size={'large'} />
               </div>
@@ -297,7 +298,7 @@ export function Home2(props) {
       <div className='full-page-md relative'>
 
         <div
-          ref={containerViewRef}
+          // ref={containerViewRef}
           className='section-md-full md-flx md-flx-all size-full p-top-80 layout-wrap'>
           <div className='md-flx md-flx-row gap-30 w-wide'>
             <div ref={videContainerRef} className='section section-md-auto divide-h p-top-80'>
@@ -352,7 +353,7 @@ export function Home2(props) {
 const MainSection = ({ active: section, navigation = [] }) => {
   const ref = useRef();
   const [user,] = useUser();
-  
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['end start', 'start start']
@@ -372,13 +373,13 @@ const MainSection = ({ active: section, navigation = [] }) => {
   })
 
   useEffect(() => {
-    if (section && section.activeSection.toString().length) { 
+    if (section && section.activeSection.toString().length) {
       bird_top_x.set(section.activeSection.toString() !== '0' ? 2500 : 0)
       bird_top_y.set(section.activeSection.toString() !== '0' ? -2500 : 0)
-      
+
       bird_bottom_x.set(section.activeSection.toString() !== '0' ? 2500 : 0)
       bird_bottom_y.set(section.activeSection.toString() !== '0' ? -2500 : 0)
-     }
+    }
   }, [bird_top_x, bird_top_y, section])
 
   // const x = useTransform(isInView ? 1 : 0, [0, 1], [2500, 0])
@@ -414,13 +415,12 @@ const MainSection = ({ active: section, navigation = [] }) => {
           <p>აღმოაჩინე ახალი რეალობა, სადაც ყოველთვის მოგებული დარჩები!</p>
         </div>
         <div className='intro-action p-top-40'>
-          <Link href={
-            !user ? process.env.AUTH_LINK : process.env.PROFILE_LINK
-          }>
+          <Link
+            target={'_self'}
+            href={
+              !user ? process.env.REGISTER_LINK : process.env.PROFILE_LINK
+            }>
             <Button
-              onClick={() => {
-                containerViewRef.current.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
-              }}
               text={'დაწყება'} variant={'primary'} size={'large'} />
           </Link>
         </div>

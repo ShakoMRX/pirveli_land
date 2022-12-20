@@ -19,7 +19,7 @@ export default function Header() {
           </Link>
         </div>
         <div className='user-area m-left-auto flx gap-12'>
-          {!user ? <Button variant={'primary'} size={'normal'} text={'შესვლა'} /> : null}
+          {!user ? <Link href={process.env.REGISTER_LINK || ''} target='_self'><Button variant={'primary'} size={'normal'} text={'შესვლა'} /></Link> : null}
           {user
             ? <Link href={process.env.PROFILE_LINK}>
               <Button reset variant={'outline'} className="flx align-items-center gap-12">
