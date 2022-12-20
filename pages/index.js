@@ -161,7 +161,7 @@ export function AppNavigation({ navigation }) {
 let options = {
   delay: 2000,
   sectionClassName: 'section',
-  anchors: ['sectionOne', 'sectionTwo', 'sectionThree'],
+  anchors: ['intro', 'faq', 'sectionThree'],
   scrollBar: false,
   navigation: false,
   verticalAlign: false,
@@ -496,7 +496,7 @@ export default function Home(props) {
       <Section>
         <FaqSection />
       </Section>
-      <Section className="fp-auto-height">Page 3</Section>
+      {/* <Section className="fp-auto-height">Page 3</Section> */}
     </SectionsContainer>
     // <div className={''}>
     //   <FullPage className={'section-md-full md-flx md-flx-col md-flx-all justify-content-evenly'} >
