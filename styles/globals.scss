@@ -384,6 +384,14 @@ opacity $animation_time ease-in;
   }
 }
 
+.mobileContainer {
+  display: block;
+
+  @include max-min(min px($BP_TABLET_SM)) {
+    display: none !important;
+  }
+}
+
 .page-bg {
   // display: none;
 

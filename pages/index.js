@@ -12,6 +12,7 @@ import variables, { getRGBdiff, hexToRgb } from '../src'
 import FullPage from '../src/Components/FullPage'
 import { useScrollValue, useUser } from '../src/store'
 import { SectionsContainer, Section } from 'react-fullpage';
+import ReactFullpage from '@fullpage/react-fullpage'
 
 export function AppNavigation({ navigation }) {
   const [hoverNav, setHoverNav] = useState(null);
@@ -338,8 +339,19 @@ const slideTimeSpeed = 3000;
 const pagerSpeed = slideTimeSpeed - 300;
 const framerSpeed = slideTimeSpeed / 1000;
 
+const sectionMap = {
+  intro: 0,
+  faq: 1,
+  some: ''
+}
+const isServer = typeof window == 'undefined';
+
+const checkActive = (key) => {
+  return !isServer ? sectionMap[window.location.hash.replace('#', '')] == key : false
+}
 
 let options = {
+  activeSection: !isServer ? sectionMap[window.location.hash.replace('#', '')] : 0,
   delay: slideTimeSpeed - 300,
   sectionClassName: 'section',
   anchors: ['intro', 'faq', 'sectionThree'],
@@ -679,10 +691,11 @@ export default function Home(props) {
   const introSection = useRef(null);
   const faqSection = useRef(null);
   const footerSection = useRef(null);
-  const [activeSection, setActiveIndex] = useState({ activeSection: 0 });
+  const [activeSection, setActiveIndex] = useState({ activeSection: options.activeSection });
+  const anchors = ["firstPage", "secondPage", "thirdPage"];
 
   return (
-    <SectionsContainer {...options}
+    <SectionsContainer className="container"  {...options}
       scrollCallback={(e) => {
         // console.log('beforeLeave', e);
         setActiveIndex(e);
@@ -693,13 +706,13 @@ export default function Home(props) {
       <Section>
         <FaqSection active={activeSection} />
       </Section>
-      <Section>
+      {false && <Section className="mobileContainer" verticalAlign="true">
         <div className='full-page'>
-        <div style={{height: 5000, backgroundColor: 'lightblue'}}>
-        some Section
+          <div style={{ height: 5000, backgroundColor: 'lightblue' }}>
+            some Section
+          </div>
         </div>
-        </div>
-      </Section>
+      </Section>}
       {/* <Section className="fp-auto-height">Page 3</Section> */}
     </SectionsContainer>
   )
