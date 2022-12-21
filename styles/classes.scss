@@ -408,9 +408,15 @@
   // overscroll-behavior: ;
 }
 
+.SectionContainer {
+  overflow: hidden;
+}
+
 .section {
-  height: 100vh;
-  width: 100%;
+  // height: 100vh;
+  // width: 100%;
+
+  overflow: visible !important;
 
   &-md-full {
     @include max-min(min px(768)) {

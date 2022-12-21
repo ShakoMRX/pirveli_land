@@ -15,7 +15,6 @@ export function ScrollProvider({ children }) {
   }
 
   useEffect(() => {
-    console.log('object', document.documentElement.scrollTop)
     // var wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
     var wheelEvent = 'scroll';
 
@@ -37,7 +36,7 @@ export function ScrollProvider({ children }) {
 
     window.addEventListener('DOMMouseScroll', onScrollEvent, { passive: false });
     return () => {
-      window.removeEventListener(wheelEvent, onScrollEvent)
+      window.removeEventListener('DOMMouseScroll', onScrollEvent)
     }
   }, [])
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { BirdBottom, BirdPath, BirdTop } from './Birds'
+import { BirdBigger, BirdBottom, BirdPath, BirdTop } from './Birds'
 
 export default function SvgElements() {
   return (
@@ -10,6 +10,7 @@ export default function SvgElements() {
       <svg visibility={'hidden'} width={0} height={0}>
         <BirdTop />
         <BirdBottom />
+        <BirdBigger />
       </svg>
     </svg>
   )

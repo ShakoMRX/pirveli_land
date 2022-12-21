@@ -18,7 +18,6 @@ export default function MyDocument() {
           type="font/otf"
           crossOrigin="anonymous"
         />
-        <meta name="viewport" content="width=device-width,initial-scale=1"></meta>
         <style
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
@@ -93,7 +92,7 @@ export default function MyDocument() {
         />
       </Head>
       <body ref={ref}>
-        {/* <script>0</script> */}
+        <script>0</script>
         <Main scroll={scrollYProgress} />
         <NextScript />
 

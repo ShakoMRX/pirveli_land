@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useRef, useState } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 import ImageComponent from '../src/Components/ImageComponent'
 import { BirdTop } from '../src/Icons'
 import Button from '../src/Shared/Button'
@@ -156,22 +156,6 @@ export function AppNavigation({ navigation }) {
     </div>
   )
 }
-
-
-let options = {
-  delay: 2000,
-  sectionClassName: 'section',
-  anchors: ['intro', 'faq', 'sectionThree'],
-  scrollBar: false,
-  navigation: false,
-  verticalAlign: false,
-  sectionPaddingTop: '0',
-  // sectionPaddingBottom: '80px',
-  // arrowNavigation: true,
-  onLeave: function () {
-    console.log('-------------------')
-  }
-};
 
 export function Home2(props) {
   const ref = useRef();
@@ -350,37 +334,119 @@ export function Home2(props) {
   )
 }
 
+const slideTimeSpeed = 3000;
+const pagerSpeed = slideTimeSpeed - 300;
+const framerSpeed = slideTimeSpeed / 1000;
+
+
+let options = {
+  delay: slideTimeSpeed - 300,
+  sectionClassName: 'section',
+  anchors: ['intro', 'faq', 'sectionThree'],
+  scrollBar: false,
+  navigation: false,
+  verticalAlign: false,
+  sectionPaddingTop: '0',
+  // arrowNavigation: true
+};
+
+const birdTopTemplate = {
+  hidden: {
+    opacity: 0, x: 1200, y: -1200,
+    transition: {
+      duration: framerSpeed
+    }
+  },
+  show: {
+    opacity: 1,
+    x: 0,
+    y: 0,
+    transition: {
+      duration: framerSpeed,
+      ease: [0.3, 1.05, 0.5, 1.05]
+    }
+  }
+}
+
+const birdBottomTemplate = {
+  hidden: {
+    opacity: 0, x: 1200, y: -1200,
+    transition: {
+      duration: framerSpeed
+    }
+  },
+  show: {
+    opacity: 1,
+    x: 0,
+    y: 0,
+    transition: {
+      duration: framerSpeed,
+      ease: [0.3, 1.05, 0.5, 1.04]
+    }
+  }
+}
+
+const intoTextTemplate = {
+  hidden: {
+    opacity: 0,
+    y: -200,
+    scale: 0.7,
+    transition: {
+      duration: framerSpeed / 3
+    }
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: framerSpeed / 1.5,
+      ease: [0.3, 1, 0.5, 1]
+    }
+  }
+}
+
 const MainSection = ({ active: section, navigation = [] }) => {
   const ref = useRef();
   const [user,] = useUser();
+  const isActive = section.activeSection == 0;
 
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['end start', 'start start']
-  })
+  // console.log('isActive', section.activeSection)
 
-  const isInView = useInView(ref);
-  const bird_top_x = useSpring(0)
-  const bird_top_y = useSpring(0)
+  // const { scrollYProgress } = useScroll({
+  //   target: ref,
+  //   offset: ['end start', 'start start']
+  // })
 
-  const bird_bottom_x = useSpring(0, {
-    damping: 100,
-    stiffness: 20
-  })
-  const bird_bottom_y = useSpring(0, {
-    damping: 100,
-    stiffness: 20
-  })
+  // const _springOpt = {
+  //   damping: 100,
+  //   duration: 3,
+  // }
 
-  useEffect(() => {
-    if (section && section.activeSection.toString().length) {
-      bird_top_x.set(section.activeSection.toString() !== '0' ? 2500 : 0)
-      bird_top_y.set(section.activeSection.toString() !== '0' ? -2500 : 0)
+  // // const isInView = useInView(ref);
+  // const bird_top_x = useSpring(0, _springOpt)
+  // const bird_top_y = useSpring(0, _springOpt)
+  // const zValue = useMotionValue(section && section.activeSection.toString().length ? 1 : 0)
 
-      bird_bottom_x.set(section.activeSection.toString() !== '0' ? 2500 : 0)
-      bird_bottom_y.set(section.activeSection.toString() !== '0' ? -2500 : 0)
-    }
-  }, [bird_top_x, bird_top_y, section])
+  // const z = useTransform(zValue, [1, 0], [2500, 0], {
+  //   clamp: false
+  // })
+
+
+  // const bird_bottom_x = useSpring(0, _springOpt)
+  // const bird_bottom_y = useSpring(0, _springOpt)
+
+  // useEffect(() => {
+  //   if (section && section.activeSection.toString().length) {
+  //     bird_top_x.set(section.activeSection.toString() !== '0' ? 2500 : 0)
+  //     bird_top_y.set(section.activeSection.toString() !== '0' ? -2500 : 0)
+
+  //     bird_bottom_x.set(section.activeSection.toString() !== '0' ? 2500 : 0)
+  //     bird_bottom_y.set(section.activeSection.toString() !== '0' ? -2500 : 0)
+
+  //     z.set(section.activeSection.toString() !== '0' ? 1 : 0)
+  //   }
+  // }, [bird_top_x, bird_top_y, section])
 
   // const x = useTransform(isInView ? 1 : 0, [0, 1], [2500, 0])
 
@@ -390,23 +456,32 @@ const MainSection = ({ active: section, navigation = [] }) => {
 
   // console.log('object', process.env.AUTH_LINK)
 
-  return <FullPage ref={ref} className={'size-full overflow-hidden md-flx md-flx-col md-flx-all justify-content-evenly'} >
+  return <FullPage ref={ref} className={'size-full md-flx md-flx-col md-flx-all justify-content-evenly'} >
     <div className='divide-h flx flx-all flx-col relative'>
       <div className='page-bg'>
         <motion.div
-          style={{ x: bird_top_x, y: bird_top_y }}
+          variants={birdTopTemplate}
+          initial={'show'}
+          animate={isActive ? 'show' : 'hidden'}
           className='bird bird-top svg-clipped'>
           {/* <svg>
           <use href="#svg_bird_top" />
         </svg> */}
         </motion.div>
-        <motion.div style={{ x: bird_top_x, y: bird_top_y }} transition={{}} className='bird bird-bottom svg-clipped'>
+        <motion.div
+          variants={birdBottomTemplate}
+          initial={'show'}
+          animate={isActive ? 'show' : 'hidden'}
+          className='bird bird-bottom svg-clipped'>
           {/* <svg id={'bird'}>
           <use href="#svg_bird_bottom" />
         </svg> */}
         </motion.div>
       </div>
-      <div
+      <motion.div
+        variants={intoTextTemplate}
+        initial={'show'}
+        animate={isActive ? 'show' : 'hidden'}
         className='top intro-section text-center relative'>
         <div className='intro-header w-max-747 text-s-26 md-text-s-40 md-l-text-s-55 text-weight-700'>
           <p><span>დააგროვე და გადაცვალე</span> <spam className='text-color-primary'>მონეტები</spam></p>
@@ -424,25 +499,131 @@ const MainSection = ({ active: section, navigation = [] }) => {
               text={'დაწყება'} variant={'primary'} size={'large'} />
           </Link>
         </div>
-      </div>
+      </motion.div>
     </div>
-    <div className='section section-md-auto divide-h flx flx-all flx-col w-wide'>
+    <motion.div
+      variants={intoTextTemplate}
+      initial={'show'}
+      animate={isActive ? 'show' : 'hidden'}
+      className='section section-md-auto divide-h flx flx-all flx-col w-wide'>
       <div className='w-wide'>
         <AppNavigation navigation={navigation} />
       </div>
-    </div>
+    </motion.div>
   </FullPage>
 }
 
-const FaqSection = () => {
+
+const videoContainerTemplate = {
+  hidden: {
+    opacity: 0,
+    y: 200,
+    scale: 0.4,
+    transition: {
+      duration: framerSpeed / 3
+    }
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      delay: .3,
+      duration: framerSpeed,
+      ease: [0.3, 1, 0.5, 1]
+    }
+  }
+}
+
+const textContainerTemplate = {
+  hidden: {
+    opacity: 0,
+    x: -5000,
+    transition: {
+      duration: framerSpeed / 3
+    }
+  },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      delay: .3,
+      duration: framerSpeed,
+      ease: [0.3, 1, 0.5, 1]
+    }
+  }
+}
+
+const textContainerTemplate2 = {
+  hidden: {
+    opacity: 0,
+    x: -5000,
+    transition: {
+      duration: framerSpeed / 1.5
+    }
+  },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      // delay: .3,
+      duration: framerSpeed,
+      ease: [0.3, 1, 0.5, 1]
+    }
+  }
+}
+
+const faqBirdMovement = {
+  hidden: {
+    // opacity: 0,
+    x: -1200,
+    y: 700,
+    transition: {
+      duration: framerSpeed / 1.5
+    }
+  },
+  hidden1: {
+    // opacity: 0,
+    x: 2400,
+    y: -700,
+    transition: {
+      duration: framerSpeed / 1.5
+    }
+  },
+  show: {
+    // opacity: 1,
+    x: 0,
+    y: 0,
+    transition: {
+      // delay: .3,
+      duration: framerSpeed,
+      ease: [0.3, 1.05, 0.5, 1.05]
+    }
+  }
+}
+
+
+const FaqSection = ({ active }) => {
+  const isActive = active.activeSection == 1;
+
   return <div
     className='size-full md-flx md-flx-all size-full layout-wrap'>
-    <div className='md-flx md-flx-row gap-30 w-wide'>
+    <div className='md-flx md-flx-row gap-30 w-wide relative'>
       <div className='section section-md-auto divide-h p-top-80'>
         <div className='info-section w-full l-sm-w-490 lg-w-619'>
           <h4 className='title-area flx flx-col text-weight-700 text-s-16 md-text-s-20 l-sm-text-s-28'>
-            <p>ლოიალურობაზე დაფუძნებული</p>
-            <p className='text-color-primary m-left-auto'>ციფრული ეკოსისტემა</p>
+            <motion.p
+
+              variants={textContainerTemplate}
+              initial={'show'}
+              animate={isActive ? 'show' : 'hidden'}
+            >ლოიალურობაზე დაფუძნებული</motion.p>
+            <motion.p
+
+              variants={textContainerTemplate2}
+              initial={'show'}
+              animate={isActive ? 'show' : 'hidden'}
+              className='text-color-primary m-left-auto'>ციფრული ეკოსისტემა</motion.p>
           </h4>
           <ul className='flx flx-col gap-20'>
             <li className='flx flx-col gap-8'>
@@ -468,7 +649,21 @@ const FaqSection = () => {
       </div>
       <div className='section section-md-auto divide-h flx flx-all md-block flex-g-1'>
 
-        <motion.div className='video-container'>
+        <motion.div
+          className='faqBird-bg'
+          variants={faqBirdMovement}
+          initial={'show'}
+          animate={isActive ? 'show' : active.activeSection > 1 ? 'hidden1' : 'hidden'}
+        >
+          <svg id={'bird'}>
+            <use href="#bird_3" />
+          </svg>
+        </motion.div>
+        <motion.div
+          variants={videoContainerTemplate}
+          initial={'show'}
+          animate={isActive ? 'show' : 'hidden'}
+          className='video-container'>
 
         </motion.div>
 
@@ -477,119 +672,35 @@ const FaqSection = () => {
   </div>
 }
 
+const MainSectionMemo = memo(MainSection, (p, n) => p.active.activeSection == n.active.activeSection)
+const FaqSectionMemo = memo(FaqSection, (p, n) => p.active.activeSection == n.active.activeSection)
 
 export default function Home(props) {
   const introSection = useRef(null);
   const faqSection = useRef(null);
   const footerSection = useRef(null);
-  const [activeSection, setActiveIndex] = useState(null);
-
+  const [activeSection, setActiveIndex] = useState({ activeSection: 0 });
 
   return (
-    <SectionsContainer {...options} scrollCallback={(e) => {
-      console.log('beforeLeave', e);
-      setActiveIndex(e);
-    }}>
+    <SectionsContainer {...options}
+      scrollCallback={(e) => {
+        // console.log('beforeLeave', e);
+        setActiveIndex(e);
+      }}>
       <Section>
-        <MainSection active={activeSection} navigation={props.appData.navigation} />
+        <MainSectionMemo active={activeSection} navigation={props.appData.navigation} />
       </Section>
       <Section>
-        <FaqSection />
+        <FaqSection active={activeSection} />
+      </Section>
+      <Section>
+        <div className='full-page'>
+        <div style={{height: 5000, backgroundColor: 'lightblue'}}>
+        some Section
+        </div>
+        </div>
       </Section>
       {/* <Section className="fp-auto-height">Page 3</Section> */}
     </SectionsContainer>
-    // <div className={''}>
-    //   <FullPage className={'section-md-full md-flx md-flx-col md-flx-all justify-content-evenly'} >
-    //     <div className='section section-md-auto divide-h flx flx-all flx-col relative'>
-    //       <div className='page-bg'>
-    //         <div
-    //           className='bird bird-top svg-clipped'>
-    //           {/* <svg>
-    //               <use href="#svg_bird_top" />
-    //             </svg> */}
-    //         </div>
-    //         <div className='bird bird-bottom svg-clipped'>
-    //           {/* <svg id={'bird'}>
-    //               <use href="#svg_bird_bottom" />
-    //             </svg> */}
-    //         </div>
-    //       </div>
-    //       <div
-    //         className='top intro-section text-center relative'>
-    //         <div className='intro-header w-max-747 text-s-26 md-text-s-40 md-l-text-s-55 text-weight-700'>
-    //           <p><span>დააგროვე და გადაცვალე</span> <spam className='text-color-primary'>მონეტები</spam></p>
-    //         </div>
-    //         <div className='intro-description p-top-50 text-s-16 md-text-s-20'>
-    //           <p>აღმოაჩინე ახალი რეალობა, სადაც ყოველთვის მოგებული დარჩები!</p>
-    //         </div>
-    //         <div className='intro-action p-top-40'>
-    //           <Link href={
-    //             'https://auth.pirveli.com/realms/xracoon-demo/protocol/openid-connect/auth?client_id=demo-client&response_type=code&scope=email&redirect_uri=http://localhost:3000'
-    //           }>
-    //             <Button
-    //               onClick={() => {
-    //                 containerViewRef.current.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
-    //               }}
-    //               text={'დაწყება'} variant={'primary'} size={'large'} />
-    //           </Link>
-    //         </div>
-    //       </div>
-    //     </div>
-
-
-    //     <div className='section section-md-auto divide-h flx flx-all flx-col w-wide'>
-    //       <div className='w-wide'>
-    //         <AppNavigation navigation={props.appData.platforms} />
-    //       </div>
-    //     </div>
-    //   </FullPage>
-    //   <FullPage className={'section-md-full md-flx md-flx-col md-flx-all justify-content-evenly'} >
-    //     <div className='section section-md-auto divide-h flx flx-all flx-col relative'>
-    //       <div className='page-bg'>
-    //         <div
-    //           className='bird bird-top svg-clipped'>
-    //           {/* <svg>
-    //               <use href="#svg_bird_top" />
-    //             </svg> */}
-    //         </div>
-    //         <div className='bird bird-bottom svg-clipped'>
-    //           {/* <svg id={'bird'}>
-    //               <use href="#svg_bird_bottom" />
-    //             </svg> */}
-    //         </div>
-    //       </div>
-    //       <div
-    //         className='top intro-section text-center relative'>
-    //         <div className='intro-header w-max-747 text-s-26 md-text-s-40 md-l-text-s-55 text-weight-700'>
-    //           <p><span>დააგროვე და გადაცვალე</span> <spam className='text-color-primary'>მონეტები</spam></p>
-    //         </div>
-    //         <div className='intro-description p-top-50 text-s-16 md-text-s-20'>
-    //           <p>აღმოაჩინე ახალი რეალობა, სადაც ყოველთვის მოგებული დარჩები!</p>
-    //         </div>
-    //         <div className='intro-action p-top-40'>
-    //           <Link href={
-    //             'https://auth.pirveli.com/realms/xracoon-demo/protocol/openid-connect/auth?client_id=demo-client&response_type=code&scope=email&redirect_uri=http://localhost:3000'
-    //           }>
-    //             <Button
-    //               onClick={() => {
-    //                 containerViewRef.current.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
-    //               }}
-    //               text={'დაწყება'} variant={'primary'} size={'large'} />
-    //           </Link>
-    //         </div>
-    //       </div>
-    //     </div>
-
-
-    //     <div className='section section-md-auto divide-h flx flx-all flx-col w-wide'>
-    //       <div className='w-wide'>
-    //         <AppNavigation navigation={props.appData.platforms} />
-    //       </div>
-    //     </div>
-    //   </FullPage>
-    //   <FullPage ref={faqSection} style={{ backgroundColor: 'lightgray' }}>
-    //     screen 2
-    //   </FullPage>
-    // </div>
   )
 }

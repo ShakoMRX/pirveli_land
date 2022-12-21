@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import Header from '../src/Layout/Header'
 import Layout from '../src/Layout/Layout'
 import { ScrollProvider, UserProvider } from '../src/store';
@@ -6,14 +7,19 @@ import '../styles/globals.scss'
 function MyApp(ctx) {
   const { Component, pageProps, appData, user } = ctx;
 
-  return <UserProvider initialValue={user}>
-    <ScrollProvider>
-      <Layout>
-        <Header />
-        <Component {...pageProps} appData={appData} />
-      </Layout>
-    </ScrollProvider>
-  </UserProvider>
+  return <div>
+    <Head>
+      <meta name="viewport" content="width=device-width,initial-scale=1"></meta>
+    </Head>
+    <UserProvider initialValue={user}>
+      <ScrollProvider>
+        <Layout>
+          <Header />
+          <Component {...pageProps} appData={appData} />
+        </Layout>
+      </ScrollProvider>
+    </UserProvider>
+  </div>
 }
 
 MyApp.getInitialProps = async function ({ ctx: { req } }) {
@@ -34,14 +40,19 @@ MyApp.getInitialProps = async function ({ ctx: { req } }) {
   ]
   let resp;
 
-  const userResp = await fetch(`${process.env.API_URL}/racoon-transactions/user`);
-  const data = await userResp.text();
-  resp = userResp.status == 200 ? { id: data } : null;
+  const headers = {
+    // 'Authorization': `Bearer ${process.env.appToken}`
+  }
 
+  const userResp = await fetch(`${process.env.API_URL}/racoon-transactions/user`, { headers })
 
   if (userResp.status == 200) {
-    const userAvatarResp = await fetch(`${process.env.API_URL}/user/user/get-auth-user-avatar`)
-    const userPointsResp = await fetch(`${process.env.API_URL}/racoon-transactions/vouchers/get-user-points`)
+
+    const data = await userResp.text();
+    resp = userResp.status == 200 ? { id: data } : null;
+
+    const userAvatarResp = await fetch(`${process.env.API_URL}/user/user/get-auth-user-avatar`, { headers })
+    const userPointsResp = await fetch(`${process.env.API_URL}/racoon-transactions/vouchers/get-user-points`, { headers })
 
 
     if (userAvatarResp.status == 200) {
@@ -54,7 +65,7 @@ MyApp.getInitialProps = async function ({ ctx: { req } }) {
       resp = Object.assign(resp, { points: userPoints })
     }
 
-    // resp = Object.assign(resp, { id: data });
+    resp = Object.assign(resp, { id: data });
   }
 
 

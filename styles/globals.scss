@@ -24,7 +24,9 @@ body {
   background-color: $color-gray;
   max-width: 100%;
   overflow-x: hidden;
-  > div { // !!!
+
+  >div {
+    // !!!
     height: 100vh;
     width: 100%;
   }
@@ -180,10 +182,16 @@ body {
 
 
 $animation_time: .4s;
-$bg_animation: all $animation_time ease-in-out, height $animation_time ease-in-out;
-$bg_animation_active: all $animation_time ease-in-out, height $animation_time cubic-bezier(0.175,  0.885, 0.320, 1.15);
-$img_animation: transform $animation_time cubic-bezier(0.175,  0.885, 0.320, 1.15),top $animation_time ease-in-out, opacity $animation_time ease-out;
-$img_animation_active: transform $animation_time cubic-bezier(0.175,  0.885, 0.320, 1.15),top $animation_time ease-in-out, opacity $animation_time ease-in;
+$bg_animation: all $animation_time ease-in-out,
+height $animation_time ease-in-out;
+$bg_animation_active: all $animation_time ease-in-out,
+height $animation_time cubic-bezier(0.175, 0.885, 0.320, 1.15);
+$img_animation: transform $animation_time cubic-bezier(0.175, 0.885, 0.320, 1.15),
+top $animation_time ease-in-out,
+opacity $animation_time ease-out;
+$img_animation_active: transform $animation_time cubic-bezier(0.175, 0.885, 0.320, 1.15),
+top $animation_time ease-in-out,
+opacity $animation_time ease-in;
 
 .navigation {
   &-bg {
@@ -410,6 +418,19 @@ $img_animation_active: transform $animation_time cubic-bezier(0.175,  0.885, 0.3
   }
 
   // }
+}
+
+.faqBird-bg {
+  position: absolute;
+  z-index: 5;
+  width: 973px;
+  height: 973px;
+  left: px(628 - 50);
+  top: px(-215);
+  z-index: 0;
+  svg {
+    @include size(100%)
+  }
 }
 
 .btn {
