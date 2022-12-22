@@ -425,7 +425,7 @@ const MainSection = ({ active: section, navigation = [] }) => {
   const isActive = section.activeSection == 0;
   const inView = useInView(ref);
 
-  console.log('isActive', section)
+  // console.log('isActive', section)
 
   // const { scrollYProgress } = useScroll({
   //   target: ref,
@@ -472,8 +472,8 @@ const MainSection = ({ active: section, navigation = [] }) => {
 
   return <FullPage
     ref={ref}
-    className={'size-full md-flx md-flx-col md-flx-all justify-content-evenly'} >
-    <div className='divide-h flx flx-all flx-col relative'>
+    className={'section-auto section-md-full md-flx md-flx-col md-flx-all justify-content-evenly'} >
+    <div className='section section-md-auto divide-h flx flx-all flx-col relative'>
       <div className='page-bg'>
         <motion.div
           variants={_birdTopTemplate}
@@ -550,7 +550,7 @@ const _videoContainerTemplate = {
     }
   }
 }
-const videoContainerTemplate = _videoContainerTemplate;
+const videoContainerTemplate = {};
 const _textContainerTemplate = {
   hidden: {
     opacity: 0,
@@ -569,7 +569,7 @@ const _textContainerTemplate = {
     }
   }
 }
-const textContainerTemplate = _textContainerTemplate;
+const textContainerTemplate = {};
 const _textContainerTemplate2 = {
   hidden: {
     opacity: 0,
@@ -588,7 +588,7 @@ const _textContainerTemplate2 = {
     }
   }
 }
-const textContainerTemplate2 = _textContainerTemplate2;
+const textContainerTemplate2 = {};
 const _faqBirdMovement = {
   hidden: {
     // opacity: 0,
@@ -617,7 +617,7 @@ const _faqBirdMovement = {
     }
   }
 }
-const faqBirdMovement = _faqBirdMovement;
+const faqBirdMovement = {};
 
 const FaqSection = ({ active }) => {
   const isActive = active.activeSection == 1;
@@ -627,13 +627,13 @@ const FaqSection = ({ active }) => {
 
     if (ref.current) {
       ref.current.parentNode.scrollTop = 0;
-      console.log('-------------', ref.current.parentNode.scrollTop)
+      // console.log('-------------', ref.current.parentNode.scrollTop)
     }
 
   }, [active, isActive])
 
   return <div ref={ref}
-    className='size-full md-flx md-flx-all size-full layout-wrap'>
+    className='section-auto section-md-full md-flx md-flx-all size-full layout-wrap'>
     <div className='md-flx md-flx-row gap-30 w-wide relative'>
       <div className='section section-md-auto divide-h p-top-80'>
         <div className='info-section w-full l-sm-w-490 lg-w-619'>
@@ -689,7 +689,22 @@ const FaqSection = ({ active }) => {
           variants={videoContainerTemplate}
           initial={'show'}
           animate={isActive ? 'show' : 'hidden'}
+          style={{ zIndex: 2 }}
           className='video-container'>
+          <div className='playBtn'>
+            <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="50" fill="#DB0060" />
+              <g clipPath="url(#clip0_3249_11327)">
+                <path d="M45 42V58L58 50L45 42Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </g>
+              <defs>
+                <clipPath id="clip0_3249_11327">
+                  <rect width="24" height="24" fill="white" transform="translate(38 38)" />
+                </clipPath>
+              </defs>
+            </svg>
+
+          </div>
 
         </motion.div>
 
@@ -724,7 +739,7 @@ const ScrollContainerElement = ({ children, scrollCallback }) => {
   useEffect(() => {
 
     if (!isServer) {
-      document.body.style.overflow = 'hidden';
+      // document.body.style.overflow = 'hidden';
     }
 
     let deltay = 0;
@@ -733,10 +748,11 @@ const ScrollContainerElement = ({ children, scrollCallback }) => {
     // console.log('scrollSize', document.documentElement.scrollTop, )
 
     // activeSection.current = document.documentElement.scrollTop > 
-    scrollCallback({activeSection: activeSection.current})
+    scrollCallback({ activeSection: activeSection.current })
 
     window.addEventListener('wheel', (e) => {
-      // e.preventDefault();
+      return;
+      e.preventDefault();
       const scroll = document.documentElement.scrollTop;
       var rolled = 'wheelDelta' in event ? event.wheelDelta : -1 * event.detail;
       const delta = Math.max(-1, Math.min(1, e.wheelDelta || -e.detail));
@@ -746,7 +762,12 @@ const ScrollContainerElement = ({ children, scrollCallback }) => {
       scale += e.deltaY * -1;
       scale = Math.min(Math.max(0, scale), containerRef.current.getBoundingClientRect().height);
 
-      console.log('-------', activeSection.current, delta)
+      // const scrollSize = delta > 0
+      //   ? prevEl ? 
+
+      // console.log('-----', { scale })
+
+      // console.log('-------', activeSection.current, delta)
 
       if (isScrolling.current || _activeSection < 0 || _activeSection == targetPositions.length) {
         return false;
@@ -757,21 +778,23 @@ const ScrollContainerElement = ({ children, scrollCallback }) => {
       const prevEl = targetPositions[_activeSection - 1];
       const nextEl = targetPositions[_activeSection + 1];
 
+      const prevSize = prevEl || 0;
 
       isScrolling.current = true;
       activeSection.current = _activeSection;
 
+      console.log('----', { prevEl, currentEl, nextEl })
 
       if (scrollingTimer.current) {
         clearTimeout(scrollingTimer.current);
       }
 
       scrollingTimer.current = setTimeout(() => {
-        console.log('-------------------------');
+        // console.log('-------------------------');
         isScrolling.current = false;
       }, 300);
 
-      console.log('-----', {prevEl, currentEl, nextEl})
+      // const scrollOffset = 
 
       if (delta > 0) {
         // console.log('up', activeSection.current)
@@ -780,19 +803,34 @@ const ScrollContainerElement = ({ children, scrollCallback }) => {
         //   scrollSize -= targetPositions[activeSection.current + 1].getBoundingClientRect().height;
         // } else {
         // }
-        console.log('up', scrollSize, _activeSection)
 
-        scrollSize += currentEl.getBoundingClientRect().height;
+        // if (targetPositions[_activeSection - 1] && targetPositions[_activeSection - 1].getBoundingClientRect().height <= targetPositions[_activeSection].getBoundingClientRect().height) {
+        //   scrollSize += targetPositions[_activeSection - 1].getBoundingClientRect().height
+        // } else {
+        //   scrollSize += targetPositions[_activeSection].getBoundingClientRect().height
+        // }
+
+        // scrollSize = prevEl && prevEl.getBoundingClientRect().height <= currentEl.getBoundingClientRect().height ? scrollSize + prevEl.getBoundingClientRect().height : currentEl.getBoundingClientRect().height;
       } else {
-        console.log('down', scrollSize)
+        // console.log('down', scrollSize)
+        // scrollSize = nextEl && nextEl.getBoundingClientRect().height <= currentEl.getBoundingClientRect().height ? scrollSize - nextEl.getBoundingClientRect().height : currentEl.getBoundingClientRect().height;
+
         // if (targetPositions.length - 2 == activeSection.current) {
         //   console.log('- prev', targetPositions[activeSection.current + 1])
         //   scrollSize -= targetPositions[activeSection.current + 1].getBoundingClientRect().height;
         // } else {
         // }
-        scrollSize -= currentEl.getBoundingClientRect().height;
+        // scrollSize -= currentEl.getBoundingClientRect().height;
         // const nextEl = targetPositions[activeSection.current];
         // nextEl.scrollIntoView({behavior: 'smooth'})
+
+        if (targetPositions.length - 2 == _activeSection) {
+          // console.log('prev')
+          // scrollSize -= targetPositions[_activeSection + 1].getBoundingClientRect().height
+        }
+        //  {
+        //   scrollSize -= targetPositions[_activeSection].getBoundingClientRect().height
+        // }
       }
 
       // scrollSize = scrollSize += 
@@ -804,16 +842,16 @@ const ScrollContainerElement = ({ children, scrollCallback }) => {
 
 
 
-      console.log('scrollSize', e.deltaY * -1)
+      // console.log('scrollSize', e.deltaY * -1)
 
-      
+
       containerRef.current.style.transform = `translate3d(0, ${scrollSize}px, 0)`
       containerRef.current.style.transition = `all 2s ease-in-out`
       scrollCallback({ activeSection: activeSection.current })
-      
-      
+
+
       // prevEl.scrollIntoView({behavior: 'smooth'})
-      
+
       // containerRef.current.style.transform = `translate3d(0, ${scrollSize}px, 0)`
       // containerRef.current.style.transition = `all 2s ease-in-out`
       // scrollCallback({ activeSection: activeSection.current })
@@ -856,13 +894,13 @@ export default function Home(props) {
   return (
     <ScrollContainerElement className="container"  {...options}
       scrollCallback={(e) => {
-        console.log('beforeLeave', e);
+        // console.log('beforeLeave', e);
         setActiveIndex(e);
       }}>
-      <CustomSection className="section section-visible">
+      <CustomSection className="section-auto section-md-full">
         <MainSectionMemo active={activeSection} navigation={props.appData.navigation} />
       </CustomSection>
-      <CustomSection className="section section-scroll">
+      <CustomSection className="section-auto section-md-full">
         <FaqSection active={activeSection} />
       </CustomSection>
       <CustomSection className="footer">

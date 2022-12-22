@@ -47,15 +47,18 @@ export function ScrollProvider({ children }) {
   )
 }
 
+// maybe add reducer 
+
 const UserContext = createContext(null);
 export const useUser = () => useContext(UserContext);
 
 export function UserProvider({ children, initialValue }) {
   const [user, setUser] = useState(initialValue);
 
+  console.log('initialValue', initialValue)
 
   return (
-    <UserContext.Provider value={[user, setUser]}>
+    <UserContext.Provider value={[initialValue, setUser]}>
       {children}
     </UserContext.Provider>
   )

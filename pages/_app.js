@@ -1,22 +1,75 @@
+import axios from 'axios';
 import Head from 'next/head';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Header from '../src/Layout/Header'
 import Layout from '../src/Layout/Layout'
 import { ScrollProvider, UserProvider } from '../src/store';
 import '../styles/globals.scss'
 
+const fetchApi = async (url, type) => {
+
+  let resp;
+
+  try {
+    resp = await fetch(`${process.env.API_URL}${url}`);
+  } catch (error) {
+    resp = { status: error, data: null }
+  }
+
+  return new Promise(async (res, rej) => {
+    if (resp.status == 200) {
+      const data = type == 'json' ? await resp.text() : await resp.text();
+      res({
+        status: resp.status,
+        data
+      });
+    } else {
+      rej({
+        status: resp.status,
+        data: null
+      })
+    }
+  });
+}
+
 function MyApp(ctx) {
   const { Component, pageProps, appData, user } = ctx;
+  const [userData, setUserData] = useState({
+    isLoading: true
+  });
+
 
   useEffect(() => {
-    
+    fetchApi('/racoon-transactions/user')
+      .then(async (r) => {
+        if (r.status !== 200) {
+          setUserData({ isLoading: false })
+          return;
+        }
+
+        let _usr = { ...userData, id: r };
+
+        await fetchApi('/user/user/get-auth-user-avatar', 'json').then((r) => {
+          _usr = { ..._usr, ...{points: r.data} }
+        }).catch(() => {});
+
+        await fetchApi('/racoon-transactions/vouchers/get-user-points').then((r) => {
+          _usr = { ..._usr, avatar: r.data };
+        }).catch(() => {});;
+
+        setUserData({..._usr, isLoading: false});
+
+      }).catch((e) => {
+        setUserData({isLoading: false});
+      });
+
   }, [])
-  
+
   return <div>
     <Head>
       <meta name="viewport" content="width=device-width,initial-scale=1"></meta>
     </Head>
-    <UserProvider initialValue={user}>
+    <UserProvider initialValue={userData}>
       <ScrollProvider>
         <Layout>
           <Header />
@@ -49,29 +102,29 @@ MyApp.getInitialProps = async function ({ ctx: { req } }) {
     // 'Authorization': `Bearer ${process.env.appToken}`
   }
 
-  const userResp = await fetch(`${process.env.API_URL}/racoon-transactions/user`, { headers })
+  // const userResp = await fetch(`${process.env.API_URL}/racoon-transactions/user`, { headers })
 
-  if (userResp.status == 200) {
+  // if (userResp.status == 200) {
 
-    const data = await userResp.text();
-    resp = userResp.status == 200 ? { id: data } : null;
+  //   const data = await userResp.text();
+  //   resp = userResp.status == 200 ? { id: data } : null;
 
-    const userAvatarResp = await fetch(`${process.env.API_URL}/user/user/get-auth-user-avatar`, { headers })
-    const userPointsResp = await fetch(`${process.env.API_URL}/racoon-transactions/vouchers/get-user-points`, { headers })
+  //   const userAvatarResp = await fetch(`${process.env.API_URL}/user/user/get-auth-user-avatar`, { headers })
+  //   const userPointsResp = await fetch(`${process.env.API_URL}/racoon-transactions/vouchers/get-user-points`, { headers })
 
 
-    if (userAvatarResp.status == 200) {
-      const userAvatar = await userAvatarResp.json();
-      resp = Object.assign(resp, { avatar: userAvatar })
-    }
+  //   if (userAvatarResp.status == 200) {
+  //     const userAvatar = await userAvatarResp.json();
+  //     resp = Object.assign(resp, { avatar: userAvatar })
+  //   }
 
-    if (userPointsResp.status == 200) {
-      const userPoints = await userPointsResp.json();
-      resp = Object.assign(resp, { points: userPoints })
-    }
+  //   if (userPointsResp.status == 200) {
+  //     const userPoints = await userPointsResp.json();
+  //     resp = Object.assign(resp, { points: userPoints })
+  //   }
 
-    resp = Object.assign(resp, { id: data });
-  }
+  //   resp = Object.assign(resp, { id: data });
+  // }
 
 
   return {
