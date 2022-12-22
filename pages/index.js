@@ -6,13 +6,14 @@ import { memo, useEffect, useRef, useState } from 'react'
 import ImageComponent from '../src/Components/ImageComponent'
 import { BirdTop } from '../src/Icons'
 import Button from '../src/Shared/Button'
-import { animate, motion, useInView, useMotionValue, useScroll, useSpring, useTransform, useVelocity, useViewportScroll } from 'framer-motion'
+import { animate, delay, motion, useDragControls, useInView, useMotionValue, useScroll, useSpring, useTransform, useVelocity, useViewportScroll } from 'framer-motion'
 import styles from '../styles/components/Home.module.scss'
 import variables, { getRGBdiff, hexToRgb } from '../src'
 import FullPage from '../src/Components/FullPage'
 import { useScrollValue, useUser } from '../src/store'
 import { SectionsContainer, Section } from 'react-fullpage';
 import ReactFullpage from '@fullpage/react-fullpage'
+import { isCancel } from 'axios'
 
 export function AppNavigation({ navigation }) {
   const [hoverNav, setHoverNav] = useState(null);
@@ -362,7 +363,7 @@ let options = {
   // arrowNavigation: true
 };
 
-const birdTopTemplate = {
+const _birdTopTemplate = {
   hidden: {
     opacity: 0, x: 1200, y: -1200,
     transition: {
@@ -379,8 +380,8 @@ const birdTopTemplate = {
     }
   }
 }
-
-const birdBottomTemplate = {
+const birdTopTemplate = {};
+const _birdBottomTemplate = {
   hidden: {
     opacity: 0, x: 1200, y: -1200,
     transition: {
@@ -397,8 +398,8 @@ const birdBottomTemplate = {
     }
   }
 }
-
-const intoTextTemplate = {
+const birdBottomTemplate = {};
+const _intoTextTemplate = {
   hidden: {
     opacity: 0,
     y: -200,
@@ -417,13 +418,14 @@ const intoTextTemplate = {
     }
   }
 }
-
+const intoTextTemplate = {};
 const MainSection = ({ active: section, navigation = [] }) => {
   const ref = useRef();
   const [user,] = useUser();
   const isActive = section.activeSection == 0;
+  const inView = useInView(ref);
 
-  // console.log('isActive', section.activeSection)
+  console.log('isActive', section)
 
   // const { scrollYProgress } = useScroll({
   //   target: ref,
@@ -468,11 +470,13 @@ const MainSection = ({ active: section, navigation = [] }) => {
 
   // console.log('object', process.env.AUTH_LINK)
 
-  return <FullPage ref={ref} className={'size-full md-flx md-flx-col md-flx-all justify-content-evenly'} >
+  return <FullPage
+    ref={ref}
+    className={'size-full md-flx md-flx-col md-flx-all justify-content-evenly'} >
     <div className='divide-h flx flx-all flx-col relative'>
       <div className='page-bg'>
         <motion.div
-          variants={birdTopTemplate}
+          variants={_birdTopTemplate}
           initial={'show'}
           animate={isActive ? 'show' : 'hidden'}
           className='bird bird-top svg-clipped'>
@@ -481,7 +485,7 @@ const MainSection = ({ active: section, navigation = [] }) => {
         </svg> */}
         </motion.div>
         <motion.div
-          variants={birdBottomTemplate}
+          variants={_birdBottomTemplate}
           initial={'show'}
           animate={isActive ? 'show' : 'hidden'}
           className='bird bird-bottom svg-clipped'>
@@ -491,7 +495,7 @@ const MainSection = ({ active: section, navigation = [] }) => {
         </motion.div>
       </div>
       <motion.div
-        variants={intoTextTemplate}
+        variants={_intoTextTemplate}
         initial={'show'}
         animate={isActive ? 'show' : 'hidden'}
         className='top intro-section text-center relative'>
@@ -514,7 +518,7 @@ const MainSection = ({ active: section, navigation = [] }) => {
       </motion.div>
     </div>
     <motion.div
-      variants={intoTextTemplate}
+      variants={_intoTextTemplate}
       initial={'show'}
       animate={isActive ? 'show' : 'hidden'}
       className='section section-md-auto divide-h flx flx-all flx-col w-wide'>
@@ -526,7 +530,7 @@ const MainSection = ({ active: section, navigation = [] }) => {
 }
 
 
-const videoContainerTemplate = {
+const _videoContainerTemplate = {
   hidden: {
     opacity: 0,
     y: 200,
@@ -546,8 +550,8 @@ const videoContainerTemplate = {
     }
   }
 }
-
-const textContainerTemplate = {
+const videoContainerTemplate = _videoContainerTemplate;
+const _textContainerTemplate = {
   hidden: {
     opacity: 0,
     x: -5000,
@@ -565,8 +569,8 @@ const textContainerTemplate = {
     }
   }
 }
-
-const textContainerTemplate2 = {
+const textContainerTemplate = _textContainerTemplate;
+const _textContainerTemplate2 = {
   hidden: {
     opacity: 0,
     x: -5000,
@@ -584,8 +588,8 @@ const textContainerTemplate2 = {
     }
   }
 }
-
-const faqBirdMovement = {
+const textContainerTemplate2 = _textContainerTemplate2;
+const _faqBirdMovement = {
   hidden: {
     // opacity: 0,
     x: -1200,
@@ -613,12 +617,22 @@ const faqBirdMovement = {
     }
   }
 }
-
+const faqBirdMovement = _faqBirdMovement;
 
 const FaqSection = ({ active }) => {
   const isActive = active.activeSection == 1;
+  const ref = useRef();
 
-  return <div
+  useEffect(() => {
+
+    if (ref.current) {
+      ref.current.parentNode.scrollTop = 0;
+      console.log('-------------', ref.current.parentNode.scrollTop)
+    }
+
+  }, [active, isActive])
+
+  return <div ref={ref}
     className='size-full md-flx md-flx-all size-full layout-wrap'>
     <div className='md-flx md-flx-row gap-30 w-wide relative'>
       <div className='section section-md-auto divide-h p-top-80'>
@@ -687,6 +701,151 @@ const FaqSection = ({ active }) => {
 const MainSectionMemo = memo(MainSection, (p, n) => p.active.activeSection == n.active.activeSection)
 const FaqSectionMemo = memo(FaqSection, (p, n) => p.active.activeSection == n.active.activeSection)
 
+
+const ScrollContainerElement = ({ children, scrollCallback }) => {
+  const { scrollYProgress } = useScroll();
+  const [scroll,] = useScrollValue();
+  const containerRef = useRef(null);
+  const activeSection = useRef(0);
+  const scrollingTimer = useRef(0);
+  const isScrolling = useRef(false);
+
+
+  const onMouseWheel = (e) => {
+    console.log('e', e)
+  }
+
+  useEffect(() => {
+    return scrollYProgress.on('change', (e) => {
+      // console.log('-----------', e)
+    })
+  }, [])
+
+  useEffect(() => {
+
+    if (!isServer) {
+      document.body.style.overflow = 'hidden';
+    }
+
+    let deltay = 0;
+    let scale = 1;
+    let scrollSize = 0;
+    // console.log('scrollSize', document.documentElement.scrollTop, )
+
+    // activeSection.current = document.documentElement.scrollTop > 
+    scrollCallback({activeSection: activeSection.current})
+
+    window.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const scroll = document.documentElement.scrollTop;
+      var rolled = 'wheelDelta' in event ? event.wheelDelta : -1 * event.detail;
+      const delta = Math.max(-1, Math.min(1, e.wheelDelta || -e.detail));
+      const _activeSection = activeSection.current - delta;
+      const targetPositions = document.querySelectorAll(`div[data-name='section']`)
+
+      scale += e.deltaY * -1;
+      scale = Math.min(Math.max(0, scale), containerRef.current.getBoundingClientRect().height);
+
+      console.log('-------', activeSection.current, delta)
+
+      if (isScrolling.current || _activeSection < 0 || _activeSection == targetPositions.length) {
+        return false;
+      }
+
+
+      const currentEl = targetPositions[_activeSection];
+      const prevEl = targetPositions[_activeSection - 1];
+      const nextEl = targetPositions[_activeSection + 1];
+
+
+      isScrolling.current = true;
+      activeSection.current = _activeSection;
+
+
+      if (scrollingTimer.current) {
+        clearTimeout(scrollingTimer.current);
+      }
+
+      scrollingTimer.current = setTimeout(() => {
+        console.log('-------------------------');
+        isScrolling.current = false;
+      }, 300);
+
+      console.log('-----', {prevEl, currentEl, nextEl})
+
+      if (delta > 0) {
+        // console.log('up', activeSection.current)
+        // if (targetPositions.length + == activeSection.current) {
+        //   console.log('- prev', targetPositions[activeSection.current + 1])
+        //   scrollSize -= targetPositions[activeSection.current + 1].getBoundingClientRect().height;
+        // } else {
+        // }
+        console.log('up', scrollSize, _activeSection)
+
+        scrollSize += currentEl.getBoundingClientRect().height;
+      } else {
+        console.log('down', scrollSize)
+        // if (targetPositions.length - 2 == activeSection.current) {
+        //   console.log('- prev', targetPositions[activeSection.current + 1])
+        //   scrollSize -= targetPositions[activeSection.current + 1].getBoundingClientRect().height;
+        // } else {
+        // }
+        scrollSize -= currentEl.getBoundingClientRect().height;
+        // const nextEl = targetPositions[activeSection.current];
+        // nextEl.scrollIntoView({behavior: 'smooth'})
+      }
+
+      // scrollSize = scrollSize += 
+
+      // scale += e.deltaY * -0.01;
+
+      // Restrict scale
+      // scale = Math.min(Math.max(0, scale), containerRef.current.getBoundingClientRect().height);
+
+
+
+      console.log('scrollSize', e.deltaY * -1)
+
+      
+      containerRef.current.style.transform = `translate3d(0, ${scrollSize}px, 0)`
+      containerRef.current.style.transition = `all 2s ease-in-out`
+      scrollCallback({ activeSection: activeSection.current })
+      
+      
+      // prevEl.scrollIntoView({behavior: 'smooth'})
+      
+      // containerRef.current.style.transform = `translate3d(0, ${scrollSize}px, 0)`
+      // containerRef.current.style.transition = `all 2s ease-in-out`
+      // scrollCallback({ activeSection: activeSection.current })
+
+    })
+
+    return () => {
+      window.removeEventListener('wheel', () => {
+        console.log('--------------------------------------')
+      })
+    }
+  }, [])
+
+  return <motion.div
+    ref={containerRef}
+    style={{}}
+  >
+    {children}
+  </motion.div>
+}
+
+
+const CustomSection = ({ children, className }) => {
+  const { scrollYProgress } = useScroll();
+
+
+  return <div data-name='section' className={`${className}`} >
+    {children}
+  </div>
+}
+
+
 export default function Home(props) {
   const introSection = useRef(null);
   const faqSection = useRef(null);
@@ -695,25 +854,24 @@ export default function Home(props) {
   const anchors = ["firstPage", "secondPage", "thirdPage"];
 
   return (
-    <SectionsContainer className="container"  {...options}
+    <ScrollContainerElement className="container"  {...options}
       scrollCallback={(e) => {
-        // console.log('beforeLeave', e);
+        console.log('beforeLeave', e);
         setActiveIndex(e);
       }}>
-      <Section>
+      <CustomSection className="section section-visible">
         <MainSectionMemo active={activeSection} navigation={props.appData.navigation} />
-      </Section>
-      <Section>
+      </CustomSection>
+      <CustomSection className="section section-scroll">
         <FaqSection active={activeSection} />
-      </Section>
-      {false && <Section className="mobileContainer" verticalAlign="true">
-        <div className='full-page'>
-          <div style={{ height: 5000, backgroundColor: 'lightblue' }}>
-            some Section
-          </div>
+      </CustomSection>
+      <CustomSection className="footer">
+        <div style={{ height: 100, }}>
+          its a foooooter
         </div>
-      </Section>}
+      </CustomSection>
+
       {/* <Section className="fp-auto-height">Page 3</Section> */}
-    </SectionsContainer>
+    </ScrollContainerElement>
   )
 }

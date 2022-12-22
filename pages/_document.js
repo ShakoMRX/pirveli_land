@@ -96,7 +96,9 @@ export default function MyDocument() {
         <Main scroll={scrollYProgress} />
         <NextScript />
 
-        <SvgElements />
+        <div className='svg_load'>
+          <SvgElements />
+        </div>
       </body>
     </Html>)
 }

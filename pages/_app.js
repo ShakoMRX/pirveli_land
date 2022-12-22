@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { useEffect } from 'react';
 import Header from '../src/Layout/Header'
 import Layout from '../src/Layout/Layout'
 import { ScrollProvider, UserProvider } from '../src/store';
@@ -7,6 +8,10 @@ import '../styles/globals.scss'
 function MyApp(ctx) {
   const { Component, pageProps, appData, user } = ctx;
 
+  useEffect(() => {
+    
+  }, [])
+  
   return <div>
     <Head>
       <meta name="viewport" content="width=device-width,initial-scale=1"></meta>
