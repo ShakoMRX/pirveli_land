@@ -258,7 +258,7 @@ export function Home2(props) {
             <motion.div
               className='top intro-section text-center relative'>
               <div className='intro-header w-max-747 text-s-26 md-text-s-40 md-l-text-s-55 text-weight-700'>
-                <p><span>დააგროვე და გადაცვალე</span> <spam className='text-color-primary'>მონეტები</spam></p>
+                <p><span>დააგროვე და გადაცვალე</span> <span className='text-color-primary'>მონეტები</span></p>
               </div>
               <div className='intro-description p-top-50 text-s-16 md-text-s-20'>
                 <p>აღმოაჩინე ახალი რეალობა, სადაც ყოველთვის მოგებული დარჩები!</p>
@@ -500,7 +500,7 @@ const MainSection = ({ active: section, navigation = [] }) => {
         animate={isActive ? 'show' : 'hidden'}
         className='top intro-section text-center relative'>
         <div className='intro-header w-max-747 text-s-26 md-text-s-40 md-l-text-s-55 text-weight-700'>
-          <p><span>დააგროვე და გადაცვალე</span> <spam className='text-color-primary'>მონეტები</spam></p>
+          <p><span>დააგროვე და გადაცვალე</span> <span className='text-color-primary'>მონეტები</span></p>
         </div>
         <div className='intro-description p-top-28 md-p-top-50 text-s-16 md-text-s-20'>
           <p>აღმოაჩინე ახალი რეალობა, სადაც ყოველთვის მოგებული დარჩები!</p>

@@ -8,25 +8,44 @@ import { ArrowIcon, Flag_GE } from '../Icons';
 import Button from '../Shared/Button';
 import { useScrollValue, useUser } from '../store';
 import { motion } from 'framer-motion';
+import variables from '..';
 
-export default function Header() {
+export default function Header({ navigation }) {
   const [user,] = useUser();
   const [scroll,] = useScrollValue();
 
   useEffect(() => {
-    console.log('scroll', scroll.scroll > 0)
+    // console.log('scroll', scroll.scroll)
   }, [scroll])
 
   return (
     <div>
-      <motion.div
-        // initial={{y: -50}}
-        animate={scroll && scroll.scroll > 0 ? { y: 0 } : {y: 50}}
-      >
-        app list
-      </motion.div>
+
       <div className={classNames(styles.header, 'absolute top-0 w-full')}>
-        <div className='header--wrap flx align-items-center'>
+        <motion.div
+          className='small-header'
+          animate={scroll && scroll.scroll > 0 ? { marginTop: 0 } : { marginTop: -variables['smallHeader'] }}
+        >
+          <div className='layout-wrap'>
+            <div className='flx h-full'>
+              <ul>
+                {navigation.map((nav) => {
+                  return <li key={nav.slug} className={nav.slug}>
+                    <Link href={nav.url}>{nav.name}</Link>
+                  </li>
+                })}
+              </ul>
+              <div style={{width: 90}} className='m-left-auto p-block-8'>
+                <Button reset className={'h-full w-full auth-btn'} size='small' variant='text' text="შესვლა" />
+            </div>
+            </div>
+          </div>
+        </motion.div>
+        <motion.div
+          animate={scroll && scroll.scroll > 0
+            ? { marginTop: -80 }
+            : { marginTop: 0 }}
+          className='header--wrap flx align-items-center'>
           <div className='logo-area'>
             <Link href={'/'}>
               <ImageComponent src={'/assets/img/pirveli-logo.png'} width={174} height={50} />
@@ -63,7 +82,7 @@ export default function Header() {
             <ArrowIcon />
           </Button> */}
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   )

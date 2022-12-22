@@ -482,11 +482,68 @@ opacity $animation_time ease-in;
 }
 
 .small-header {
+  background-color: #000;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  height: px($SMALL_HEAD_ER);
+  @include flex;
+  color: #FFF;
+
+  .auth-btn {
+    border-radius: 4px;
+  }
+
   ul {
     @include flex;
-    gap: 12px;
-    li {
+    gap: 24px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    height: 100%;
 
+    li {
+      line-height: 17px;
+      font-weight: 400;
+      font-size: 12px;
+      height: 100%;
+      color: #FFF;
+      position: relative;
+
+      @each $platform, $color in $brands {
+        &.#{$platform} {
+          a {
+            &:hover {
+              &:after {
+                background-color: $color;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    a {
+      @include flex-all;
+      height: 100%;
+
+      &:after {
+        content: "";
+        display: block;
+        left: 0;
+        bottom: 0;
+        height: 3px;
+        width: 100%;
+        position: absolute;
+        border-radius: 4px 4px 0 0;
+        transition: all .125s ease-in-out;
+      }
+
+      &:hover {
+        color: darken(#FFF, 5%);
+      }
     }
   }
 }

@@ -1,6 +1,7 @@
 $border-size: 1;
 
 .btn {
+  display: contents;
   :global {
     .btn {
       --btn-padding-inline: 32px;
