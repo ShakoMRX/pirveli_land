@@ -509,7 +509,7 @@ const MainSection = ({ active: section, navigation = [] }) => {
           <Link
             target={'_self'}
             href={
-              !user ? process.env.REGISTER_LINK : process.env.PROFILE_LINK
+              user && !user.id ? process.env.REGISTER_LINK : process.env.PROFILE_LINK
             }>
             <Button
               text={'დაწყება'} variant={'primary'} size={'large'} />
