@@ -480,3 +480,13 @@ opacity $animation_time ease-in;
   clip-path: url(#svgPath);
   background-color: rgba($color-primary, .2);
 }
+
+.small-header {
+  ul {
+    @include flex;
+    gap: 12px;
+    li {
+
+    }
+  }
+}

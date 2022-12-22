@@ -17,7 +17,7 @@ const fetchApi = async (url, type) => {
   }
 
   return new Promise(async (res, rej) => {
-    if (resp.status == 200) {
+    if (resp.status !== 401 || resp.status !== 500) {
       const data = type == 'json' ? await resp.text() : await resp.text();
       res({
         status: resp.status,

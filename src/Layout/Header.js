@@ -14,14 +14,17 @@ export default function Header() {
   const [scroll,] = useScrollValue();
 
   useEffect(() => {
-    console.log('scroll', scroll)
+    console.log('scroll', scroll.scroll > 0)
   }, [scroll])
 
   return (
     <div>
       <motion.div
-        initial={scroll > { y: 0 }}
-      ></motion.div>
+        // initial={{y: -50}}
+        animate={scroll && scroll.scroll > 0 ? { y: 0 } : {y: 50}}
+      >
+        app list
+      </motion.div>
       <div className={classNames(styles.header, 'absolute top-0 w-full')}>
         <div className='header--wrap flx align-items-center'>
           <div className='logo-area'>
@@ -36,7 +39,7 @@ export default function Header() {
               :
               !user.id
                 ?
-                <Link key="auth" href={process.env.REGISTER_LINK || ''} target='_self'>
+                <Link key="auth" href={process.env.AUTH_LINK || ''} target='_self'>
                   <Button variant={'primary'} size={'normal'} text={'შესვლა'} />
                 </Link>
                 : <Link key="userInfo" href={process.env.PROFILE_LINK}>
