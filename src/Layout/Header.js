@@ -10,7 +10,6 @@ import { useUser } from '../store';
 
 export default function Header() {
   const [user,] = useUser();
-  console.log('user', user)
 
   return (
     <div className={classNames(styles.header, 'absolute top-0 w-full')}>

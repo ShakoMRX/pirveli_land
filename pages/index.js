@@ -473,7 +473,7 @@ const MainSection = ({ active: section, navigation = [] }) => {
   return <FullPage
     ref={ref}
     className={'section-auto section-md-full md-flx md-flx-col md-flx-all justify-content-evenly'} >
-    <div className='section section-md-auto divide-h flx flx-all flx-col relative'>
+    <div className='md-p-top-108 section-md-auto divide-h flx flx-all flx-col relative'>
       <div className='page-bg'>
         <motion.div
           variants={_birdTopTemplate}
@@ -521,7 +521,7 @@ const MainSection = ({ active: section, navigation = [] }) => {
       variants={_intoTextTemplate}
       initial={'show'}
       animate={isActive ? 'show' : 'hidden'}
-      className='section section-md-auto divide-h flx flx-all flx-col w-wide'>
+      className=' section-md-auto divide-h flx flx-all flx-col w-wide'>
       <div className='w-wide'>
         <AppNavigation navigation={navigation} />
       </div>

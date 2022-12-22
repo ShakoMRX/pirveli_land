@@ -13,7 +13,7 @@ const nextConfig = {
     appToken
   },
   env: {
-    API_URL: 'https://pirveli.pirveli.com/api',
+    API_URL: 'https://pirveli.com/api',
     AUTH_LINK: 'https://auth.pirveli.com/realms/xracoon-demo/protocol/openid-connect/auth?client_id=demo-client&response_type=code&scope=email&redirect_uri=https://pirveli.com',
     REGISTER_LINK: 'https://auth.pirveli.com/realms/xracoon-demo/protocol/openid-connect/auth?client_id=demo-client&response_type=code&scope=email&redirect_uri=https://pirveli.com',
     PROFILE_LINK: 'https://profile.pirveli.com/',
@@ -21,7 +21,7 @@ const nextConfig = {
     MEDICAL_LINK: 'https://medical.pirveli.com/',
     VOUCHER_LINK: 'https://vouchers.pirveli.com/',
     WIN_LINK: 'https://win.pirveli.com/',
-    GAME_LINK: 'https://pirveli.pirveli.com/',
+    GAME_LINK: 'https://pirveli.com/',
     appToken
   },
   sassOptions: {

@@ -72,6 +72,9 @@
       padding-block: px($size);
     }
   }
+
+
+
 }
 
 @mixin margin-content() {
@@ -311,6 +314,7 @@
   &-40 {
     width: 40px;
   }
+
   &-90 {
     width: 90px;
   }
@@ -486,6 +490,10 @@
 
     &-p {
       @include padding-content;
+
+      &-top-108 {
+        padding-top: 108px;
+      }
     }
 
     &-m {
