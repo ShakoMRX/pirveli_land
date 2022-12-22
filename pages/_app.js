@@ -8,13 +8,8 @@ import '../styles/globals.scss'
 
 const fetchApi = async (url, type) => {
 
-  let resp;
 
-  try {
-    resp = await fetch(`${process.env.API_URL}${url}`);
-  } catch (error) {
-    resp = { status: error, data: null }
-  }
+  let resp = await fetch(`${process.env.API_URL}${url}`);
 
   return new Promise(async (res, rej) => {
     if (resp.status !== 401 || resp.status !== 500) {
