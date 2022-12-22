@@ -736,7 +736,7 @@ const ScrollContainerElement = ({ children, scrollCallback }) => {
     scrollCallback({activeSection: activeSection.current})
 
     window.addEventListener('wheel', (e) => {
-      e.preventDefault();
+      // e.preventDefault();
       const scroll = document.documentElement.scrollTop;
       var rolled = 'wheelDelta' in event ? event.wheelDelta : -1 * event.detail;
       const delta = Math.max(-1, Math.min(1, e.wheelDelta || -e.detail));

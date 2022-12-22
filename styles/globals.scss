@@ -18,13 +18,14 @@ a {
 html {
   height: 100%;
   width: 100%;
+  overflow: hidden;
 }
 
 body {
   background-color: $color-gray;
   max-width: 100%;
   overflow-x: hidden;
-
+  overflow: hidden;
   // >div {
   //   // !!!
   //   height: 100vh;
@@ -393,7 +394,7 @@ opacity $animation_time ease-in;
 }
 
 .page-bg {
-  // display: none;
+  display: none;
 
   // @include max-min(min px($BP_TABLET_SM)) {
   position: absolute;
@@ -436,6 +437,7 @@ opacity $animation_time ease-in;
   left: px(628 - 50);
   top: px(-215);
   z-index: 0;
+
   svg {
     @include size(100%)
   }
