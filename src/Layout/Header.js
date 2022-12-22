@@ -26,7 +26,7 @@ export default function Header({ navigation }) {
           className='small-header'
           animate={scroll && scroll.scroll > 0 ? { marginTop: 0 } : { marginTop: -variables['smallHeader'] }}
         >
-          <div className='layout-wrap'>
+          <div className='layout-wrap  h-full'>
             <div className='flx h-full'>
               <ul>
                 {navigation.map((nav) => {

@@ -76,6 +76,7 @@
   &-top-108 {
     padding-top: 108px;
   }
+
   &-top-auto {
     padding-top: initial;
   }
@@ -263,6 +264,14 @@
 
     &-primary {
       background-color: $color-primary;
+    }
+
+    &-dark-gray {
+      background-color: $color-dark-gray;
+    }
+
+    &-gray {
+      background-color: $color-gray;
     }
   }
 }

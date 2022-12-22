@@ -14,6 +14,7 @@ import { useScrollValue, useUser } from '../src/store'
 import { SectionsContainer, Section } from 'react-fullpage';
 import ReactFullpage from '@fullpage/react-fullpage'
 import { isCancel } from 'axios'
+import Footer from '../src/Components/Footer'
 
 export function AppNavigation({ navigation }) {
   const [hoverNav, setHoverNav] = useState(null);
@@ -904,9 +905,7 @@ export default function Home(props) {
         <FaqSection active={activeSection} />
       </CustomSection>
       <CustomSection className="footer">
-        <div style={{ height: 100, }}>
-          its a foooooter
-        </div>
+        <Footer />
       </CustomSection>
 
       {/* <Section className="fp-auto-height">Page 3</Section> */}

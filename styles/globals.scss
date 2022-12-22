@@ -482,15 +482,19 @@ opacity $animation_time ease-in;
 }
 
 .small-header {
-  background-color: #000;
+  background-color: $color-dark-gray;
   width: 100%;
   position: absolute;
   top: 0;
   left: 0;
   z-index: 5;
   height: px($SMALL_HEAD_ER);
-  @include flex;
   color: #FFF;
+  display: none;
+
+  @include max-min(min px($BP_TABLET_SM)) {
+    display: block;
+  }
 
   .auth-btn {
     border-radius: 4px;
@@ -546,4 +550,8 @@ opacity $animation_time ease-in;
       }
     }
   }
+}
+
+.withFooter {
+  
 }
