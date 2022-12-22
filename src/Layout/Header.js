@@ -24,6 +24,7 @@ export default function Header({ navigation }) {
       <div className={classNames(styles.header, 'absolute top-0 w-full')}>
         <motion.div
           className='small-header'
+          initial={scroll && scroll.scroll > 0 ? { marginTop: 0 } : { marginTop: -variables['smallHeader'] }}
           animate={scroll && scroll.scroll > 0 ? { marginTop: 0 } : { marginTop: -variables['smallHeader'] }}
         >
           <div className='layout-wrap  h-full'>
