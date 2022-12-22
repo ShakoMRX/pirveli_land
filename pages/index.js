@@ -147,7 +147,7 @@ export function AppNavigation({ navigation }) {
                   {nav.name}
                 </div>
                 <div className='image-area '>
-                  <ImageComponent width={180} height={180} src={`/assets/img/${nav.slug}.png`} />
+                  <ImageComponent width={299} height={299} src={`/assets/img/${nav.slug}.png`} />
                 </div>
               </Link>
             </li>
@@ -473,7 +473,7 @@ const MainSection = ({ active: section, navigation = [] }) => {
   return <FullPage
     ref={ref}
     className={'section-auto section-md-full md-flx md-flx-col md-flx-all justify-content-evenly'} >
-    <div className='md-p-top-108 section-md-auto divide-h flx flx-all flx-col relative'>
+    <div className='p-top-108 md-p-top-auto section-md-auto divide-h flx flx-all flx-col relative'>
       <div className='page-bg'>
         <motion.div
           variants={_birdTopTemplate}
@@ -502,10 +502,10 @@ const MainSection = ({ active: section, navigation = [] }) => {
         <div className='intro-header w-max-747 text-s-26 md-text-s-40 md-l-text-s-55 text-weight-700'>
           <p><span>დააგროვე და გადაცვალე</span> <spam className='text-color-primary'>მონეტები</spam></p>
         </div>
-        <div className='intro-description p-top-50 text-s-16 md-text-s-20'>
+        <div className='intro-description p-top-28 md-p-top-50 text-s-16 md-text-s-20'>
           <p>აღმოაჩინე ახალი რეალობა, სადაც ყოველთვის მოგებული დარჩები!</p>
         </div>
-        <div className='intro-action p-top-40'>
+        <div className='intro-action p-top-28 md-p-top-40'>
           <Link
             target={'_self'}
             href={

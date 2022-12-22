@@ -42,7 +42,8 @@ function MyApp(ctx) {
   useEffect(() => {
     fetchApi('/racoon-transactions/user')
       .then(async (r) => {
-        if (r.status !== 200) {
+        
+        if (r.status == 401 || r.status == 500) {
           setUserData({ isLoading: false })
           return;
         }

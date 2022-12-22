@@ -73,6 +73,12 @@
     }
   }
 
+  &-top-108 {
+    padding-top: 108px;
+  }
+  &-top-auto {
+    padding-top: initial;
+  }
 
 
 }
@@ -491,9 +497,6 @@
     &-p {
       @include padding-content;
 
-      &-top-108 {
-        padding-top: 108px;
-      }
     }
 
     &-m {

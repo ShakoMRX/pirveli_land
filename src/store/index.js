@@ -29,14 +29,14 @@ export function ScrollProvider({ children }) {
       // console.log('onScroll', e.screenY, e.layerY);
       // console.log('onScroll', window.pageYOffset || document.documentElement.scrollTop);
 
-      // setScroll({
-      //   scroll: window.pageYOffset || document.documentElement.scrollTop
-      // })
+      setScroll({
+        scroll: window.pageYOffset || document.documentElement.scrollTop
+      })
     }
 
-    window.addEventListener('DOMMouseScroll', onScrollEvent, { passive: false });
+    window.addEventListener('scroll', onScrollEvent, { passive: false });
     return () => {
-      window.removeEventListener('DOMMouseScroll', onScrollEvent)
+      window.removeEventListener('scroll', onScrollEvent)
     }
   }, [])
 
