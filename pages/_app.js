@@ -75,7 +75,7 @@ function MyApp(ctx) {
     <Head>
       <meta name="viewport" content="width=device-width,initial-scale=1"></meta>
     </Head>
-    <UserProvider initialValue={{id: '2'}}>
+    <UserProvider initialValue={userData}>
       <ScrollProvider>
         <Layout>
           <Header languages={Languages} navigation={appData.navigation} />
