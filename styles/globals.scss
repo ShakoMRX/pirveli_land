@@ -555,6 +555,7 @@ opacity $animation_time ease-in;
   height: px($SMALL_HEAD_ER);
   color: #FFF;
   // display: none;
+  z-index: 555;
 
   @include max-min(min px($BP_TABLET_SM + 1)) {
     display: block;

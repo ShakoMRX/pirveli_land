@@ -73,11 +73,9 @@ export default function Header({ navigation }) {
           </div>}
         </motion.div>
 
-
-
         <motion.div
           animate={useScroll > 0
-            ? width > 768 ? { marginTop: -80, ...motionStyle } : user && !user.id ? { marginTop: 0, ...motionStyle } : { marginTop: 46, ...motionStyle }
+            ? width > 768 ? { marginTop: 46, ...motionStyle } : user && !user.id ? { marginTop: 0, ...motionStyle } : { marginTop: 46, ...motionStyle }
             : { marginTop: 0, ...motionStyle }}
           className={'header--wrap flx align-items-center' + (mobileMenu && user && user.id ? ' bitmoere' : '')}>
           <div className='logo-area'>
@@ -95,7 +93,11 @@ export default function Header({ navigation }) {
                 <Link key="auth" href={process.env.AUTH_LINK || ''} target='_self'>
                   <Button variant={'primary'} size={'normal'} text={'შესვლა'} />
                 </Link>
-                : width > 968 ? <Link key="userInfo" href={process.env.PROFILE_LINK}>
+                : width > 968 ? <motion.div
+                initial={{x: 0}}
+                animate={(useScroll > 0) ? {y: -63} : {y: 0}}
+                >
+                <Link key="userInfo" href={process.env.PROFILE_LINK}>
                   <Button reset variant={'outline'} className="flx align-items-center gap-12">
                     <div className='p-left-16'>
                       <ImageComponent width={20} height={20} src={'/assets/img/coin.png'} />
@@ -109,7 +111,8 @@ export default function Header({ navigation }) {
                       <Image alt='' width={15} height={20} src={`/assets/img/avatars/avatar${user.avatar ? user.avatar.path : '1'}.png`} />
                     </div>
                   </Button>
-                </Link> : null}
+                </Link>
+                </motion.div> : null}
             <Button onClick={() => setMobileMenu(true)} variant='none' reset className={'flx flx-all md-hidden'} style={{ width: 34, height: 34 }}>
               <ImageComponent width={20} height={20} src={'/assets/img/burger.svg'} />
             </Button>

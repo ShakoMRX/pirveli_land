@@ -13,17 +13,17 @@
         @extend %layout-wrap;
         min-height: px($HEADER_MOBILE_SIZE);
         position: relative;
-        z-index: 5555;
+        z-index: 55;
 
         &:before {
           content: '';
-          background-color: rgba(#FFF, .2);
+          // background-color: rgba(#FFF, .2);
           width: 100%;
           height: 100%;
           position: absolute;
           top: 0;
           left: 0;
-          backdrop-filter: blur(1px);
+          // backdrop-filter: blur(1px);
         }
 
         >div {
@@ -36,6 +36,10 @@
           img {
             height: 100%;
             width: initial;
+
+            @include max-min(min px($BP_TABLET_SM)) {
+              height: revert-layer;
+            }
           }
 
           a {
@@ -51,6 +55,7 @@
 
           .logo-area {
             height: initial;
+            
           }
         }
       }
