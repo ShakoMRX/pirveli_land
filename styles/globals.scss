@@ -717,3 +717,26 @@ opacity $animation_time ease-in;
     display: flex;
   }
 }
+
+.intro-header  {
+  line-height: 150%;
+  padding-inline: 16px;
+
+  @include max-min(min px($BP_TABLET_SM)) {
+    padding-inline: 0px;
+  }
+}
+
+.title-area {
+  transform: translateX(0);
+  // line-height: 150%;
+
+  @include max-min(max px(1440)) {
+
+    .text-color-primary {
+      transform: translateX(80px);
+      z-index: 3;
+      position: relative;
+    }
+  }
+}
