@@ -37,7 +37,7 @@ export default function Header({ navigation }) {
           initial={useScroll > 0 && user && user.id || useScroll > 0 && width > 768 || mobileMenu && user && user.id ? { marginTop: 0 } : { marginTop: -variables['smallHeader'] }}
           animate={useScroll > 0 && user && user.id || useScroll > 0 && width > 768 || mobileMenu && user && user.id ? { marginTop: 0 } : { marginTop: -variables['smallHeader'] }}
         >
-          {width > 968 ? <div className='layout-wrap h-full'>
+          {width > 768 ? <div className='layout-wrap h-full'>
             <div className='flx h-full'>
               <ul>
                 {navigation.map((nav) => {
@@ -93,7 +93,7 @@ export default function Header({ navigation }) {
                 <Link key="auth" href={process.env.AUTH_LINK || ''} target='_self'>
                   <Button variant={'primary'} size={'normal'} text={'შესვლა'} />
                 </Link>
-                : width > 968 ? <motion.div
+                : width > 768 ? <motion.div
                 initial={{x: 0}}
                 animate={(useScroll > 0) ? {y: -63} : {y: 0}}
                 >
