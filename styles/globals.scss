@@ -524,9 +524,14 @@ opacity $animation_time ease-in;
     box-shadow: 0px 0px 32px rgba(0, 0, 0, 0.1);
     position: relative;
     z-index: 1;
+
+    @include max-min(min px($BP_TABLET_SM + 1)) {
+      height: 535px;
+      // height: 509px;
+    }
   }
 
-  @include max-min(min px($BP_TABLET_SM)) {
+  @include max-min(min px($BP_TABLET_SM + 1)) {
     width: 100%;
     height: 535px;
     // height: 509px;
