@@ -482,8 +482,8 @@ opacity $animation_time ease-in;
 
   @include max-min(min px($BP_TABLET_SM)) {
 
-    width: 973px;
-    height: 973px;
+    width: 97.3%;
+    height: 97.3%;
   }
 
   svg {
@@ -688,4 +688,26 @@ opacity $animation_time ease-in;
     }
   }
 
+}
+
+.drop {
+  &-outline {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    color: #000;
+    background: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 0 1px rgba(56, 56, 56, 0.1);
+    border-radius: 12px;
+    margin-top: 4px;
+  }
+}
+
+.langBtn {
+  display: none;
+
+  @include max-min(min px($BP_TABLET_SM + 1)) {
+    display: flex;
+  }
 }

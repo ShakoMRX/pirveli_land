@@ -5,13 +5,8 @@ import Link from 'next/link';
 import Button from '../Shared/Button';
 import { useUser } from '../store';
 
-const Langs = [
-  { name: 'gb', slug: 'gb' },
-  { name: 'KA', slug: 'ge' },
-  { name: 'RU', slug: 'ru' },
-]
 
-export default function MobileMenu({ navigation, mobileMenu, onAction }) {
+export default function MobileMenu({ navigation, mobileMenu, onAction, languages }) {
   const [user,] = useUser();
 
   useEffect(() => {
@@ -34,7 +29,7 @@ export default function MobileMenu({ navigation, mobileMenu, onAction }) {
       >
         <div className='flx align-items-center gap-6'>
           <ul className='lang-area flx align-items-center'>
-            {Langs.map((l) => {
+            {languages.map((l) => {
               return <li className={'w-44 h-44 flx flx-all'}
                 key={l.slug}>
                 <span className={`${l.slug == 'gb' ? ' bordered b-radius-4' : null}`}>

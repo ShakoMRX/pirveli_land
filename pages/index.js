@@ -301,19 +301,19 @@ export function Home2(props) {
                 </h4>
                 <ul className='flx flx-col gap-20'>
                   <li className='flx flx-col gap-8'>
-                    <p className='text-s-16 md-text-s-24 text-color-primary'>01</p>
+                    <p className='text-s-16 md-text-s-24 text-weight-700 text-color-primary'>01</p>
                     <span className='text-line-height-24'>
                       ადგილი სადაც ყოველ შენს აქტივობას მოაქვს მონეტები. ერთვები გასართობ თამაშებში და ზრდი დაგროვებული მონეტების რაოდენობას.
                     </span>
                   </li>
                   <li className='flx flx-col gap-8'>
-                    <p className='text-s-16 md-text-s-24 text-color-primary'>02</p>
+                    <p className='text-s-16 md-text-s-24 text-weight-700 text-color-primary'>02</p>
                     <span className='text-line-height-24'>
                       დაგროვებულ მონეტებს ცვლი ფასდაკლებების ვაუჩერებსა და კატალოგში მოცემულ შერჩეულ პროდუქტებში.
                     </span>
                   </li>
                   <li className='flx flx-col gap-8'>
-                    <p className='text-s-16 md-text-s-24 text-color-primary'>03</p>
+                    <p className='text-s-16 md-text-s-24  text-weight-700 text-color-primary'>03</p>
                     <span className='text-line-height-24'>
                       ყოველ 100 მონეტაზე იღებ ფულადი პრიზების მოგების 5 შანსს. სამ დღეში ერთხელ - დღიური საპრიზო ფონდით - 10 000ლ. დიდი გათამაშება - საწყისი საპრიზო ფონდით - 300 000ლ.
                     </span>
@@ -659,19 +659,19 @@ const FaqSection = ({ active }) => {
           </h4>
           <ul className='flx flx-col gap-20'>
             <li className='flx flx-col gap-8'>
-              <p className='text-s-16 md-text-s-24 text-color-primary'>01</p>
+              <p className='text-s-16 md-text-s-24 text-weight-700 text-color-primary'>01</p>
               <span className='text-line-height-24'>
                 ადგილი სადაც ყოველ შენს აქტივობას მოაქვს მონეტები. ერთვები გასართობ თამაშებში და ზრდი დაგროვებული მონეტების რაოდენობას.
               </span>
             </li>
             <li className='flx flx-col gap-8'>
-              <p className='text-s-16 md-text-s-24 text-color-primary'>02</p>
+              <p className='text-s-16 md-text-s-24 text-weight-700 text-color-primary'>02</p>
               <span className='text-line-height-24'>
                 დაგროვებულ მონეტებს ცვლი ფასდაკლებების ვაუჩერებსა და კატალოგში მოცემულ შერჩეულ პროდუქტებში.
               </span>
             </li>
             <li className='flx flx-col gap-8'>
-              <p className='text-s-16 md-text-s-24 text-color-primary'>03</p>
+              <p className='text-s-16 md-text-s-24 text-weight-700 text-color-primary'>03</p>
               <span className='text-line-height-24'>
                 ყოველ 100 მონეტაზე იღებ ფულადი პრიზების მოგების 5 შანსს. სამ დღეში ერთხელ - დღიური საპრიზო ფონდით - 10 000ლ. დიდი გათამაშება - საწყისი საპრიზო ფონდით - 300 000ლ.
               </span>

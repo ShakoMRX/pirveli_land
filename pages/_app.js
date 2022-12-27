@@ -7,6 +7,13 @@ import Layout from '../src/Layout/Layout'
 import { ScrollProvider, UserProvider } from '../src/store';
 import '../styles/globals.scss'
 
+const Languages = [
+  { name: 'GB', slug: 'gb' },
+  { name: 'KA', slug: 'ge' },
+  { name: 'RU', slug: 'ru' },
+]
+
+
 const fetchApi = async (url, type) => {
 
 
@@ -31,13 +38,12 @@ const fetchApi = async (url, type) => {
 function MyApp(ctx) {
   const { Component, pageProps, appData, user } = ctx;
   const [userData, setUserData] = useState({
-    isLoading: false
+    isLoading: !false
   });
 
 
   useEffect(() => {
 
-    return;
     fetchApi('/racoon-transactions/user')
       .then(async (r) => {
 
@@ -69,10 +75,10 @@ function MyApp(ctx) {
     <Head>
       <meta name="viewport" content="width=device-width,initial-scale=1"></meta>
     </Head>
-    <UserProvider initialValue={{id: '1'}}>
+    <UserProvider initialValue={userData}>
       <ScrollProvider>
         <Layout>
-          <Header navigation={appData.navigation} />
+          <Header languages={Languages} navigation={appData.navigation} />
           <Component {...pageProps} appData={appData} />
           {/* <MobileMenu /> */}
         </Layout>

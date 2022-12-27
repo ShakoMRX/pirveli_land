@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from '../../styles/components/Header.module.scss';
 import ImageComponent from '../Components/ImageComponent';
 import { ArrowIcon, Flag_GE } from '../Icons';
@@ -11,11 +11,27 @@ import { motion } from 'framer-motion';
 import variables, { useWindow } from '..';
 import MobileMenu from '../Components/MobileMenu';
 
-export default function Header({ navigation }) {
+export default function Header({ navigation, languages }) {
   const [user,] = useUser();
   const [scroll,] = useScrollValue();
   const [width,] = useWindow();
   const [mobileMenu, setMobileMenu] = useState(false);
+  const [landDrop, openLangDrop] = useState(false);
+
+  const handle = (e) => {
+    if (landDrop) {
+      if (!dropRef.current.contains(e.target)) {
+        openLangDrop(false);
+      }
+    }
+  }
+
+  const dropRef = useRef();
+
+  useEffect(() => {
+    document.addEventListener('click', handle);
+    return document.removeEventListener('click', handle)
+  }, [])
 
   useEffect(() => {
     // console.log('scroll', scroll.scroll)
@@ -34,10 +50,10 @@ export default function Header({ navigation }) {
       <div className={classNames(styles.header, 'absolute top-0 w-full')}>
         <motion.div
           className='small-header'
-          initial={useScroll > 0 && user && user.id || useScroll > 0 && width > 768 || mobileMenu && user && user.id ? { marginTop: 0 } : { marginTop: -variables['smallHeader'] }}
-          animate={useScroll > 0 && user && user.id || useScroll > 0 && width > 768 || mobileMenu && user && user.id ? { marginTop: 0 } : { marginTop: -variables['smallHeader'] }}
+          initial={useScroll > 0 && user && user.id || useScroll > 0 && width >= 768 || mobileMenu && user && user.id ? { marginTop: 0 } : { marginTop: -variables['smallHeader'] }}
+          animate={useScroll > 0 && user && user.id || useScroll > 0 && width >= 768 || mobileMenu && user && user.id ? { marginTop: 0 } : { marginTop: -variables['smallHeader'] }}
         >
-          {width > 768 ? <div className='layout-wrap h-full'>
+          {width >= 768 ? <div className='layout-wrap h-full'>
             <div className='flx h-full'>
               <ul>
                 {navigation.map((nav) => {
@@ -47,7 +63,7 @@ export default function Header({ navigation }) {
                 })}
               </ul>
               {user && !user.id ? <div style={{ width: 90 }} className='m-left-auto p-block-8'>
-                <Button reset className={'h-full w-full auth-btn'} size='small' variant='text' text="შესვლა" />
+                {/* <Button reset className={'h-full w-full auth-btn'} size='small' variant='text' text="შესვლა" /> */}
               </div> : <div className='flx align-items-center gap-12 m-left-auto  b-radius-12'>
                 <div className='p-left-16'>
                   <ImageComponent width={20} height={20} src={'/assets/img/coin.png'} />
@@ -93,37 +109,57 @@ export default function Header({ navigation }) {
                 <Link key="auth" href={process.env.AUTH_LINK || ''} target='_self'>
                   <Button variant={'primary'} size={'normal'} text={'შესვლა'} />
                 </Link>
-                : width > 768 ? <motion.div
-                initial={{x: 0}}
-                animate={(useScroll > 0) ? {y: -63} : {y: 0}}
+                : width >= 768 ? <motion.div
+                  initial={{ x: 0 }}
+                  animate={(useScroll > 0) ? { y: -63 } : { y: 0 }}
                 >
-                <Link key="userInfo" href={process.env.PROFILE_LINK}>
-                  <Button reset variant={'outline'} className="flx align-items-center gap-12">
-                    <div className='p-left-16'>
-                      <ImageComponent width={20} height={20} src={'/assets/img/coin.png'} />
-                    </div>
-                    <div>{user?.points ? user?.points?.amountOfPoints : '0'}</div>
-                    <div className='w-40 h-40 b-radius-inherit bg-color-yellow flx flx-all'
-                      style={user?.avatar && user?.avatar?.code ? {
-                        backgroundColor: `#${user?.avatar?.code}`
-                      } : {}}
-                    >
-                      <Image alt='' width={15} height={20} src={`/assets/img/avatars/avatar${user.avatar ? user.avatar.path : '1'}.png`} />
-                    </div>
-                  </Button>
-                </Link>
+                  <Link key="userInfo" href={process.env.PROFILE_LINK}>
+                    <Button reset variant={'outline'} className="flx align-items-center gap-12">
+                      <div className='p-left-16'>
+                        <ImageComponent width={20} height={20} src={'/assets/img/coin.png'} />
+                      </div>
+                      <div>{user?.points ? user?.points?.amountOfPoints : '0'}</div>
+                      <div className='w-40 h-40 b-radius-inherit bg-color-yellow flx flx-all'
+                        style={user?.avatar && user?.avatar?.code ? {
+                          backgroundColor: `#${user?.avatar?.code}`
+                        } : {}}
+                      >
+                        <Image alt='' width={15} height={20} src={`/assets/img/avatars/avatar${user.avatar ? user.avatar.path : '1'}.png`} />
+                      </div>
+                    </Button>
+                  </Link>
                 </motion.div> : null}
+
+            <Button
+              onClick={() => openLangDrop(!landDrop)}
+              variant={'outline'} 
+              className="flx align-items-center gap-12 p-inline-16 p-block-10 langBtn">
+              <Flag_GE />
+              <ArrowIcon />
+              <motion.div
+                ref={dropRef}
+                initial={{ opacity: 0 }}
+                animate={landDrop ? { opacity: 1 } : { opacity: 0 }}
+                className='drop drop-outline '>
+                <ul className='lang-area flx flx-col align-items-center'>
+                  {languages.map((l) => {
+                    return <li className={'w-44 h-44 flx flx-all'}
+                      key={l.slug}>
+                      <span className={`${l.slug == 'gb' ? ' bordered b-radius-4' : null}`}>
+                        <ImageComponent alt={l.name} width={24} height={18} src={'/assets/img/flag-' + l.slug + '.svg'} />
+                      </span>
+                    </li>
+                  })}
+                </ul>
+              </motion.div>
+            </Button>
             <Button onClick={() => setMobileMenu(true)} variant='none' reset className={'flx flx-all md-hidden'} style={{ width: 34, height: 34 }}>
               <ImageComponent width={20} height={20} src={'/assets/img/burger.svg'} />
             </Button>
-            {/* <Button variant={'outline'} className="flx align-items-center gap-12 p-inline-16 p-block-10">
-            <Flag_GE />
-            <ArrowIcon />
-          </Button> */}
           </div>
         </motion.div>
 
-        <MobileMenu onAction={(e) => setMobileMenu(e)} mobileMenu={mobileMenu} navigation={navigation} />
+        <MobileMenu languages={languages} onAction={(e) => setMobileMenu(e)} mobileMenu={mobileMenu} navigation={navigation} />
       </div>
     </div>
   )
