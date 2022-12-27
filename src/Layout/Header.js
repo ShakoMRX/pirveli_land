@@ -21,19 +21,18 @@ export default function Header({ navigation }) {
     // console.log('scroll', scroll.scroll)
   }, [scroll])
 
-  const useScroll = width > 768 && scroll && scroll.scroll;
+  const useScroll = scroll && scroll.scroll;
 
   return (
     <div>
       <div className={classNames(styles.header, 'absolute top-0 w-full')}>
-        {user && user.id ? <motion.div
+        <motion.div
           className='small-header'
-          initial={useScroll > 0 ? { marginTop: 0 } : { marginTop: -variables['smallHeader'] }}
-          animate={useScroll > 0 ? { marginTop: 0 } : { marginTop: -variables['smallHeader'] }}
+          initial={useScroll > 0 && user && user.id || useScroll > 0 && width > 768 || mobileMenu ? { marginTop: 0 } : { marginTop: -variables['smallHeader'] }}
+          animate={useScroll > 0 && user && user.id || useScroll > 0 && width > 768 || mobileMenu ? { marginTop: 0 } : { marginTop: -variables['smallHeader'] }}
         >
-          <div className='layout-wrap h-full'>
+          {width > 968 ? <div className='layout-wrap h-full'>
             <div className='flx h-full'>
-
               <ul>
                 {navigation.map((nav) => {
                   return <li key={nav.slug} className={nav.slug}>
@@ -41,15 +40,34 @@ export default function Header({ navigation }) {
                   </li>
                 })}
               </ul>
-              <div style={{ width: 90 }} className='m-left-auto p-block-8'>
+              {user && !user.id ? <div style={{ width: 90 }} className='m-left-auto p-block-8'>
                 <Button reset className={'h-full w-full auth-btn'} size='small' variant='text' text="შესვლა" />
+              </div> : <div className='flx align-items-center gap-12'>
+                <div className='p-left-16'>
+                  <ImageComponent width={20} height={20} src={'/assets/img/coin.png'} />
+                </div>
+                <div>{user?.points ? user?.points?.amountOfPoints : '0'}</div>
+                <div className='w-40 h-40 b-radius-inherit bg-color-yellow flx flx-all'
+                  style={user?.avatar && user?.avatar?.code ? {
+                    backgroundColor: `#${user?.avatar?.code}`
+                  } : {}}
+                >
+                  <Image alt='' width={15} height={20} src={`/assets/img/avatars/avatar${user.avatar ? user.avatar.path : '1'}.png`} />
+                </div>
+              </div>}
+            </div>
+          </div> : <div className='flx align-items-center h-full layout-wrap'>
+            <div className='flx m-left-auto gap-12'>
+              <div>{user?.points ? user?.points?.amountOfPoints : '0'}</div>
+              <div className='p-left-16'>
+                <ImageComponent width={20} height={20} src={'/assets/img/coin.png'} />
               </div>
             </div>
-          </div>
-        </motion.div> : null}
+          </div>}
+        </motion.div>
         <motion.div
           animate={useScroll > 0
-            ? { marginTop: -80 }
+            ? width > 768 ? { marginTop: -80 } : user && !user.id ? { marginTop: 0 } : { marginTop: 46 }
             : { marginTop: 0 }}
           className='header--wrap flx align-items-center'>
           <div className='logo-area'>
@@ -67,8 +85,8 @@ export default function Header({ navigation }) {
                 <Link key="auth" href={process.env.AUTH_LINK || ''} target='_self'>
                   <Button variant={'primary'} size={'normal'} text={'შესვლა'} />
                 </Link>
-                : <Link key="userInfo" href={process.env.PROFILE_LINK}>
-                  <Button reset variant={'outline'} className="flx align-items-center gap-12">
+                : width > 968 ? <Link key="userInfo" href={process.env.PROFILE_LINK}>
+                  <Button reset variant={'outline'} className="flx align-items-center gap-12 m-left-auto">
                     <div className='p-left-16'>
                       <ImageComponent width={20} height={20} src={'/assets/img/coin.png'} />
                     </div>
@@ -81,23 +99,10 @@ export default function Header({ navigation }) {
                       <Image alt='' width={15} height={20} src={`/assets/img/avatars/avatar${user.avatar ? user.avatar.path : '1'}.png`} />
                     </div>
                   </Button>
-                </Link>}
+                </Link> : null}
             <Button onClick={() => setMobileMenu(true)} variant='none' reset className={'flx flx-all md-hidden'} style={{ width: 34, height: 34 }}>
-
-              <svg id="yumi_burger" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g clipPath="url(#clip0_5191_5041)">
-                  <path d="M4 8H20" stroke="#383838" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M4 16H20" stroke="#383838" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </g>
-                <defs>
-                  <clipPath id="clip0_5191_5041">
-                    <rect width="24" height="24" fill="white" />
-                  </clipPath>
-                </defs>
-              </svg>
+              <ImageComponent width={20} height={20} src={'/assets/img/burger.svg'} />
             </Button>
-
-
             {/* <Button variant={'outline'} className="flx align-items-center gap-12 p-inline-16 p-block-10">
             <Flag_GE />
             <ArrowIcon />

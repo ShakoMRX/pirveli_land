@@ -318,7 +318,7 @@ export function Home2(props) {
                 </ul>
               </div>
             </div>
-            <div className='section section-md-auto divide-h flx flx-all md-block flex-g-1'>
+            <div className='section-auto section-md-auto divide-h flx flx-all md-block flex-g-1 md-p-top-40 md-p-bottom-40'>
 
               <motion.div style={{
                 opacity: vScale,
@@ -638,7 +638,7 @@ const FaqSection = ({ active }) => {
   return <div ref={ref}
     className='section-auto section-md-full md-flx md-flx-all size-full layout-wrap'>
     <div className='md-flx md-flx-row gap-30 w-wide relative'>
-      <div className='section section-md-auto divide-h p-top-80'>
+      <div className='section-auto section-md-auto divide-h p-top-80'>
         <div className='info-section w-full l-sm-w-490 lg-w-619'>
           <h4 className='title-area flx flx-col text-weight-700 text-s-16 md-text-s-20 l-sm-text-s-28'>
             <motion.p
@@ -676,7 +676,7 @@ const FaqSection = ({ active }) => {
           </ul>
         </div>
       </div>
-      <div className='section section-md-auto divide-h flx flx-all md-block flex-g-1'>
+      <div className='section-auto section-md-auto divide-h flx flx-all md-block flex-g-1 md-p-top-30 md-p-bottom-30'>
 
         <motion.div
           className='faqBird-bg'
