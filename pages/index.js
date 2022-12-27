@@ -99,6 +99,8 @@ export function AppNavigation({ navigation }) {
   const showBg = (e, show) => {
     if (show) {
       bgRef.current.classList.add('active');
+      bgRef.current.parentNode.classList.add('active');
+      e.currentTarget.classList.add('active');
       if (e.currentTarget.dataset.name !== lastActiveEl.current) {
         lastActiveEl.current = e.currentTarget.dataset.name;
       }
@@ -107,6 +109,7 @@ export function AppNavigation({ navigation }) {
 
     } else {
       bgRef.current.classList.remove('active')
+      bgRef.current.parentNode.classList.remove('active')
       bgRef.current.style.backgroundColor = 'transparent';
       lastActiveEl.current = null;
     }
@@ -676,7 +679,7 @@ const FaqSection = ({ active }) => {
           </ul>
         </div>
       </div>
-      <div className='section-auto section-md-auto divide-h flx flx-all md-block flex-g-1 md-p-top-30 md-p-bottom-30'>
+      <div className='section-auto section-md-auto divide-h flx flx-all md-block flex-g-1 p-top-56 p-bottom-56'>
 
         <motion.div
           className='faqBird-bg'

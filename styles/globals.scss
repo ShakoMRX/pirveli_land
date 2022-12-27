@@ -258,6 +258,16 @@ opacity $animation_time ease-in;
       }
     }
 
+    &.active {
+      li {
+        .title {
+          color: rgba(#fff, .4);
+        }
+
+        &:not(active) {}
+      }
+    }
+
   }
 
   &--item {
@@ -325,6 +335,7 @@ opacity $animation_time ease-in;
       right: 24px;
       color: #FFF;
       z-index: 5;
+      transition: all .22s ease-in-out;
 
       &:hover {}
 
@@ -378,7 +389,7 @@ opacity $animation_time ease-in;
 
     &:hover {
       .title {
-        color: #FFF;
+        color: #FFF !important;
       }
 
       .image-area {
@@ -588,12 +599,12 @@ opacity $animation_time ease-in;
 
 .mobile-menu {
   position: fixed;
-  padding-top: px($HEADER_MOBILE_SIZE);
+  padding-top: px($SMALL_HEAD_ER);
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 555;
+  z-index: 5555;
 
   @include max-min(min px($BP_TABLET_SM + 1)) {
     top: px($HEADER_SIZE);

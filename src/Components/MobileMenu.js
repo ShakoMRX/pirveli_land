@@ -52,7 +52,7 @@ export default function MobileMenu({ navigation, mobileMenu, onAction }) {
         <ul className='nav-list p-top-56'>
           {navigation.map((n) => {
             return <li key={n.slug} className={n.slug}>
-              <Link href={n.slug}>
+              <Link href={n.url}>
                 <div className='icon-area'>
                   <ImageComponent alt={n.slug} width={24} height={24} src={'/assets/img/' + n.slug + '.svg'} />
                 </div>

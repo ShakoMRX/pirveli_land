@@ -23,6 +23,12 @@ export default function Header({ navigation }) {
 
   const useScroll = scroll && scroll.scroll;
 
+  const motionStyle = {};
+
+  if (mobileMenu) {
+    Object.assign(motionStyle, { y: 20, opacity: 0 })
+  }
+
   return (
     <div>
       <div className={classNames(styles.header, 'absolute top-0 w-full')}>
@@ -42,7 +48,7 @@ export default function Header({ navigation }) {
               </ul>
               {user && !user.id ? <div style={{ width: 90 }} className='m-left-auto p-block-8'>
                 <Button reset className={'h-full w-full auth-btn'} size='small' variant='text' text="შესვლა" />
-              </div> : <div className='flx align-items-center gap-12'>
+              </div> : <div className='flx align-items-center gap-12 m-left-auto  b-radius-12'>
                 <div className='p-left-16'>
                   <ImageComponent width={20} height={20} src={'/assets/img/coin.png'} />
                 </div>
@@ -57,18 +63,22 @@ export default function Header({ navigation }) {
               </div>}
             </div>
           </div> : <div className='flx align-items-center h-full layout-wrap'>
+            <div>
+              <Image alt='' width={15} height={20} src={`/assets/img/avatars/avatar${user.avatar ? user.avatar.path : '1'}.png`} />
+            </div>
             <div className='flx m-left-auto gap-12'>
               <div>{user?.points ? user?.points?.amountOfPoints : '0'}</div>
-              <div className='p-left-16'>
-                <ImageComponent width={20} height={20} src={'/assets/img/coin.png'} />
-              </div>
+              <ImageComponent width={20} height={20} src={'/assets/img/coin.png'} />
             </div>
           </div>}
         </motion.div>
+
+
+        
         <motion.div
           animate={useScroll > 0
-            ? width > 768 ? { marginTop: -80 } : user && !user.id ? { marginTop: 0 } : { marginTop: 46 }
-            : { marginTop: 0 }}
+            ? width > 768 ? { marginTop: -80, ...motionStyle } : user && !user.id ? { marginTop: 0, ...motionStyle } : { marginTop: 46, ...motionStyle }
+            : { marginTop: 0, ...motionStyle }}
           className='header--wrap flx align-items-center'>
           <div className='logo-area'>
             <Link href={'/'}>
@@ -86,7 +96,7 @@ export default function Header({ navigation }) {
                   <Button variant={'primary'} size={'normal'} text={'შესვლა'} />
                 </Link>
                 : width > 968 ? <Link key="userInfo" href={process.env.PROFILE_LINK}>
-                  <Button reset variant={'outline'} className="flx align-items-center gap-12 m-left-auto">
+                  <Button reset variant={'outline'} className="flx align-items-center gap-12">
                     <div className='p-left-16'>
                       <ImageComponent width={20} height={20} src={'/assets/img/coin.png'} />
                     </div>
