@@ -32,7 +32,7 @@ export default function MobileMenu({ navigation, mobileMenu, onAction, languages
             {languages.map((l) => {
               return <li className={'w-44 h-44 flx flx-all'}
                 key={l.slug}>
-                <span className={`${l.slug == 'gb' ? ' bordered b-radius-4' : null}`}>
+                <span className={`${l.slug == 'ge' ? ' bordered b-radius-4' : null}`}>
                   <ImageComponent alt={l.name} width={24} height={18} src={'/assets/img/flag-' + l.slug + '.svg'} />
                 </span>
               </li>
