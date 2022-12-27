@@ -478,7 +478,7 @@ const MainSection = ({ active: section, navigation = [] }) => {
 
   return <FullPage
     ref={ref}
-    className={'section section-md-full flx flx-col md-flx-all md-justify-content-evenly'} >
+    className={'section-auto section-md-full flx flx-col md-flx-all md-justify-content-evenly'} >
     <div className='p-top-180 md-p-top-auto section-md-auto divide-h flx flx-all flx-col relative'>
       <div className='page-bg'>
         <motion.div
@@ -640,7 +640,7 @@ const FaqSection = ({ active }) => {
 
   return <div ref={ref}
     className='section-auto section-md-full md-flx md-flx-all size-full layout-wrap'>
-    <div className='md-flx md-flx-row gap-30 w-wide relative flx-wrap'>
+    <div className='some-cntnr md-flx md-flx-row gap-30 w-wide relative'>
       <div className='section-auto section-md-auto divide-h p-top-80 relative z-3'>
         <div className='info-section w-full l-sm-w-490 lg-w-619'>
           <h4 className='title-area flx flx-col text-weight-700 text-s-16 md-text-s-20 l-sm-text-s-28'>

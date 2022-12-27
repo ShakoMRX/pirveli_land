@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
+import ImageComponent from '../src/Components/ImageComponent';
 import MobileMenu from '../src/Components/MobileMenu';
 import Header from '../src/Layout/Header'
 import Layout from '../src/Layout/Layout'
@@ -33,6 +34,12 @@ const fetchApi = async (url, type) => {
       })
     }
   });
+}
+
+const MessengerChatIcon = () => {
+  return <div className='messenger-float'>
+    <ImageComponent width={60} height={60} alt="Contact us on Messenger" src={'/assets/img/messenger.svg'} />
+  </div>
 }
 
 function MyApp(ctx) {
@@ -81,6 +88,7 @@ function MyApp(ctx) {
           <Header languages={Languages} navigation={appData.navigation} />
           <Component {...pageProps} appData={appData} />
           {/* <MobileMenu /> */}
+          <MessengerChatIcon />
         </Layout>
       </ScrollProvider>
     </UserProvider>
