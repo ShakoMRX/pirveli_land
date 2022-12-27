@@ -132,14 +132,15 @@ export default function Header({ navigation, languages }) {
 
             <Button
               onClick={() => openLangDrop(!landDrop)}
-              variant={'outline'} 
+              variant={'outline'}
               className="flx align-items-center gap-12 p-inline-16 p-block-10 langBtn">
               <Flag_GE />
               <ArrowIcon />
-              <motion.div
+              {landDrop ? <motion.div
                 ref={dropRef}
                 initial={{ opacity: 0 }}
-                animate={landDrop ? { opacity: 1 } : { opacity: 0 }}
+                animate={landDrop ? { opacity: 1, display: 'block' } : { opacity: 0 }}
+                exit={{ display: 'none' }}
                 className='drop drop-outline '>
                 <ul className='lang-area flx flx-col align-items-center'>
                   {languages.map((l) => {
@@ -151,7 +152,7 @@ export default function Header({ navigation, languages }) {
                     </li>
                   })}
                 </ul>
-              </motion.div>
+              </motion.div> : null}
             </Button>
             <Button onClick={() => setMobileMenu(true)} variant='none' reset className={'flx flx-all md-hidden'} style={{ width: 34, height: 34 }}>
               <ImageComponent width={20} height={20} src={'/assets/img/burger.svg'} />
