@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
+import MobileMenu from '../src/Components/MobileMenu';
 import Header from '../src/Layout/Header'
 import Layout from '../src/Layout/Layout'
 import { ScrollProvider, UserProvider } from '../src/store';
@@ -30,11 +31,13 @@ const fetchApi = async (url, type) => {
 function MyApp(ctx) {
   const { Component, pageProps, appData, user } = ctx;
   const [userData, setUserData] = useState({
-    isLoading: true
+    isLoading: false
   });
 
 
   useEffect(() => {
+
+    return;
     fetchApi('/racoon-transactions/user')
       .then(async (r) => {
 
@@ -66,11 +69,12 @@ function MyApp(ctx) {
     <Head>
       <meta name="viewport" content="width=device-width,initial-scale=1"></meta>
     </Head>
-    <UserProvider initialValue={userData}>
+    <UserProvider initialValue={{id: '1'}}>
       <ScrollProvider>
         <Layout>
           <Header navigation={appData.navigation} />
           <Component {...pageProps} appData={appData} />
+          {/* <MobileMenu /> */}
         </Layout>
       </ScrollProvider>
     </UserProvider>

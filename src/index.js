@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import variables from '../styles/root.module.scss'
 
 export function hexToRgb(hex) {
@@ -18,6 +19,28 @@ export function getRGBdiff(obj1, obj2) {
     g: Math.abs(obj1.g - obj2.g),
     b: Math.abs(obj1.b - obj2.b),
   }
+}
+
+export const useWindow = () => {
+
+  const [width, setWidth] = useState(0)
+  const [height, setHeight] = useState(0)
+
+  const handleWindowResize = () => {
+    setWidth(window.innerWidth);
+    setHeight(window.innerHeight);
+  }
+
+  useEffect(() => {
+    // component is mounted and window is available
+    handleWindowResize();
+    window.addEventListener('resize', handleWindowResize);
+    // unsubscribe from the event on component unmount
+    return () => window.removeEventListener('resize', handleWindowResize);
+  }, []);
+
+  return [width, height]
+
 }
 
 export default variables;

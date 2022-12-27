@@ -208,7 +208,15 @@ opacity $animation_time ease-in;
     height: 100%;
     overflow: auto;
     padding-top: 100px;
-    // padding-inline: 16px;
+    padding-inline: 16px;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
     @include max-min(min px($BP_TABLET_SM)) {
       padding-top: 0;
@@ -254,15 +262,17 @@ opacity $animation_time ease-in;
 
   &--item {
     position: relative;
-    width: 300px;
-    height: 300px;
+    width: 211px;
+    height: 111px;
     flex-shrink: 0;
     z-index: 2;
+    border-radius: 12px;
 
     @include max-min(min px($BP_TABLET_SM)) {
       width: initial;
       height: initial;
       // flex: 1;
+      border-radius: initial;
     }
 
 
@@ -311,8 +321,8 @@ opacity $animation_time ease-in;
 
     .title {
       position: absolute;
-      bottom: 28px;
-      right: 44px;
+      bottom: 24px;
+      right: 24px;
       color: #FFF;
       z-index: 5;
 
@@ -331,9 +341,9 @@ opacity $animation_time ease-in;
     }
 
     .image-area {
-      width: 300px;
-      height: 300px;
-      transform: translateY(-100px);
+      width: 124px;
+      height: 124px;
+      transform: translateY(-50px);
       position: absolute;
       top: 0;
       left: 0;
@@ -405,8 +415,13 @@ opacity $animation_time ease-in;
   // overflow: hidden;
 
   .bird {
-    width: 573px;
-    height: 746px;
+    width: 284px;
+    height: 364px;
+
+    @include max-min(min px($BP_TABLET_SM + 1)) {
+      width: 573px;
+      height: 746px;
+    }
 
     svg {
       width: 100%;
@@ -416,14 +431,29 @@ opacity $animation_time ease-in;
 
   .bird-top {
     position: absolute;
-    top: - px(248 + 84);
-    left: calc(100% - 130px);
+    right: -150px;
+    left: initial;
+    top: -50px;
+
+    @include max-min(min px($BP_TABLET_SM + 1)) {
+      top: - px(248 + 84);
+      left: calc(100% - 130px);
+    }
   }
 
   .bird-bottom {
     position: absolute;
-    top: 300px;
-    right: calc(100% + 180px);
+
+    top: 350px;
+    right: initial;
+    left: -180px;
+
+    @include max-min(min px($BP_TABLET_SM + 1)) {
+      top: 300px;
+      right: calc(100% + 180px);
+      left: initial;
+    }
+
   }
 
   // }
@@ -482,7 +512,7 @@ opacity $animation_time ease-in;
 }
 
 .small-header {
-  background-color: $color-dark-gray;
+  background-color: $color-dark;
   width: 100%;
   position: absolute;
   top: 0;
@@ -490,9 +520,9 @@ opacity $animation_time ease-in;
   z-index: 5;
   height: px($SMALL_HEAD_ER);
   color: #FFF;
-  display: none;
+  // display: none;
 
-  @include max-min(min px($BP_TABLET_SM)) {
+  @include max-min(min px($BP_TABLET_SM + 1)) {
     display: block;
   }
 
@@ -516,7 +546,8 @@ opacity $animation_time ease-in;
       color: #FFF;
       position: relative;
 
-      @each $platform, $color in $brands {
+      @each $platform,
+      $color in $brands {
         &.#{$platform} {
           a {
             &:hover {
@@ -552,6 +583,64 @@ opacity $animation_time ease-in;
   }
 }
 
-.withFooter {
-  
+.withFooter {}
+
+
+.mobile-menu {
+  position: fixed;
+  top: px($HEADER_MOBILE_SIZE);
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #FFF;
+  z-index: 555;
+
+  @include max-min(min px($BP_TABLET_SM + 1)) {
+    top: px($HEADER_SIZE);
+  }
+
+  &.show {}
+
+  .lang-area {
+    height: px($HEADER_MOBILE_SIZE);
+  }
+
+  .bordered {
+    border: 2px solid $color-primary;
+  }
+
+  .nav-list {
+    @include flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    li {
+      flex: calc(50% - 8px);
+      height: 83px;
+      flex-grow: 0;
+      @include flex;
+      flex-direction: column;
+      padding-inline: 20px;
+      padding-top: 16px;
+      border-radius: 12px;
+
+      .title {
+        margin-top: auto;
+        padding-bottom: 8px;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 23px;
+        /* White/White */
+        color: #FFFFFF;
+      }
+
+      @each $platform,
+      $color in $brands {
+        &.#{$platform} {
+          background-color: $color;
+        }
+      }
+    }
+  }
+
 }

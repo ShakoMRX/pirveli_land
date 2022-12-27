@@ -125,36 +125,38 @@ export function AppNavigation({ navigation }) {
             [`size-h-full`]: hoverNav
           })}>
       </motion.div> */}
-      <div className='layout-wrap flx h-full'>
+      <div className='layout-wrap-out h-full'>
+        <div className='layout-wrap flx h-full'>
 
-        <ul
-          // onMouseMove={(e) => onMouseMove(e)}
-          // onMouseLeave={() => showBg(null, false)}
-          className='navigation-list flx m-block-auto gap-10 md-gap-0'>
-          {navigation.map((nav) => {
-            return <li key={nav.slug}
-              data-name={nav.slug}
-              className={classNames('navigation--item text-center size-full flx flx-all', `bg-${nav.slug}`)}>
-              <Link
-                onMouseEnter={(e) => showBg(e, true)}
-                onMouseLeave={() => showBg(null, false)}
-                href={nav.url || '/'}
-                target={'_self'}
-                className='navigation--target flx'>
-                <div
-                  onMouseEnter={(e) => onMouseEnter(e, nav.slug)}
-                  onMouseLeave={() => setHoverNav(null)}
-                  className='title text-s-24 md-text-s-28 text-weight-600'>
-                  {nav.name}
-                </div>
-                <div className='image-area '>
-                  <ImageComponent width={299} height={299} src={`/assets/img/${nav.slug}.png`} />
-                </div>
-              </Link>
-            </li>
-          })}
-          <div ref={bgRef} className='simple-bg'></div>
-        </ul>
+          <ul
+            // onMouseMove={(e) => onMouseMove(e)}
+            // onMouseLeave={() => showBg(null, false)}
+            className='navigation-list flx m-block-auto gap-10 md-gap-0'>
+            {navigation.map((nav) => {
+              return <li key={nav.slug}
+                data-name={nav.slug}
+                className={classNames('navigation--item text-center size-full flx flx-all', `bg-${nav.slug}`)}>
+                <Link
+                  onMouseEnter={(e) => showBg(e, true)}
+                  onMouseLeave={() => showBg(null, false)}
+                  href={nav.url || '/'}
+                  target={'_self'}
+                  className='navigation--target flx'>
+                  <div
+                    onMouseEnter={(e) => onMouseEnter(e, nav.slug)}
+                    onMouseLeave={() => setHoverNav(null)}
+                    className='title text-s-16 md-text-s-28 text-weight-600'>
+                    {nav.name}
+                  </div>
+                  <div className='image-area '>
+                    <ImageComponent width={299} height={299} src={`/assets/img/${nav.slug}.png`} />
+                  </div>
+                </Link>
+              </li>
+            })}
+            <div ref={bgRef} className='simple-bg'></div>
+          </ul>
+        </div>
       </div>
     </div>
   )
@@ -473,40 +475,40 @@ const MainSection = ({ active: section, navigation = [] }) => {
 
   return <FullPage
     ref={ref}
-    className={'section-auto section-md-full md-flx md-flx-col md-flx-all justify-content-evenly'} >
+    className={'section section-md-full flx flx-col flx-all justify-content-evenly'} >
     <div className='p-top-108 md-p-top-auto section-md-auto divide-h flx flx-all flx-col relative'>
       <div className='page-bg'>
         <motion.div
           variants={_birdTopTemplate}
           initial={'show'}
           animate={isActive ? 'show' : 'hidden'}
-          className='bird bird-top svg-clipped'>
-          {/* <svg>
-          <use href="#svg_bird_top" />
-        </svg> */}
+          className='bird bird-top'>
+          <svg>
+            <use href="#svg_bird_top" />
+          </svg>
         </motion.div>
         <motion.div
           variants={_birdBottomTemplate}
           initial={'show'}
           animate={isActive ? 'show' : 'hidden'}
-          className='bird bird-bottom svg-clipped'>
-          {/* <svg id={'bird'}>
-          <use href="#svg_bird_bottom" />
-        </svg> */}
+          className='bird bird-bottom'>
+          <svg id={'bird'}>
+            <use href="#svg_bird_bottom" />
+          </svg>
         </motion.div>
       </div>
       <motion.div
         variants={_intoTextTemplate}
         initial={'show'}
         animate={isActive ? 'show' : 'hidden'}
-        className='top intro-section text-center relative'>
+        className='top intro-section text-center relative md-p-top-auto'>
         <div className='intro-header w-max-747 text-s-26 md-text-s-40 md-l-text-s-55 text-weight-700'>
           <p><span>დააგროვე და გადაცვალე</span> <span className='text-color-primary'>მონეტები</span></p>
         </div>
         <div className='intro-description p-top-28 md-p-top-50 text-s-16 md-text-s-20'>
           <p>აღმოაჩინე ახალი რეალობა, სადაც ყოველთვის მოგებული დარჩები!</p>
         </div>
-        <div className='intro-action p-top-28 md-p-top-40'>
+        <div className='intro-action p-top-28 md-p-top-30'>
           <Link
             target={'_self'}
             href={

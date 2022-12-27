@@ -11,7 +11,7 @@
     .header {
       &--wrap {
         @extend %layout-wrap;
-        min-height: px($HEADER_SIZE);
+        min-height: px($HEADER_MOBILE_SIZE);
         position: relative;
 
         &:before {
@@ -25,13 +25,32 @@
           backdrop-filter: blur(1px);
         }
 
-        > div {
+        >div {
           position: relative;
         }
 
-        @include max-min(max px($BP_TABLET_SM)) {
-          margin-top: 0 !important;
+        .logo-area {
+          height: 32px;
 
+          img {
+            height: 100%;
+            width: initial;
+          }
+
+          a {
+            height: 100%;
+            display: flex;
+          }
+
+        }
+
+        @include max-min(min px($BP_TABLET_SM + 1)) {
+          // margin-top: 0 !important;
+          min-height: px($HEADER_SIZE);
+
+          .logo-area {
+            height: initial;
+          }
         }
       }
     }

@@ -77,6 +77,10 @@
     padding-top: 108px;
   }
 
+  &-top-30 {
+    padding-top: 30px;
+  }
+
   &-top-auto {
     padding-top: initial;
   }
@@ -330,6 +334,10 @@
     width: 40px;
   }
 
+  &-44 {
+    width: 44px;
+  }
+
   &-90 {
     width: 90px;
   }
@@ -352,6 +360,10 @@
 
   &-42 {
     height: 42px;
+  }
+
+  &-44 {
+    height: 44px;
   }
 
   &-40 {
@@ -409,7 +421,7 @@
 
 
 //   &-md-full {
-//     @include max-min(min px(768)) {
+//     @include max-min(min px($BP_TABLET_SM + 1)) {
 //       height: 100%;
 //     }
 //   }
@@ -477,20 +489,20 @@
   }
 
   &-md-full {
-    @include max-min(min px(768)) {
+    @include max-min(min px($BP_TABLET_SM + 1)) {
       height: 100vh;
     }
   }
 
   &-md-auto {
-    @include max-min(min px(768)) {
+    @include max-min(min px($BP_TABLET_SM + 1)) {
       height: initial;
     }
   }
 }
 
 .md {
-  @include max-min(min px(768)) {
+  @include max-min(min px($BP_TABLET_SM + 1)) {
     &-flx {
       @include flx-content();
     }
@@ -505,7 +517,6 @@
 
     &-p {
       @include padding-content;
-
     }
 
     &-m {
@@ -514,6 +525,10 @@
 
     &-text {
       @include text-content;
+    }
+
+    &-hidden {
+      display: none;
     }
   }
 }
@@ -583,6 +598,10 @@
 
   &-12 {
     border-radius: 12px;
+  }
+
+  &-4 {
+    border-radius: 4px;
   }
 }
 
