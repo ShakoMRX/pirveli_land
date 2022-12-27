@@ -527,7 +527,7 @@ const MainSection = ({ active: section, navigation = [] }) => {
       variants={_intoTextTemplate}
       initial={'show'}
       animate={isActive ? 'show' : 'hidden'}
-      className=' section-md-auto divide-h flx flx-all flx-col w-wide'>
+      className=' section-md-auto divide-h flx flx-all flx-col w-wide relative z-2s'>
       <div className='w-wide'>
         <AppNavigation navigation={navigation} />
       </div>
@@ -913,7 +913,7 @@ export default function Home(props) {
         // console.log('beforeLeave', e);
         setActiveIndex(e);
       }}>
-      <CustomSection className="section-auto section-md-full relative z-2">
+      <CustomSection className="section-auto section-md-full relative z-3">
         <MainSectionMemo active={activeSection} navigation={props.appData.navigation} />
       </CustomSection>
       <CustomSection className="section-auto section-md-full">
