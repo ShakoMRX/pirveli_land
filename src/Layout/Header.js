@@ -25,7 +25,7 @@ export default function Header({ navigation }) {
 
   const motionStyle = {};
 
-  if (mobileMenu) {
+  if (mobileMenu && user && user.id) {
     Object.assign(motionStyle, { y: 20, opacity: 0 })
   }
 
@@ -34,8 +34,8 @@ export default function Header({ navigation }) {
       <div className={classNames(styles.header, 'absolute top-0 w-full')}>
         <motion.div
           className='small-header'
-          initial={useScroll > 0 && user && user.id || useScroll > 0 && width > 768 || mobileMenu ? { marginTop: 0 } : { marginTop: -variables['smallHeader'] }}
-          animate={useScroll > 0 && user && user.id || useScroll > 0 && width > 768 || mobileMenu ? { marginTop: 0 } : { marginTop: -variables['smallHeader'] }}
+          initial={useScroll > 0 && user && user.id || useScroll > 0 && width > 768 || mobileMenu && user && user.id ? { marginTop: 0 } : { marginTop: -variables['smallHeader'] }}
+          animate={useScroll > 0 && user && user.id || useScroll > 0 && width > 768 || mobileMenu && user && user.id ? { marginTop: 0 } : { marginTop: -variables['smallHeader'] }}
         >
           {width > 968 ? <div className='layout-wrap h-full'>
             <div className='flx h-full'>
@@ -74,12 +74,12 @@ export default function Header({ navigation }) {
         </motion.div>
 
 
-        
+
         <motion.div
           animate={useScroll > 0
             ? width > 768 ? { marginTop: -80, ...motionStyle } : user && !user.id ? { marginTop: 0, ...motionStyle } : { marginTop: 46, ...motionStyle }
             : { marginTop: 0, ...motionStyle }}
-          className='header--wrap flx align-items-center'>
+          className={'header--wrap flx align-items-center' + (mobileMenu && user && user.id ? ' bitmoere' : '')}>
           <div className='logo-area'>
             <Link href={'/'}>
               <ImageComponent src={'/assets/img/pirveli-logo.png'} width={174} height={50} />

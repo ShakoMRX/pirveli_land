@@ -27,7 +27,7 @@ export default function MobileMenu({ navigation, mobileMenu, onAction }) {
     <motion.div
       initial={{ x: '100%' }}
       animate={mobileMenu ? { x: 0 } : { x: '100%' }}
-      className='mobile-menu'
+      className={'mobile-menu' + (user && !user.id ? " bitmore" : '')}
     >
       <div
         className='mobile-menu-wrap layout-wrap flx flx-col'

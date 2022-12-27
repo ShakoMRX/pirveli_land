@@ -679,18 +679,9 @@ const FaqSection = ({ active }) => {
           </ul>
         </div>
       </div>
-      <div className='section-auto section-md-auto divide-h flx flx-all md-block flex-g-1 p-top-56 p-bottom-56'>
+      <div className='section-auto section-md-auto divide-h flx flx-all md-block flex-g-1 p-top-80 p-bottom-56'>
 
-        <motion.div
-          className='faqBird-bg'
-          variants={faqBirdMovement}
-          initial={'show'}
-          animate={isActive ? 'show' : active.activeSection > 1 ? 'hidden1' : 'hidden'}
-        >
-          <svg id={'bird'}>
-            <use href="#bird_3" />
-          </svg>
-        </motion.div>
+
         <motion.div
           variants={videoContainerTemplate}
           initial={'show'}
@@ -710,6 +701,25 @@ const FaqSection = ({ active }) => {
               </defs>
             </svg>
 
+          </div>
+
+          <div className='video-area'>
+
+          </div>
+
+          <motion.div
+            className='faqBird-bg'
+            variants={faqBirdMovement}
+            initial={'show'}
+            animate={isActive ? 'show' : active.activeSection > 1 ? 'hidden1' : 'hidden'}
+          >
+            <svg id={'bird'}>
+              <use href="#bird_3" />
+            </svg>
+          </motion.div>
+
+          <div className='element'>
+            <ImageComponent alt="Meet our Pirveli" width={227} height={137} src='/assets/img/meet-first.svg' />
           </div>
 
         </motion.div>
@@ -903,7 +913,7 @@ export default function Home(props) {
         // console.log('beforeLeave', e);
         setActiveIndex(e);
       }}>
-      <CustomSection className="section-auto section-md-full">
+      <CustomSection className="section-auto section-md-full relative z-2">
         <MainSectionMemo active={activeSection} navigation={props.appData.navigation} />
       </CustomSection>
       <CustomSection className="section-auto section-md-full">
