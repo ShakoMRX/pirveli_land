@@ -88,7 +88,7 @@ function MyApp(ctx) {
           <Header languages={Languages} navigation={appData.navigation} />
           <Component {...pageProps} appData={appData} />
           {/* <MobileMenu /> */}
-          <MessengerChatIcon />
+          {/* <MessengerChatIcon /> */}
         </Layout>
       </ScrollProvider>
     </UserProvider>

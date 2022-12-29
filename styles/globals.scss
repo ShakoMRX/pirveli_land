@@ -507,7 +507,7 @@ opacity $animation_time ease-in;
   position: relative;
 
 
-  margin-bottom: 200px;
+  // margin-bottom: 200px;
 
   .playBtn {
     position: absolute;
@@ -539,14 +539,14 @@ opacity $animation_time ease-in;
     z-index: 1;
 
     @include max-min(min px($BP_TABLET_SM + 1)) {
-      height: 535px;
+      height: 100%;
       // height: 509px;
     }
   }
 
   @include max-min(min px($BP_TABLET_SM + 1)) {
     width: 100%;
-    height: 535px;
+    height: 100%;
     // height: 509px;
   }
 
@@ -617,6 +617,7 @@ opacity $animation_time ease-in;
     a {
       @include flex-all;
       height: 100%;
+      font-size: 14px;
 
       &:after {
         content: "";
@@ -790,6 +791,4 @@ opacity $animation_time ease-in;
   }
 }
 
-.user-infoarea {
-  
-}
+.user-infoarea {}

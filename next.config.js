@@ -20,8 +20,8 @@ const nextConfig = {
     SHOP_LINK: 'https://shop.pirveli.com/',
     MEDICAL_LINK: 'https://medical.pirveli.com/',
     VOUCHER_LINK: 'https://vouchers.pirveli.com/',
-    WIN_LINK: 'https://win.pirveli.com/',
-    GAME_LINK: 'https://pirveli.com/',
+    WIN_LINK: 'https://s3.pirveli.com/v1/api/getFile?id=6555',
+    GAME_LINK: 'https://s3.pirveli.com/v1/api/getFile?id=6556',
     appToken
   },
   sassOptions: {
