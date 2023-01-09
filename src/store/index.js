@@ -6,10 +6,11 @@ const ScrollContext = createContext(null);
 export const useScrollValue = () => useContext(ScrollContext);
 
 export function ScrollProvider({ children }) {
-  const [scrollState, setScroll] = useState(typeof window !== 'undefined' ? window.scrollY : null);
+  const [scrollState, setScroll] = useState(typeof window !== 'undefined' ? {scroll: window.scrollY} : null);
   const isLocked = useRef(false);
   const prevValue = useRef(scrollState);
 
+  console.log('scrollState', scrollState)
   
   const setLock = (e) => {
     isLocked.current = e;

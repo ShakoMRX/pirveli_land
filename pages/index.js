@@ -1,20 +1,14 @@
 import classNames from 'classnames'
-import Head from 'next/head'
-import Image from 'next/image'
 import Link from 'next/link'
-import { memo, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import ImageComponent from '../src/Components/ImageComponent'
-import { BirdTop } from '../src/Icons'
 import Button from '../src/Shared/Button'
-import { animate, delay, motion, useDragControls, useInView, useMotionValue, useScroll, useSpring, useTransform, useVelocity, useViewportScroll } from 'framer-motion'
-import styles from '../styles/components/Home.module.scss'
-import variables, { getRGBdiff, hexToRgb } from '../src'
+import { motion, useInView, useScroll, useTransform } from 'framer-motion'
+import variables, { hexToRgb } from '../src'
 import FullPage from '../src/Components/FullPage'
 import { useScrollValue, useUser } from '../src/store'
-import { SectionsContainer, Section } from 'react-fullpage';
-import ReactFullpage from '@fullpage/react-fullpage'
-import { isCancel } from 'axios'
 import Footer from '../src/Components/Footer'
+import { faqBirdMovement, isServer, options, textContainerTemplate, textContainerTemplate2, videoContainerTemplate, _birdBottomTemplate, _birdTopTemplate, _intoTextTemplate } from '../src/utils'
 
 export function AppNavigation({ navigation }) {
   const [hoverNav, setHoverNav] = useState(null);
@@ -30,7 +24,7 @@ export function AppNavigation({ navigation }) {
       id: slug,
       bg: variables[`brand_${slug}`]
     });
-  }
+  };
 
   const onMouseMove = (e) => {
     const rgb = {};
@@ -165,94 +159,37 @@ export function AppNavigation({ navigation }) {
   )
 }
 
-const slideTimeSpeed = 3000;
-const pagerSpeed = slideTimeSpeed - 300;
-const framerSpeed = slideTimeSpeed / 1000;
-
-const sectionMap = {
-  intro: 0,
-  faq: 1,
-  some: ''
-}
-const isServer = typeof window == 'undefined';
-
-const checkActive = (key) => {
-  return !isServer ? sectionMap[window.location.hash.replace('#', '')] == key : false
-}
-
-let options = {
-  activeSection: !isServer ? sectionMap[window.location.hash.replace('#', '')] : 0,
-  delay: slideTimeSpeed - 300,
-  sectionClassName: 'section',
-  anchors: ['intro', 'faq', 'sectionThree'],
-  scrollBar: false,
-  navigation: false,
-  verticalAlign: false,
-  sectionPaddingTop: '0',
-  // arrowNavigation: true
-};
-
-const _birdTopTemplate = {
-  hidden: {
-    opacity: 0, x: 1200, y: -1200,
-    transition: {
-      duration: framerSpeed
-    }
-  },
-  show: {
-    opacity: 1,
-    x: 0,
-    y: 0,
-    transition: {
-      duration: framerSpeed,
-      ease: [0.3, 1.05, 0.5, 1.05]
-    }
-  }
-}
-const birdTopTemplate = {};
-const _birdBottomTemplate = {
-  hidden: {
-    opacity: 0, x: 1200, y: -1200,
-    transition: {
-      duration: framerSpeed
-    }
-  },
-  show: {
-    opacity: 1,
-    x: 0,
-    y: 0,
-    transition: {
-      duration: framerSpeed,
-      ease: [0.3, 1.05, 0.5, 1.04]
-    }
-  }
-}
-const birdBottomTemplate = {};
-const _intoTextTemplate = {
-  hidden: {
-    opacity: 0,
-    y: -200,
-    scale: 0.7,
-    transition: {
-      duration: framerSpeed / 3
-    }
-  },
-  show: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: framerSpeed / 1.5,
-      ease: [0.3, 1, 0.5, 1]
-    }
-  }
-}
-const intoTextTemplate = {};
 const MainSection = ({ active: section, navigation = [] }) => {
   const ref = useRef();
   const [user,] = useUser();
   const isActive = section.activeSection == 0;
-  const inView = useInView(ref);
+  const inView = useScroll({
+    container: !isServer ? document.body : null
+  });
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["end start", "start start"]
+  });
+
+  const birdTransform = {
+    x: useTransform(scrollYProgress, [0.5, 1], [2700, 0]),
+    y: useTransform(scrollYProgress, [0.5, 1], [-2700, 0])
+  };
+
+  const textTransform = {
+    scale: useTransform(scrollYProgress, [0, 1], [0.7, 1]),
+    y: useTransform(scrollYProgress, [0, 1], [-500, 0]),
+    opacity: useTransform(scrollYProgress, [0.5, 1], [0, 1]),
+  }
+
+
+  // console.log('inView', inView);
+
+  birdTransform.x.on('change', (e) => {
+    // console.log('e', e);
+
+  })
 
   // console.log('isActive', section)
 
@@ -302,21 +239,23 @@ const MainSection = ({ active: section, navigation = [] }) => {
   return <FullPage
     ref={ref}
     className={'section-auto section-md-full flx flx-col md-flx-all md-justify-content-evenly'} >
-    <div className='p-top-180 md-p-top-auto section-md-auto divide-h flx flx-all flx-col relative'>
+    <div
+      className='p-top-180 md-p-top-auto section-md-auto divide-h flx flx-all flx-col relative'>
       <div className='page-bg'>
         <motion.div
-          variants={_birdTopTemplate}
-          initial={'show'}
-          animate={isActive ? 'show' : 'hidden'}
+          // variants={_birdTopTemplate}
+          // initial={'show'}
+          // animate={isActive ? 'show' : 'hidden'}
+          style={birdTransform}
           className='bird bird-top'>
           <svg>
             <use href="#svg_bird_top" />
           </svg>
         </motion.div>
         <motion.div
-          variants={_birdBottomTemplate}
-          initial={'show'}
-          animate={isActive ? 'show' : 'hidden'}
+          // variants={_birdBottomTemplate}
+          // initial={'show'}
+          style={birdTransform}
           className='bird bird-bottom'>
           <svg id={'bird'}>
             <use href="#svg_bird_bottom" />
@@ -324,9 +263,10 @@ const MainSection = ({ active: section, navigation = [] }) => {
         </motion.div>
       </div>
       <motion.div
-        variants={_intoTextTemplate}
-        initial={'show'}
-        animate={isActive ? 'show' : 'hidden'}
+        // variants={_intoTextTemplate}
+        // initial={'show'}
+        // animate={isActive ? 'show' : 'hidden'}
+        style={textTransform}
         className='top intro-section text-center relative md-p-top-auto'>
         <div className='intro-header w-max-747 text-s-26 md-text-s-40 md-l-text-s-55 text-weight-700'>
           <p><span>დააგროვე და გადაცვალე</span> <span className='text-color-primary'>მონეტები</span></p>
@@ -347,9 +287,7 @@ const MainSection = ({ active: section, navigation = [] }) => {
       </motion.div>
     </div>
     <motion.div
-      variants={_intoTextTemplate}
-      initial={'show'}
-      animate={isActive ? 'show' : 'hidden'}
+      style={textTransform}
       className='p-top-auto md-p-top-140 section-md-auto divide-h flx flx-all flx-col w-wide relative z-2s'>
       <div className='w-wide'>
         <AppNavigation navigation={navigation} />
@@ -358,95 +296,6 @@ const MainSection = ({ active: section, navigation = [] }) => {
   </FullPage>
 }
 
-
-const _videoContainerTemplate = {
-  hidden: {
-    opacity: 0,
-    y: 200,
-    scale: 0.4,
-    transition: {
-      duration: framerSpeed / 3
-    }
-  },
-  show: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      delay: .3,
-      duration: framerSpeed,
-      ease: [0.3, 1, 0.5, 1]
-    }
-  }
-}
-const videoContainerTemplate = {};
-const _textContainerTemplate = {
-  hidden: {
-    opacity: 0,
-    x: -5000,
-    transition: {
-      duration: framerSpeed / 3
-    }
-  },
-  show: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      delay: .3,
-      duration: framerSpeed,
-      ease: [0.3, 1, 0.5, 1]
-    }
-  }
-}
-const textContainerTemplate = {};
-const _textContainerTemplate2 = {
-  hidden: {
-    opacity: 0,
-    x: -5000,
-    transition: {
-      duration: framerSpeed / 1.5
-    }
-  },
-  show: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      // delay: .3,
-      duration: framerSpeed,
-      ease: [0.3, 1, 0.5, 1]
-    }
-  }
-}
-const textContainerTemplate2 = {};
-const _faqBirdMovement = {
-  hidden: {
-    // opacity: 0,
-    x: -1200,
-    y: 700,
-    transition: {
-      duration: framerSpeed / 1.5
-    }
-  },
-  hidden1: {
-    // opacity: 0,
-    x: 2400,
-    y: -700,
-    transition: {
-      duration: framerSpeed / 1.5
-    }
-  },
-  show: {
-    // opacity: 1,
-    x: 0,
-    y: 0,
-    transition: {
-      // delay: .3,
-      duration: framerSpeed,
-      ease: [0.3, 1.05, 0.5, 1.05]
-    }
-  }
-}
-const faqBirdMovement = {};
 
 const FaqSection = ({ active }) => {
   const isActive = active.activeSection == 1;
@@ -552,8 +401,109 @@ const FaqSection = ({ active }) => {
   </div>
 }
 
-const MainSectionMemo = memo(MainSection, (p, n) => p.active.activeSection == n.active.activeSection)
-const FaqSectionMemo = memo(FaqSection, (p, n) => p.active.activeSection == n.active.activeSection)
+const FaqSectionSimple = ({ active }) => {
+  const isActive = active.activeSection == 1;
+  const ref = useRef();
+
+  useEffect(() => {
+
+    if (ref.current) {
+      ref.current.parentNode.scrollTop = 0;
+      // console.log('-------------', ref.current.parentNode.scrollTop)
+    }
+
+  }, [active, isActive])
+
+  return <div ref={ref}
+    className='row-container'>
+    <div className='row'>
+      <div className='col-md-6'>
+        <div className='info-section w-full l-sm-w-490 lg-w-619'>
+          <h4 className='title-area flx flx-col text-weight-700 text-s-16 md-text-s-20 l-sm-text-s-28'>
+            <motion.p
+
+              variants={textContainerTemplate}
+              initial={'show'}
+              animate={isActive ? 'show' : 'hidden'}
+            >ლოიალურობაზე დაფუძნებული</motion.p>
+            <motion.p
+
+              variants={textContainerTemplate2}
+              initial={'show'}
+              animate={isActive ? 'show' : 'hidden'}
+              className='text-color-primary m-left-auto'>ციფრული ეკოსისტემა</motion.p>
+          </h4>
+          <ul className='flx flx-col gap-20'>
+            <li className='flx flx-col gap-8'>
+              <p className='text-s-16 md-text-s-24 text-weight-700 text-color-primary'>01</p>
+              <span className='text-line-height-24'>
+                ადგილი სადაც ყოველ შენს აქტივობას მოაქვს მონეტები. ერთვები გასართობ თამაშებში და ზრდი დაგროვებული მონეტების რაოდენობას.
+              </span>
+            </li>
+            <li className='flx flx-col gap-8'>
+              <p className='text-s-16 md-text-s-24 text-weight-700 text-color-primary'>02</p>
+              <span className='text-line-height-24'>
+                დაგროვებულ მონეტებს ცვლი ფასდაკლებების ვაუჩერებსა და კატალოგში მოცემულ შერჩეულ პროდუქტებში.
+              </span>
+            </li>
+            <li className='flx flx-col gap-8'>
+              <p className='text-s-16 md-text-s-24 text-weight-700 text-color-primary'>03</p>
+              <span className='text-line-height-24'>
+                ყოველ 100 მონეტაზე იღებ ფულადი პრიზების მოგების 5 შანსს. სამ დღეში ერთხელ - დღიური საპრიზო ფონდით - 10 000ლ. დიდი გათამაშება - საწყისი საპრიზო ფონდით - 300 000ლ.
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div className='col-md-6'>
+        <motion.div
+          variants={videoContainerTemplate}
+          initial={'show'}
+          animate={isActive ? 'show' : 'hidden'}
+          style={{ zIndex: 2 }}
+          className='video-container'>
+          <div className='playBtn'>
+            <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="50" fill="#DB0060" />
+              <g clipPath="url(#clip0_3249_11327)">
+                <path d="M45 42V58L58 50L45 42Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </g>
+              <defs>
+                <clipPath id="clip0_3249_11327">
+                  <rect width="24" height="24" fill="white" transform="translate(38 38)" />
+                </clipPath>
+              </defs>
+            </svg>
+
+          </div>
+
+          <div className='video-area'>
+
+          </div>
+
+          <motion.div
+            className='faqBird-bg'
+            variants={faqBirdMovement}
+            initial={'show'}
+            animate={isActive ? 'show' : active.activeSection > 1 ? 'hidden1' : 'hidden'}
+          >
+            <svg id={'bird'}>
+              <use href="#bird_3" />
+            </svg>
+          </motion.div>
+
+          <div className='element'>
+            <ImageComponent alt="Meet our Pirveli" width={227} height={137} src='/assets/img/meet-first.svg' />
+          </div>
+
+        </motion.div>
+      </div>
+    </div>
+  </div>
+}
+
+// const MainSectionMemo = memo(MainSection, (p, n) => p.active.activeSection == n.active.activeSection)
+// const FaqSectionMemo = memo(FaqSection, (p, n) => p.active.activeSection == n.active.activeSection)
 
 
 const ScrollContainerElement = ({ children, scrollCallback }) => {
@@ -561,8 +511,11 @@ const ScrollContainerElement = ({ children, scrollCallback }) => {
   const [scroll,] = useScrollValue();
   const containerRef = useRef(null);
   const activeSection = useRef(0);
-  const scrollingTimer = useRef(0);
+  const [scrollingTimer, setTimer] = useState(0);
   const isScrolling = useRef(false);
+  const [active, setActive] = useState(0);
+  const [prevActive, setPrev] = useState(0);
+  const [scrolling, setScrolling] = useState(false);
 
 
   const onMouseWheel = (e) => {
@@ -576,10 +529,24 @@ const ScrollContainerElement = ({ children, scrollCallback }) => {
   }, [])
 
   useEffect(() => {
+    // if (!scrolling && prevActive != active) {
+    //   // console.log(active);
+    //   setPrev(active);
+    // }
+    if (!scrolling) {
+      // console.log('object', active)
+    }
+    // console.log('-----------------activeSection', scrolling);
+    // document.querySelectorAll(`div[data-name='section']`)[active].scrollIntoView({ behavior: 'smooth' })
+
+  }, [scrolling, active])
+
+  useEffect(() => {
 
     if (!isServer) {
       // document.body.style.overflow = 'hidden';
     }
+    const _targetPositions = document.querySelectorAll(`div[data-name='section']`)
 
     let deltay = 0;
     let scale = 1;
@@ -589,129 +556,141 @@ const ScrollContainerElement = ({ children, scrollCallback }) => {
     // activeSection.current = document.documentElement.scrollTop > 
     scrollCallback({ activeSection: activeSection.current })
 
-    window.addEventListener('wheel', (e) => {
+    let timer;
+    function debounce(func, timeout = 300) {
+      return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => { func.apply(this, args); }, timeout);
+      };
+    }
+
+    function onScroll(e) {
       return;
-      e.preventDefault();
-      const scroll = document.documentElement.scrollTop;
-      var rolled = 'wheelDelta' in event ? event.wheelDelta : -1 * event.detail;
+      setScrolling(true);
       const delta = Math.max(-1, Math.min(1, e.wheelDelta || -e.detail));
       const _activeSection = activeSection.current - delta;
-      const targetPositions = document.querySelectorAll(`div[data-name='section']`)
+      // setActive(_activeSection)
 
-      scale += e.deltaY * -1;
-      scale = Math.min(Math.max(0, scale), containerRef.current.getBoundingClientRect().height);
-
-      // const scrollSize = delta > 0
-      //   ? prevEl ? 
-
-      // console.log('-----', { scale })
-
-      // console.log('-------', activeSection.current, delta)
-
-      if (isScrolling.current || _activeSection < 0 || _activeSection == targetPositions.length) {
-        return false;
+      if (!scrolling) {
+        console.log('_activeSection', activeSection.current)
       }
 
+      return debounce(() => {
+        setScrolling(false)
+        console.log('---------------')
+        return;
+        e.preventDefault();
+        const scroll = document.documentElement.scrollTop;
+        var rolled = 'wheelDelta' in event ? event.wheelDelta : -1 * event.detail;
+        const delta = Math.max(-1, Math.min(1, e.wheelDelta || -e.detail));
+        const _activeSection = activeSection.current - delta;
+        const targetPositions = document.querySelectorAll(`div[data-name='section']`)
 
-      const currentEl = targetPositions[_activeSection];
-      const prevEl = targetPositions[_activeSection - 1];
-      const nextEl = targetPositions[_activeSection + 1];
+        scale += e.deltaY * -0.1;
+        scale = Math.min(Math.max(0, scale), 1894);
 
-      const prevSize = prevEl || 0;
+        // const scrollSize = delta > 0
+        //   ? prevEl ? 
 
-      isScrolling.current = true;
-      activeSection.current = _activeSection;
+        // console.log('-----', { scale })
 
-      console.log('----', { prevEl, currentEl, nextEl })
+        // console.log('-------', activeSection.current, delta)
 
-      if (scrollingTimer.current) {
-        clearTimeout(scrollingTimer.current);
-      }
-
-      scrollingTimer.current = setTimeout(() => {
-        // console.log('-------------------------');
-        isScrolling.current = false;
-      }, 300);
-
-      // const scrollOffset = 
-
-      if (delta > 0) {
-        // console.log('up', activeSection.current)
-        // if (targetPositions.length + == activeSection.current) {
-        //   console.log('- prev', targetPositions[activeSection.current + 1])
-        //   scrollSize -= targetPositions[activeSection.current + 1].getBoundingClientRect().height;
-        // } else {
-        // }
-
-        // if (targetPositions[_activeSection - 1] && targetPositions[_activeSection - 1].getBoundingClientRect().height <= targetPositions[_activeSection].getBoundingClientRect().height) {
-        //   scrollSize += targetPositions[_activeSection - 1].getBoundingClientRect().height
-        // } else {
-        //   scrollSize += targetPositions[_activeSection].getBoundingClientRect().height
-        // }
-
-        // scrollSize = prevEl && prevEl.getBoundingClientRect().height <= currentEl.getBoundingClientRect().height ? scrollSize + prevEl.getBoundingClientRect().height : currentEl.getBoundingClientRect().height;
-      } else {
-        // console.log('down', scrollSize)
-        // scrollSize = nextEl && nextEl.getBoundingClientRect().height <= currentEl.getBoundingClientRect().height ? scrollSize - nextEl.getBoundingClientRect().height : currentEl.getBoundingClientRect().height;
-
-        // if (targetPositions.length - 2 == activeSection.current) {
-        //   console.log('- prev', targetPositions[activeSection.current + 1])
-        //   scrollSize -= targetPositions[activeSection.current + 1].getBoundingClientRect().height;
-        // } else {
-        // }
-        // scrollSize -= currentEl.getBoundingClientRect().height;
-        // const nextEl = targetPositions[activeSection.current];
-        // nextEl.scrollIntoView({behavior: 'smooth'})
-
-        if (targetPositions.length - 2 == _activeSection) {
-          // console.log('prev')
-          // scrollSize -= targetPositions[_activeSection + 1].getBoundingClientRect().height
+        if (isScrolling.current || _activeSection < 0 || _activeSection == targetPositions.length) {
+          return false;
         }
-        //  {
-        //   scrollSize -= targetPositions[_activeSection].getBoundingClientRect().height
+
+
+        const currentEl = targetPositions[_activeSection];
+        const prevEl = targetPositions[_activeSection - 1];
+        const nextEl = targetPositions[_activeSection + 1];
+
+        const _prev = activeSection.current;
+
+        const prevSize = prevEl || 0;
+
+        isScrolling.current = true;
+        setActive(_activeSection);
+        setScrolling(true);
+        activeSection.current = _activeSection;
+
+        // console.log('----', { prevEl, currentEl, nextEl })
+
+        if (scrollingTimer) {
+          clearTimeout(scrollingTimer);
+        }
+
+        setTimer(setTimeout(() => {
+          console.log('-------------------------');
+          isScrolling.current = false;
+          setScrolling(false);
+
+        }, 5300));
+
+        // console.log('scrolling', isScrolling.current)
+
+        // if (delta > 0) {
+        //   scrollSize += currentEl.getBoundingClientRect().height
+        //   if (prevEl) {
+        //     if (prevEl.getBoundingClientRect().height < currentEl.getBoundingClientRect().height) {
+        //     } else {
+        //     }
+        //   } else {
+        //   }
+        // } else {
+
+        //   scrollSize -= currentEl.getBoundingClientRect().height
+        //   if (nextEl) {
+        //     if (nextEl.getBoundingClientRect().height < currentEl.getBoundingClientRect().height) {
+        //     } else {
+        //     }
+        //     // console.log('nextEl', currentEl, targetPositions[_activeSection + 1].getBoundingClientRect())
+        //   } else {
+        //     console.log('-----')
+        //   }
         // }
-      }
 
-      // scrollSize = scrollSize += 
+        // scrollSize = scrollSize += 
 
-      // scale += e.deltaY * -0.01;
+        // scale += e.deltaY * -0.01;
 
-      // Restrict scale
-      // scale = Math.min(Math.max(0, scale), containerRef.current.getBoundingClientRect().height);
+        // // Restrict scale
+        // scale = Math.min(Math.max(0, scale), containerRef.current.getBoundingClientRect().height);
 
+        // console.log('-----', scale - document.body.scrollHeight)
 
-
-      // console.log('scrollSize', e.deltaY * -1)
-
-
-      containerRef.current.style.transform = `translate3d(0, ${scrollSize}px, 0)`
-      containerRef.current.style.transition = `all 2s ease-in-out`
-      scrollCallback({ activeSection: activeSection.current })
+        // console.log('scrollSize', e.deltaY * -1)
 
 
-      // prevEl.scrollIntoView({behavior: 'smooth'})
+        // containerRef.current.style.transform = `translate3d(0, ${scrollSize}px, 0)`
+        // containerRef.current.style.transition = `all 2s ease-in-out`
+        // scrollCallback({ activeSection: activeSection.current })
 
-      // containerRef.current.style.transform = `translate3d(0, ${scrollSize}px, 0)`
-      // containerRef.current.style.transition = `all 2s ease-in-out`
-      // scrollCallback({ activeSection: activeSection.current })
 
-    })
+        // prevEl.scrollIntoView({behavior: 'smooth'})
+
+        // containerRef.current.style.transform = `translate3d(0, ${scrollSize}px, 0)`
+        // containerRef.current.style.transition = `all 2s ease-in-out`
+        scrollCallback({ activeSection: activeSection.current })
+
+      })()
+    }
+
+    window.addEventListener('wheel', onScroll)
 
     return () => {
-      window.removeEventListener('wheel', () => {
-        console.log('--------------------------------------')
-      })
+      window.removeEventListener('wheel', onScroll)
     }
   }, [])
 
   return <motion.div
     ref={containerRef}
+    className="sections"
     style={{}}
   >
     {children}
   </motion.div>
 }
-
 
 const CustomSection = ({ children, className }) => {
   const { scrollYProgress } = useScroll();
@@ -721,7 +700,6 @@ const CustomSection = ({ children, className }) => {
     {children}
   </div>
 }
-
 
 export default function Home(props) {
   const introSection = useRef(null);
@@ -737,11 +715,19 @@ export default function Home(props) {
         setActiveIndex(e);
       }}>
       <CustomSection className="section-auto section-md-full relative z-3">
-        <MainSectionMemo active={activeSection} navigation={props.appData.navigation} />
+        <MainSection active={activeSection} navigation={props.appData.navigation} />
       </CustomSection>
       <CustomSection className="section-auto section-md-full">
         <FaqSection active={activeSection} />
       </CustomSection>
+      {/* <CustomSection className="footer">
+        <Footer />
+      </CustomSection> */}
+      {/* <CustomSection className="section-auto section-md-full">
+        <div style={{ height: 2500, backgroundColor: 'gray' }}>
+          <h4>Section</h4>
+        </div>
+      </CustomSection> */}
       <CustomSection className="footer">
         <Footer />
       </CustomSection>

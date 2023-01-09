@@ -2,16 +2,19 @@
 
 //
 $color-gray: #EDEEEF;
+$color-gray-text: #ffffffb3;
+$color-gray-text-2: #F7F9FB;
 $color-primary: #DB0060;
 $color-yellow: #EDC520;
 $color-light-gray: #EDC520;
 $color-dark-gray: #383838;
 $color-dark: #1E1E1E;
+$color-dark_header: #1D1D1E ;
 
 //
 $HEADER_SIZE: 80;
 $HEADER_MOBILE_SIZE: 56;
-$SMALL_HEAD_ER: 46;
+$SMALL_HEAD_ER: 44;
 
 $VOUCHERS_BRAND_COLOR: #9766F0;
 $MEDICAL_BRAND_COLOR: #FFBBB6;
@@ -31,6 +34,14 @@ $BP_TABLET_SM: 768;
 $BP_LAPTOP_MD: 1366;
 $BP_LAPTOP_XL: 1440;
 $BP_LAPTOP_SM: 1080;
+
+$bps: (
+  sm: 374,
+  md: $BP_TABLET_SM,
+  l-sm: $BP_LAPTOP_SM,
+  l-md: $BP_LAPTOP_MD,
+  xl: $BP_LAPTOP_XL,
+);
 
 $divides: (2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 28, 30, 40, 50,80, 200);
 

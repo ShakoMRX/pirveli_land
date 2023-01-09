@@ -22,10 +22,14 @@ html {
 }
 
 body {
+  // scroll-snap-type: y mandatory;
   background-color: $color-gray;
   max-width: 100%;
-  overflow-x: hidden;
+  // overflow-x: hidden;
+  // overflow-y: hidden !important;
   // overflow: hidden;
+  overflow-x: hidden;
+
   // >div {
   //   // !!!
   //   height: 100vh;
@@ -558,6 +562,10 @@ opacity $animation_time ease-in;
   }
 }
 
+.sections>div {
+  scroll-snap-align: center;
+}
+
 .svg-clipped {
   -webkit-clip-path: url(#svgPath);
   clip-path: url(#svgPath);
@@ -565,16 +573,17 @@ opacity $animation_time ease-in;
 }
 
 .small-header {
-  background-color: $color-dark;
+  background-color: $color-dark_header;
   width: 100%;
-  position: absolute;
+  // position: absolute;
   top: 0;
   left: 0;
   z-index: 5;
   height: px($SMALL_HEAD_ER);
-  color: #FFF;
+  color: $color-gray-text;
   // display: none;
   z-index: 555;
+  position: relative;
 
   @include max-min(min px($BP_TABLET_SM + 1)) {
     display: block;
@@ -597,7 +606,6 @@ opacity $animation_time ease-in;
       font-weight: 400;
       font-size: 12px;
       height: 100%;
-      color: #FFF;
       position: relative;
 
       @each $platform,
@@ -618,6 +626,7 @@ opacity $animation_time ease-in;
       @include flex-all;
       height: 100%;
       font-size: 14px;
+      font-weight: 600;
 
       &:after {
         content: "";

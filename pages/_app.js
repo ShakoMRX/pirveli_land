@@ -1,11 +1,10 @@
-import axios from 'axios';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import ImageComponent from '../src/Components/ImageComponent';
-import MobileMenu from '../src/Components/MobileMenu';
 import Header from '../src/Layout/Header'
 import Layout from '../src/Layout/Layout'
 import { ScrollProvider, UserProvider } from '../src/store';
+import fetchApi from '../src/utils/fetch';
 import '../styles/globals.scss'
 
 const Languages = [
@@ -13,28 +12,6 @@ const Languages = [
   { name: 'KA', slug: 'ge' },
   { name: 'RU', slug: 'ru' },
 ]
-
-
-const fetchApi = async (url, type) => {
-
-
-  let resp = await fetch(`${process.env.API_URL}${url}`);
-
-  return new Promise(async (res, rej) => {
-    if (resp.status !== 401 || resp.status !== 500) {
-      const data = type == 'json' ? await resp.json() : await resp.text();
-      res({
-        status: resp.status,
-        data
-      });
-    } else {
-      rej({
-        status: resp.status,
-        data: null
-      })
-    }
-  });
-}
 
 const MessengerChatIcon = () => {
   return <div className='messenger-float'>
@@ -50,30 +27,28 @@ function MyApp(ctx) {
 
 
   useEffect(() => {
-
+    // setUserData({
+    //   isLoading: false
+    // })
+    // return
     fetchApi('/racoon-transactions/user')
-      .then(async (r) => {
+      .then(async (id) => {
 
-        if (r.status == 401 || r.status == 500) {
-          setUserData({ isLoading: false })
-          return;
-        }
+        const avatar = await fetchApi('/user/user/get-auth-user-avatar', 'json').then((r) => {
+          return r.data
+        }).catch(() => {
+          return null
+        })
 
-        let _usr = { ...userData, id: r };
+        const points = await fetchApi('/racoon-transactions/vouchers/get-user-points', 'json').then((r) => {
+          return r.data
+        }).catch(() => {
+          return null
+        });
 
-        await fetchApi('/user/user/get-auth-user-avatar', 'json').then((r) => {
-          _usr = { ..._usr, ...{ avatar: r.data } }
-          console.log('r', r)
-        }).catch(() => { });
-
-        await fetchApi('/racoon-transactions/vouchers/get-user-points', 'json').then((r) => {
-          _usr = { ..._usr, points: r.data };
-        }).catch(() => { });;
-
-        setUserData({ ..._usr, isLoading: false });
-
+        setUserData({ points, avatar, id: id, isLoading: false });
       }).catch((e) => {
-        setUserData({ isLoading: false });
+        setUserData({ id: null, isLoading: false });
       });
 
   }, [])

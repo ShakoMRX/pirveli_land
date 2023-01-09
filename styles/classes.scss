@@ -80,6 +80,7 @@
   &-top-108 {
     padding-top: 108px;
   }
+
   &-top-180 {
     padding-top: 180px;
   }
@@ -87,6 +88,7 @@
   &-top-30 {
     padding-top: 30px;
   }
+
   &-top-140 {
     padding-top: 140px;
   }
@@ -94,6 +96,7 @@
   &-bottom-30 {
     padding-bottom: 30px;
   }
+
   &-bottom-56 {
     padding-bottom: 56px;
   }
@@ -108,10 +111,12 @@
 
 
 }
+
 .z {
   &-2 {
     z-index: 2;
   }
+
   &-3 {
     z-index: 3;
   }
@@ -183,6 +188,14 @@
   &-color {
     &-primary {
       color: $color-primary;
+    }
+
+    &-white {
+      color: #fff;
+    }
+
+    &-gray-2 {
+      color: $color-gray-text-2;
     }
   }
 
@@ -311,6 +324,14 @@
 
 .brand {
   @include brand-content;
+}
+
+.opacity {
+  @for $i from 0 through 100 {
+    &-#{$i} {
+      opacity: $i / 100;
+    }
+  }
 }
 
 .image-wrapper {
@@ -513,7 +534,7 @@
     overflow: hidden;
 
     @include max-min(min px($BP_TABLET_SM)) {
-      overflow: visible;
+      // overflow: visible;
     }
   }
 
@@ -634,6 +655,46 @@
   }
 }
 
+.row-container {
+}
+
+.row {
+  margin-left: -20px;
+  margin-right: -20px;
+  // padding-left: 20px;
+  // padding-right: 20px;
+  @include flex;
+  flex-wrap: wrap;
+
+
+
+  @for $i from 0 through 12 {
+    .col {
+      &-#{$i} {
+        width: #{100 / 12 * $i}+"%";
+      }
+    }
+  }
+
+  > div[class*='col'] {
+    padding-left: 20px;
+    padding-right: 20px
+  }
+
+  @each $key,
+  $value in $bps {
+    @include max-min(min px($value)) {
+      @for $i from 0 through 12 {
+        .col {
+          &-#{$key}-#{$i} {
+            width: #{100 / 12 * $i}+"%";
+          }
+        }
+      }
+    }
+  }
+
+}
 
 //
 .transition {
