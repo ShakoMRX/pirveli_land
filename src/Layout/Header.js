@@ -89,21 +89,25 @@ export default function Header({ navigation: _navigation, languages }) {
                 </li>
               })}
             </ul>
-            {user && !user.id ? <div style={{ width: 90 }} className='m-left-auto p-block-8'>
-              {/* <Button reset className={'h-full w-full auth-btn'} size='small' variant='text' text="შესვლა" /> */}
-            </div> : <div className='flx align-items-center gap-12 m-left-auto  b-radius-12'>
-              <div className='p-left-16'>
-                <ImageComponent width={20} height={20} src={'/assets/img/coin.png'} />
+            {user && !user.id
+              ? <div style={{ width: 90 }} className='m-left-auto p-block-8'>
+                {/* <Button reset className={'h-full w-full auth-btn'} size='small' variant='text' text="შესვლა" /> */}
               </div>
-              <div>{userObj.amountOfPoints}</div>
-              <div className='w-40 h-40 b-radius-inherit bg-color-yellow flx flx-all'
-                style={user?.avatar && user?.avatar?.code ? {
-                  backgroundColor: `#${user?.avatar?.code}`
-                } : {}}
-              >
-                <Image alt='' width={15} height={20} src={`/assets/img/avatars/avatar${userObj.avatar}.png`} />
-              </div>
-            </div>}
+              : _useScroll > 0
+                ? <div className='flx align-items-center gap-12 m-left-auto  b-radius-12'>
+                  <div className='p-left-16'>
+                    <ImageComponent width={20} height={20} src={'/assets/img/coin.png'} />
+                  </div>
+                  <div>{userObj.amountOfPoints}</div>
+                  <div className='w-40 h-40 b-radius-inherit bg-color-yellow flx flx-all'
+                    style={user?.avatar && user?.avatar?.code ? {
+                      backgroundColor: `#${user?.avatar?.code}`
+                    } : {}}
+                  >
+                    <Image alt='' width={15} height={20} src={`/assets/img/avatars/avatar${userObj.avatar}.png`} />
+                  </div>
+                </div>
+                : null}
           </div>
         </div>
       </motion.div>
