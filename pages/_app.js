@@ -81,10 +81,10 @@ MyApp.getInitialProps = async function ({ ctx: { req } }) {
 
   const navigation = [
     { name: 'მაღაზია', url: process.env.SHOP_LINK, slug: 'shop' },
-    { name: 'მედიქალი', url: process.env.MEDICAL_LINK, slug: 'medical' },
-    { name: 'ვაუჩერი', url: process.env.VOUCHER_LINK, slug: 'voucher' },
+    { name: 'ჯანდაცვა', url: process.env.MEDICAL_LINK, slug: 'medical' },
+    { name: 'ვაუჩერები', url: process.env.VOUCHER_LINK, slug: 'voucher' },
     { name: 'გათამაშება', url: process.env.WIN_LINK, slug: 'winning' },
-    { name: 'თამაშები', url: process.env.GAME_LINK, slug: 'game' },
+    { name: 'გართობა', url: process.env.GAME_LINK, slug: 'game' },
   ]
   let resp;
 

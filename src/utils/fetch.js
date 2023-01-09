@@ -6,8 +6,8 @@ const headers = {
 
 const fetchApi = async (url, type) => {
   let ignore = false;
-  let resp = await axios(`${process.env.API_URL}${url}`, {
-  // let resp = await axios('https://jsonplaceholder.typicode.com/todos/1', {
+  // let resp = await axios(`${process.env.API_URL}${url}`, {
+  let resp = await axios('https://jsonplaceholder.typicode.com/todos/1', {
     headers
   }).catch(e => {
     return { ...e.response };

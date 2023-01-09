@@ -531,7 +531,7 @@
   }
 
   &-auto {
-    overflow: hidden;
+    overflow: visible;
 
     @include max-min(min px($BP_TABLET_SM)) {
       // overflow: visible;

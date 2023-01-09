@@ -595,7 +595,7 @@ opacity $animation_time ease-in;
 
   ul {
     @include flex;
-    gap: 24px;
+    gap: 32px;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -618,6 +618,19 @@ opacity $animation_time ease-in;
               }
             }
           }
+
+          &.active {
+            a {
+              color: $color;
+
+              &:after {
+                background-color: $color;
+
+              }
+            }
+
+            ;
+          }
         }
       }
     }
@@ -627,6 +640,7 @@ opacity $animation_time ease-in;
       height: 100%;
       font-size: 14px;
       font-weight: 600;
+      outline: none;
 
       &:after {
         content: "";

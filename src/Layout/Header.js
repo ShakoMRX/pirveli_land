@@ -12,12 +12,16 @@ import variables, { useWindow } from '..';
 import MobileMenu from '../Components/MobileMenu';
 import { isServer } from '../utils';
 
-export default function Header({ navigation, languages }) {
+export default function Header({ navigation: _navigation, languages }) {
   const [user,] = useUser();
   const [scroll,] = useScrollValue();
   const [width,] = useWindow();
   const [mobileMenu, setMobileMenu] = useState(false);
   const [landDrop, openLangDrop] = useState(false);
+
+  const navigation = ([{
+    name: 'მთავარი', url: '/', slug: 'main'
+  }]).concat(_navigation)
 
 
   const handle = (e) => {
@@ -63,7 +67,7 @@ export default function Header({ navigation, languages }) {
     initial: _useScroll >= 0 ? { marginTop: 0 } : { marginTop: -variables['smallHeader'] }
   }
 
-  console.log('scrollValue', _useScroll);
+  // console.log('scrollValue', _useScroll);
 
   const headerScroll = _useScroll > 900 ? { marginTop: 0 } : { marginTop: -variables['smallHeader'] };
   const mobileHeaderScroll = _useScroll > 0 ? { marginTop: 0 } : { marginTop: -variables['smallHeader'] };
@@ -71,52 +75,39 @@ export default function Header({ navigation, languages }) {
   return (
     <div className={classNames(styles.header, 'absolute top-0 w-full')}>
 
-      {width >= 768
-        ? <motion.div
-          className='small-header'
-          animate={_useScroll > 900 ? { marginTop: 0 } : { marginTop: -variables['smallHeader'] }}
-        >
-          <div className='layout-wrap h-full'>
-            <div className='flx h-full'>
-              <ul>
-                {navigation.map((nav) => {
-                  return <li key={nav.slug} className={nav.slug}>
-                    <Link href={nav.url}>{nav.name}</Link>
-                  </li>
-                })}
-              </ul>
-              {user && !user.id ? <div style={{ width: 90 }} className='m-left-auto p-block-8'>
-                {/* <Button reset className={'h-full w-full auth-btn'} size='small' variant='text' text="შესვლა" /> */}
-              </div> : <div className='flx align-items-center gap-12 m-left-auto  b-radius-12'>
-                <div className='p-left-16'>
-                  <ImageComponent width={20} height={20} src={'/assets/img/coin.png'} />
-                </div>
-                <div>{userObj.amountOfPoints}</div>
-                <div className='w-40 h-40 b-radius-inherit bg-color-yellow flx flx-all'
-                  style={user?.avatar && user?.avatar?.code ? {
-                    backgroundColor: `#${user?.avatar?.code}`
-                  } : {}}
-                >
-                  <Image alt='' width={15} height={20} src={`/assets/img/avatars/avatar${userObj.avatar}.png`} />
-                </div>
-              </div>}
-            </div>
-          </div>
-        </motion.div>
-        : <motion.div
-          animate={_useScroll > 0 ? { marginTop: 0 } : { marginTop: -variables['smallHeader'] }}
-          className='small-header'
-        >
-          <div className='flx align-items-center h-full layout-wrap'>
-            <div>
-              <Image alt='' width={15} height={20} src={`/assets/img/avatars/avatar${userObj.avatar}.png`} />
-            </div>
-            <div className='flx m-left-auto gap-12'>
+      <motion.div
+        className='small-header'
+      // animate={_useScroll > 0 ? { marginTop: 0 } : { marginTop: -variables['smallHeader'] }}
+      >
+        <div className='layout-wrap h-full'>
+          <div className='flx h-full'>
+            <ul>
+              {navigation.map((nav) => {
+                return <li key={nav.slug} className={nav.slug +
+                  `${nav.slug == 'main' ? ' active' : ''}`}>
+                  <Link href={nav.url}>{nav.name}</Link>
+                </li>
+              })}
+            </ul>
+            {user && !user.id ? <div style={{ width: 90 }} className='m-left-auto p-block-8'>
+              {/* <Button reset className={'h-full w-full auth-btn'} size='small' variant='text' text="შესვლა" /> */}
+            </div> : <div className='flx align-items-center gap-12 m-left-auto  b-radius-12'>
+              <div className='p-left-16'>
+                <ImageComponent width={20} height={20} src={'/assets/img/coin.png'} />
+              </div>
               <div>{userObj.amountOfPoints}</div>
-              <ImageComponent width={20} height={20} src={'/assets/img/coin.png'} />
-            </div>
+              <div className='w-40 h-40 b-radius-inherit bg-color-yellow flx flx-all'
+                style={user?.avatar && user?.avatar?.code ? {
+                  backgroundColor: `#${user?.avatar?.code}`
+                } : {}}
+              >
+                <Image alt='' width={15} height={20} src={`/assets/img/avatars/avatar${userObj.avatar}.png`} />
+              </div>
+            </div>}
           </div>
-        </motion.div>}
+        </div>
+      </motion.div>
+
 
       <motion.div
         style={{

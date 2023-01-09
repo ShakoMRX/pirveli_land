@@ -23,6 +23,7 @@ $LOTTERY_BRAND_COLOR: #DB0060;
 $GAMES_BRAND_COLOR: #EDC520;
 
 $brands: (
+  main: $color-primary,
   voucher: $VOUCHERS_BRAND_COLOR,
   medical: $MEDICAL_BRAND_COLOR,
   shop: $SHOP_BRAND_COLOR,

@@ -173,15 +173,25 @@ const MainSection = ({ active: section, navigation = [] }) => {
   });
 
   const birdTransform = {
-    x: useTransform(scrollYProgress, [0.5, 1], [2700, 0]),
-    y: useTransform(scrollYProgress, [0.5, 1], [-2700, 0])
+    x: useTransform(scrollYProgress, [0.5, 1], [0, 0]),
+    y: useTransform(scrollYProgress, [0.5, 1], [-0, 0])
   };
 
   const textTransform = {
-    scale: useTransform(scrollYProgress, [0, 1], [0.7, 1]),
-    y: useTransform(scrollYProgress, [0, 1], [-500, 0]),
-    opacity: useTransform(scrollYProgress, [0.5, 1], [0, 1]),
+    scale: useTransform(scrollYProgress, [0, 1], [1, 1]),
+    y: useTransform(scrollYProgress, [0, 1], [0, 0]),
+    opacity: useTransform(scrollYProgress, [0.5, 1], [1, 1]),
   }
+  // const birdTransform = {
+  //   x: useTransform(scrollYProgress, [0.5, 1], [2700, 0]),
+  //   y: useTransform(scrollYProgress, [0.5, 1], [-2700, 0])
+  // };
+
+  // const textTransform = {
+  //   scale: useTransform(scrollYProgress, [0, 1], [0.7, 1]),
+  //   y: useTransform(scrollYProgress, [0, 1], [-500, 0]),
+  //   opacity: useTransform(scrollYProgress, [0.5, 1], [0, 1]),
+  // }
 
 
   // console.log('inView', inView);
