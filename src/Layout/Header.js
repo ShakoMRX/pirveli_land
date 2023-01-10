@@ -8,27 +8,45 @@ import { ArrowIcon, Flag_GE } from '../Icons';
 import Button from '../Shared/Button';
 import { useScrollValue, useUser } from '../store';
 import { AnimatePresence, motion, useMotionValue, useScroll, useTransform } from 'framer-motion';
-import variables, { useWindow } from '..';
+import variables, { useOutsideClick, useWindow } from '..';
 import MobileMenu from '../Components/MobileMenu';
 import { isServer } from '../utils';
 
-const LanguageSwitchButton = () => {
+const LanguageSwitchButton = ({ className, close, variant = 'outline', animate, initial, exit, languages, reset }) => {
+  const [scroll] = useScrollValue();
+  const { ref, isOpen, setIsOpen } = useOutsideClick();
+
+  const motionValues = { animate, initial, exit };
+  const buttonProps = { reset, variant };
+
+  useEffect(() => {
+    if (close) {
+      setIsOpen(false);
+    }
+  }, [close, setIsOpen])
+
   return <motion.div
-    animate={_useScroll >= indicatorRef.current ? { y: -100 } : { y: 0 }}
-    className='langBtn'>
+    {...motionValues}
+    className={classNames('langBtn', className)}>
     <Button
-      onClick={() => openLangDrop(!landDrop)}
+      onClick={() => setIsOpen(!isOpen)}
       variant={'outline'}
+      {...buttonProps}
+
       className="flx align-items-center gap-12 p-inline-16 p-block-10">
       <Flag_GE />
-      <ArrowIcon />
-      {landDrop ? <motion.div
-        ref={dropRef}
+      <div className='dropIcon'>
+        <ArrowIcon />
+      </div>
+      {isOpen ? <motion.div
+        ref={ref}
+
+        // ref={dropRef}
         initial={{ opacity: 0 }}
-        animate={landDrop ? { opacity: 1, display: 'block' } : { opacity: 0 }}
+        animate={isOpen ? { opacity: 1, display: 'block' } : { opacity: 0 }}
         exit={{ display: 'none' }}
         className='drop drop-outline '>
-        <ul className='lang-area flx flx-col align-items-center'>
+        <ul className='lang-area flx flx-col align-items-center p-block-10'>
           {languages.map((l) => {
             return <li className={'w-44 h-44 flx flx-all'}
               key={l.slug}>
@@ -63,7 +81,7 @@ export default function Header({ navigation: _navigation, languages }) {
     }
   }
 
-  const dropRef = useRef();
+  // const dropRef = useRef();
 
   useEffect(() => {
     document.addEventListener('click', handle);
@@ -77,6 +95,9 @@ export default function Header({ navigation: _navigation, languages }) {
   const scrollY = useScroll({
     target: !isServer ? document.body : null
   });
+
+
+
 
   // const headerMargin = useTransform(scrollY.scrollY, [0, variables['smallHeader']], [-variables['smallHeader'], 0])
   // const headerMargin = scrollY.scrollY > 200 ? -46 : 0;
@@ -118,7 +139,8 @@ export default function Header({ navigation: _navigation, languages }) {
 
   return (
     <div className={classNames(styles.header, 'absolute top-0 w-full', {
-      [styles.scrolling]: _useScroll > 0
+      [styles.scrolling]: _useScroll > 0,
+      [styles.hidden]: _useScroll > indicatorRef.current
     })}>
       <motion.div
         className='small-header'
@@ -129,7 +151,7 @@ export default function Header({ navigation: _navigation, languages }) {
           : _useScroll > indicatorRef.current
             ? { marginTop: 0 } : { marginTop: -variables['smallHeader'] }}
         animate={width < 968
-          ? _useScroll > indicatorRef.current && user.id || _useScroll > indicatorRef.current && user.isLoading
+          ? _useScroll > indicatorRef.current && user.id || mobileMenu || _useScroll > indicatorRef.current && user.isLoading
             ? { marginTop: 0 }
             : _useScroll == 0 && mobileMenu && user.id ? { marginTop: 0 } : { marginTop: -variables['smallHeader'] }
           : _useScroll > indicatorRef.current
@@ -168,31 +190,14 @@ export default function Header({ navigation: _navigation, languages }) {
               // animate={_useScroll >= indicatorRef.current ? { y: -100 } : { y: 0 }}
               className='langBtn flx align-items-center gap-12 m-left-14'>
               {user && user.id ? <div className='line-h'></div> : null}
-              <Button
-                onClick={() => openLangDrop(!landDrop)}
-                variant={'none'}
+              <LanguageSwitchButton
                 reset
-                className="flx align-items-center gap-12 p-inline-16 p-block-10">
-                <Flag_GE />
-                <ArrowIcon />
-                {landDrop ? <motion.div
-                  ref={dropRef}
-                  initial={{ opacity: 0 }}
-                  animate={landDrop ? { opacity: 1, display: 'block' } : { opacity: 0 }}
-                  exit={{ display: 'none' }}
-                  className='drop drop-outline '>
-                  <ul className='lang-area flx flx-col align-items-center'>
-                    {languages.map((l) => {
-                      return <li className={'w-44 h-44 flx flx-all'}
-                        key={l.slug}>
-                        <span className={`${l.slug == 'gb' ? ' bordered b-radius-4' : null}`}>
-                          <ImageComponent alt={l.name} width={24} height={18} src={'/assets/img/flag-' + l.slug + '.svg'} />
-                        </span>
-                      </li>
-                    })}
-                  </ul>
-                </motion.div> : null}
-              </Button>
+                close={_useScroll <= indicatorRef.current}
+                variant='none'
+                languages={languages}
+                className={'-'}
+                initial={_useScroll && _useScroll >= indicatorRef.current ? { y: -200 } : { y: 0 }}
+              />
             </motion.div>
           </div>
         </div>
@@ -226,15 +231,27 @@ export default function Header({ navigation: _navigation, languages }) {
                 <Button variant={'primary'} size={'normal'} text={'შესვლა'} />
               </Link>
               : width >= 768 ? <motion.div
-                initial={{ x: 0 }}
-                animate={(_useScroll > indicatorRef.current) ? { y: -63 } : { y: 0 }}
+              // initial={{ x: 0 }}
+              // animate={(_useScroll > indicatorRef.current) ? { y: -63 } : { y: 0 }}
               >
                 <Link key="userInfo" href={process.env.PROFILE_LINK}>
                   <Button reset variant={'outline'} className="flx align-items-center gap-12">
-                    <div className='p-left-16'>
-                      <ImageComponent width={20} height={20} src={'/assets/img/coin.png'} />
-                    </div>
-                    <div>{userObj.amountOfPoints}</div>
+                    <AnimatePresence>
+                      {_useScroll < indicatorRef.current
+                        ? <motion.div
+                          animate={(_useScroll > indicatorRef.current) ? { x: 63 } : { x: 0 }}
+                          className='p-left-16'>
+                          <ImageComponent width={20} height={20} src={'/assets/img/coin.png'} />
+                        </motion.div>
+                        : null}
+                    </AnimatePresence>
+                    <AnimatePresence>
+                      {_useScroll < indicatorRef.current
+                        ? <motion.div
+                          animate={(_useScroll > indicatorRef.current) ? { x: 63 } : { x: 0 }}
+                        >{userObj.amountOfPoints}</motion.div>
+                        : null}
+                    </AnimatePresence>
                     <div className='w-40 h-40 b-radius-inherit bg-color-yellow flx flx-all'
                       style={user?.avatar && user?.avatar?.code ? {
                         backgroundColor: `#${user?.avatar?.code}`
@@ -246,11 +263,19 @@ export default function Header({ navigation: _navigation, languages }) {
                 </Link>
               </motion.div> : null}
 
-          <motion.div
-            initial={ _useScroll && _useScroll >= indicatorRef.current ? { y: -200 } : { y: 0 }}
+          <LanguageSwitchButton
+                close={_useScroll >= indicatorRef.current}
+
+            languages={languages}
+            className={'langBtnmain'}
+            initial={_useScroll && _useScroll >= indicatorRef.current ? { y: -200 } : { y: 0 }}
+          />
+
+          {/* <motion.div
+            // initial={_useScroll && _useScroll >= indicatorRef.current ? { y: -200 } : { y: 0 }}
             exit={{ y: -200 }}
             // animate={_useScroll >= indicatorRef.current ? { y: -100 } : { y: 0 }}
-            className='langBtn'>
+            className='langBtn langBtnmain'>
             <Button
               onClick={() => openLangDrop(!landDrop)}
               variant={'outline'}
@@ -275,7 +300,7 @@ export default function Header({ navigation: _navigation, languages }) {
                 </ul>
               </motion.div> : null}
             </Button>
-          </motion.div>
+          </motion.div> */}
           <Button onClick={() => setMobileMenu(true)} variant='none' reset className={'flx flx-all md-hidden'} style={{ width: 34, height: 34 }}>
             <ImageComponent width={20} height={20} src={'/assets/img/burger.svg'} />
           </Button>

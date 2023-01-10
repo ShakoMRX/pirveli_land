@@ -597,6 +597,14 @@ opacity $animation_time ease-in;
     border-radius: 4px;
   }
 
+  .langBtn {
+    .dropIcon {
+      svg path {
+        fill: #FFF;
+      }
+    }
+  }
+
   ul {
     @include flex;
     gap: 32px;
