@@ -11,7 +11,8 @@ import { AnimatePresence, motion, useMotionValue, useScroll, useTransform } from
 import variables, { useOutsideClick, useWindow } from '..';
 import MobileMenu from '../Components/MobileMenu';
 import { isServer } from '../utils';
-
+import axios from "axios";
+import { useRouter } from 'next/router'
 const LanguageSwitchButton = ({ className, close, variant = 'outline', animate, initial, exit, languages, reset }) => {
   const [scroll] = useScrollValue();
   const { ref, isOpen, setIsOpen } = useOutsideClick();
@@ -62,6 +63,7 @@ const LanguageSwitchButton = ({ className, close, variant = 'outline', animate, 
 }
 
 export default function Header({ navigation: _navigation, languages }) {
+  const Router = useRouter()
   const [user,] = useUser();
   const [scroll,] = useScrollValue();
   const [width,] = useWindow();
@@ -136,6 +138,18 @@ export default function Header({ navigation: _navigation, languages }) {
   }, [scroll])
 
   console.log('_useScroll && _useScroll > 0', _useScroll > 0)
+
+  const auth = ()=>{
+    // https://pirveli.com/api
+    // axios.get(`${process.env.API_URL}/main/page`).then((res)=>{
+    //   console.log("Res",res)
+    // }).catch((e)=>{
+    //   console.log("cathc",e)
+    // })
+
+    Router.push('/main/page')
+
+  }
 
   return (
     <div className={classNames(styles.header, 'absolute top-0 w-full', {
@@ -227,9 +241,9 @@ export default function Header({ navigation: _navigation, languages }) {
             :
             !user.id
               ?
-              <Link key="auth" href={process.env.AUTH_LINK || ''} target='_self'>
+              <a href={"/main/page"}>
                 <Button variant={'primary'} size={'normal'} text={'შესვლა'} />
-              </Link>
+              </a>
               : width >= 768 ? <motion.div
               // initial={{ x: 0 }}
               // animate={(_useScroll > indicatorRef.current) ? { y: -63 } : { y: 0 }}
