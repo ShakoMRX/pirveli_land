@@ -429,6 +429,9 @@ opacity $animation_time ease-in;
   height: 100%;
   // overflow: hidden;
 
+  svg {
+    transition: all 0.4s ease-in-out, height 0.4s ease-in-out;
+  }
   .bird {
     width: 284px;
     height: 364px;

@@ -10,7 +10,7 @@
 
   @if($bp==true) {
     @include max-min(min px(768)) {
-      padding-inline: 35px;
+      padding-inline: 50px;
     }
 
     @include max-min(min px($BP_LAPTOP_XL)) {

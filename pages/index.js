@@ -9,6 +9,8 @@ import FullPage from '../src/Components/FullPage'
 import { useScrollValue, useUser } from '../src/store'
 import Footer from '../src/Components/Footer'
 import { faqBirdMovement, isServer, options, textContainerTemplate, textContainerTemplate2, videoContainerTemplate, _birdBottomTemplate, _birdTopTemplate, _intoTextTemplate } from '../src/utils'
+import { BirdTop } from '../src/Icons'
+import { BirdBottom } from '../src/Icons/Birds'
 
 export function AppNavigation({ navigation }) {
   const [hoverNav, setHoverNav] = useState(null);
@@ -91,13 +93,22 @@ export function AppNavigation({ navigation }) {
   }
 
   const showBg = (e, show) => {
+    const birdTop = document.getElementById('birdTop');
+    const birdBottom = document.getElementById('birdBottom');
     if (show) {
+
+      
       bgRef.current.classList.add('active');
       bgRef.current.parentNode.classList.add('active');
       e.currentTarget.classList.add('active');
       if (e.currentTarget.dataset.name !== lastActiveEl.current) {
         lastActiveEl.current = e.currentTarget.dataset.name;
       }
+
+      console.log('bird2', e.currentTarget.parentNode.dataset.name);
+
+      birdTop.firstChild.style.fill = variables[`brand_${e.currentTarget.parentNode.dataset.name}`];
+      birdBottom.firstChild.style.fill = variables[`brand_${e.currentTarget.parentNode.dataset.name}`];
 
       bgRef.current.style.backgroundColor = variables[`brand_${lastActiveEl.current}`]
 
@@ -106,12 +117,16 @@ export function AppNavigation({ navigation }) {
       bgRef.current.parentNode.classList.remove('active')
       bgRef.current.style.backgroundColor = 'transparent';
       lastActiveEl.current = null;
+      
+      birdTop.firstChild.style.fill = '';
+      birdBottom.firstChild.style.fill = '';
+
     }
 
   }
 
   return (
-    <div className='app-navigation relative'>
+    <div className='app-navigation relative' id={'appNavigation'}>
       {/* <motion.div
         // initial={{backgroundColor: '#FFF'}}
         // animate={{backgroundColor: hoverNav ? hoverNav.bg : 'transparent'}}
@@ -256,20 +271,22 @@ const MainSection = ({ active: section, navigation = [] }) => {
           // variants={_birdTopTemplate}
           // initial={'show'}
           // animate={isActive ? 'show' : 'hidden'}
+          id="birdTop"
           style={birdTransform}
           className='bird bird-top'>
-          <svg>
-            <use href="#svg_bird_top" />
-          </svg>
+          <BirdTop />
         </motion.div>
         <motion.div
           // variants={_birdBottomTemplate}
           // initial={'show'}
           style={birdTransform}
+          id="birdBottom"
           className='bird bird-bottom'>
-          <svg id={'bird'}>
+          <BirdBottom />
+
+          {/* <svg id={'bird'}>
             <use href="#svg_bird_bottom" />
-          </svg>
+          </svg> */}
         </motion.div>
       </div>
       <motion.div

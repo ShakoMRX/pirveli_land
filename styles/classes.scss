@@ -462,6 +462,12 @@
   overflow: hidden;
 }
 
+.line-h {
+  height: 22px;
+  width: 1px;
+  background-color: #FFF;
+}
+
 .layout-wrap {
   @extend %layout-wrap;
 
