@@ -384,6 +384,9 @@
     width: 40px;
   }
 
+  &-34 {
+    width: 34px;
+  }
   &-44 {
     width: 44px;
   }
@@ -406,6 +409,10 @@
     &-747 {
       max-height: 747px;
     }
+  }
+
+  &-34 {
+    height: 34px;
   }
 
   &-42 {
@@ -646,6 +653,9 @@
     border-radius: inherit;
   }
 
+  &-100 {
+    border-radius: 100%;
+  }
   &-12 {
     border-radius: 12px;
   }

@@ -94,12 +94,12 @@ export default function Header({ navigation: _navigation, languages }) {
                 {/* <Button reset className={'h-full w-full auth-btn'} size='small' variant='text' text="შესვლა" /> */}
               </div>
               : _useScroll > 0
-                ? <div className='flx align-items-center gap-12 m-left-auto  b-radius-12'>
+                ? <div className='flx align-items-center gap-12 m-left-auto  b-radius-100'>
                   <div className='p-left-16'>
                     <ImageComponent width={20} height={20} src={'/assets/img/coin.png'} />
                   </div>
                   <div>{userObj.amountOfPoints}</div>
-                  <div className='w-40 h-40 b-radius-inherit bg-color-yellow flx flx-all'
+                  <div className='w-34 h-34 b-radius-inherit bg-color-yellow flx flx-all'
                     style={user?.avatar && user?.avatar?.code ? {
                       backgroundColor: `#${user?.avatar?.code}`
                     } : {}}

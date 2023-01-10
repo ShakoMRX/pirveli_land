@@ -465,7 +465,8 @@ opacity $animation_time ease-in;
 
     @include max-min(min px($BP_TABLET_SM + 1)) {
       top: 300px;
-      right: calc(100% + 180px);
+      right: 100%;
+      // right: calc(100% + 180px);
       left: initial;
     }
 
