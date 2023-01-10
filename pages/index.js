@@ -105,7 +105,7 @@ export function AppNavigation({ navigation }) {
         lastActiveEl.current = e.currentTarget.dataset.name;
       }
 
-      console.log('bird2', e.currentTarget.parentNode.dataset.name);
+      // console.log('bird2', e.currentTarget.parentNode.dataset.name);
 
       birdTop.firstChild.style.fill = variables[`brand_${e.currentTarget.parentNode.dataset.name}`];
       birdBottom.firstChild.style.fill = variables[`brand_${e.currentTarget.parentNode.dataset.name}`];
