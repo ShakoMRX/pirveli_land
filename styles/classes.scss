@@ -458,6 +458,10 @@
   }
 }
 
+.sections {
+  overflow: hidden;
+}
+
 .layout-wrap {
   @extend %layout-wrap;
 

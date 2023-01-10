@@ -74,26 +74,36 @@ export default function Header({ navigation: _navigation, languages }) {
 
   return (
     <div className={classNames(styles.header, 'absolute top-0 w-full')}>
-
       <motion.div
         className='small-header'
-      // animate={_useScroll > 0 ? { marginTop: 0 } : { marginTop: -variables['smallHeader'] }}
+        initial={width < 968
+          ? _useScroll > 0 && user.id || _useScroll > 0 && user.isLoading
+            ? { marginTop: 0 }
+            : { marginTop: -variables['smallHeader'] }
+          : _useScroll > 0
+            ? { marginTop: 0 } : { marginTop: -variables['smallHeader'] }}
+        animate={width < 968
+          ? _useScroll > 0 && user.id || _useScroll > 0 && user.isLoading
+            ? { marginTop: 0 }
+            : _useScroll == 0 && mobileMenu && user.id ? { marginTop: 0 } : { marginTop: -variables['smallHeader'] }
+          : _useScroll > 0
+            ? { marginTop: 0 } : { marginTop: -variables['smallHeader'] }}
       >
         <div className='layout-wrap h-full'>
           <div className='flx h-full'>
-            <ul>
+            {width > 968 ? <ul>
               {navigation.map((nav) => {
                 return <li key={nav.slug} className={nav.slug +
                   `${nav.slug == 'main' ? ' active' : ''}`}>
                   <Link href={nav.url}>{nav.name}</Link>
                 </li>
               })}
-            </ul>
+            </ul> : null}
             {user && !user.id
               ? <div style={{ width: 90 }} className='m-left-auto p-block-8'>
                 {/* <Button reset className={'h-full w-full auth-btn'} size='small' variant='text' text="შესვლა" /> */}
               </div>
-              : _useScroll > 0
+              : _useScroll > 0 && user.id || mobileMenu && user.id
                 ? <div className='flx align-items-center gap-12 m-left-auto  b-radius-100'>
                   <div className='p-left-16'>
                     <ImageComponent width={20} height={20} src={'/assets/img/coin.png'} />
@@ -115,7 +125,7 @@ export default function Header({ navigation: _navigation, languages }) {
 
       <motion.div
         style={{
-          marginTop: headerMargin2,
+          // marginTop: headerMargin2,
         }}
         // initial={_useScroll > 0
         //   ? { marginTop: 46, ...motionStyle }
