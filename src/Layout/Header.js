@@ -129,13 +129,13 @@ export default function Header({ navigation: _navigation, languages }) {
   const indicatorRef = useRef(0);
 
 
-  if (!isServer && !indicatorRef.current) {
+  if (typeof document !== 'undefined' && !indicatorRef.current && document.getElementById('appNavigation')) {
     indicatorRef.current = document.getElementById('appNavigation').getBoundingClientRect().top;
   }
   useEffect(() => {
   }, [scroll])
 
-  console.log('_useScroll && _useScroll > 0', _useScroll > 0)
+  // console.log('_useScroll && _useScroll > 0', _useScroll > 0)
 
   return (
     <div className={classNames(styles.header, 'absolute top-0 w-full', {

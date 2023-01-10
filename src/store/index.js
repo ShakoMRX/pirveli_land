@@ -10,8 +10,6 @@ export function ScrollProvider({ children }) {
   const isLocked = useRef(false);
   const prevValue = useRef(scrollState);
 
-  console.log('scrollState', scrollState)
-  
   const setLock = (e) => {
     isLocked.current = e;
   }
