@@ -185,7 +185,7 @@ export default function Header({navigation: _navigation, languages}) {
                   <div className='p-left-16'>
                     <ImageComponent width={20} height={20} src={'/assets/img/coin.png'}/>
                   </div>
-                  <div>{points.amountOfPoints}</div>
+                  <div>{points?.amountOfPoints}</div>
                   {/* <div className='w-34 h-34 b-radius-inherit bg-color-yellow flx flx-all'
                     style={user?.avatar && user?.avatar?.code ? {
                       backgroundColor: `#${user?.avatar?.code}`
@@ -256,7 +256,7 @@ export default function Header({navigation: _navigation, languages}) {
                       {_useScroll < indicatorRef.current
                         ? <motion.div
                           animate={(_useScroll > indicatorRef.current) ? {x: 63} : {x: 0}}
-                        >{points.amountOfPoints}</motion.div>
+                        >{points?.amountOfPoints}</motion.div>
                         : null}
                     </AnimatePresence>
                     <div className='w-40 h-40 b-radius-inherit bg-color-yellow flx flx-all'
