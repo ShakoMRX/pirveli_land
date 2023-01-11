@@ -3,14 +3,14 @@ import React from 'react'
 import styles from '../../styles/components/Button.module.scss'
 
 export default function Button({
-  variant = 'simple',
-  size = 'normal',
-  className,
-  text,
-  children,
-  reset,
-  ...props
-}) {
+                                 variant = 'simple',
+                                 size = 'normal',
+                                 className,
+                                 text,
+                                 children,
+                                 reset,
+                                 ...props
+                               }) {
   return (
     <div className={styles.btn}>
       <button className={classNames('btn btn--wrap', {
@@ -18,7 +18,7 @@ export default function Button({
         [`size-${size}`]: size,
         [`reset`]: reset,
       }, className)}
-      {...props}
+              {...props}
       >
         {text ? text : children}
       </button>
