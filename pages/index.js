@@ -305,7 +305,7 @@ const MainSection = ({ active: section, navigation = [] }) => {
           <Link
             target={'_self'}
             href={
-              user && !user.id ? 'https://auth.pirveli.com/realms/xracoon-demo/protocol/openid-connect/registrations?client_id=demo-client&response_type=code&scope=email&redirect_uri=https://auth.pirveli.com/realms/xracoon-demo/protocol/openid-connect/registrations?client_id=demo-client&response_type=code&scope=email&redirect_uri=https://pirveli.com/login/oauth2/code/keycloak' : process.env.PROFILE_LINK
+              user && !user.id ? process.env.REGISTER_LINK : process.env.PROFILE_LINK
             }>
             <Button
               text={'დაწყება'} variant={'primary'} size={'large'} />
