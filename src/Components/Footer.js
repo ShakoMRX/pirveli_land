@@ -26,8 +26,6 @@ export default function Footer() {
                 <li><Link href={'http://s3.pirveli.com/v1/api/getFile?id=7300'} target='_blank'>კონფიდენციალურობის პოლიტიკა</Link></li>
               </ul>
             </div>
-
-
             <div className='col-12 col-sm-12 col-md-3 p-top-50 md-p-top-auto'>
               <h4 className='text-s-16 text-color-gray-2 opacity-40 p-bottom-24'>შემოგვირთდი</h4>
               <ul className='nav-list flx flx-col gap-24 text-color-white'>
