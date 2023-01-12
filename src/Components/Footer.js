@@ -23,7 +23,7 @@ export default function Footer() {
                 <li><Link href={'https://s3.pirveli.com/v1/api/getFile?id=6574'} target='_blank'>ზოგადი წესები</Link>
                 </li>
                 <li><Link href={'/'}>ხშირად დასმული კითხვები</Link></li>
-                <li><Link href={'/'}>კონფიდენციალურობის პოლიტიკა</Link></li>
+                <li><Link href={'http://s3.pirveli.com/v1/api/getFile?id=7300'} target='_blank'>კონფიდენციალურობის პოლიტიკა</Link></li>
               </ul>
             </div>
 
