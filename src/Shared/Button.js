@@ -3,6 +3,7 @@ import React from 'react'
 import styles from '../../styles/components/Button.module.scss'
 
 export default function Button({
+                                 pulse,
                                  variant = 'simple',
                                  size = 'normal',
                                  className,
@@ -13,7 +14,7 @@ export default function Button({
                                }) {
   return (
     <div className={styles.btn}>
-      <button className={classNames('btn btn--wrap', {
+      <button className={classNames(`btn btn--wrap  ${pulse && 'pulse'}`, {
         [`variant-${variant}`]: variant,
         [`size-${size}`]: size,
         [`reset`]: reset,

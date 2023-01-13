@@ -3,7 +3,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 a {
@@ -135,7 +135,7 @@ body {
           color: #FFF;
           overflow: visible;
 
-          >div {
+          > div {
             top: -100%;
             transform: translateX(-50%) translateY(-40px);
             opacity: 1;
@@ -153,7 +153,7 @@ body {
       top: 0;
       left: 0;
 
-      >div {
+      > div {
         width: inherit;
         height: inherit;
 
@@ -181,7 +181,8 @@ body {
     }
 
 
-    &:hover {}
+    &:hover {
+    }
   }
 }
 
@@ -268,7 +269,8 @@ opacity $animation_time ease-in;
           color: rgba(#fff, .4);
         }
 
-        &:not(active) {}
+        &:not(active) {
+        }
       }
     }
 
@@ -311,7 +313,7 @@ opacity $animation_time ease-in;
             //   }
             // }
 
-            ~div {
+            ~ div {
               height: 100%;
               background-color: $color !important;
             }
@@ -341,7 +343,8 @@ opacity $animation_time ease-in;
       z-index: 5;
       transition: all .22s ease-in-out;
 
-      &:hover {}
+      &:hover {
+      }
 
       @include max-min(min px($BP_TABLET_SM)) {
         position: unset;
@@ -363,7 +366,7 @@ opacity $animation_time ease-in;
       top: 0;
       left: 0;
 
-      >div {
+      > div {
         width: inherit;
         height: inherit;
 
@@ -432,6 +435,7 @@ opacity $animation_time ease-in;
   svg {
     transition: all 0.4s ease-in-out, height 0.4s ease-in-out;
   }
+
   .bird {
     width: 284px;
     height: 364px;
@@ -461,13 +465,12 @@ opacity $animation_time ease-in;
 
   .bird-bottom {
     position: absolute;
-
-    top: 350px;
+    top: 260px;
     right: initial;
     left: -180px;
 
     @include max-min(min px($BP_TABLET_SM + 1)) {
-      top: 300px;
+      top: 260px;
       right: 100%;
       // right: calc(100% + 180px);
       left: initial;
@@ -571,7 +574,7 @@ opacity $animation_time ease-in;
   }
 }
 
-.sections>div {
+.sections > div {
   scroll-snap-align: center;
 }
 
@@ -603,11 +606,11 @@ opacity $animation_time ease-in;
   }
 
   .langBtn {
-    .dropIcon {
-      svg path {
-        fill: #FFF;
-      }
-    }
+    //.dropIcon {
+    //  svg path {
+    //    fill: #FFF;
+    //  }
+    //}
   }
 
   ul {
@@ -646,7 +649,7 @@ opacity $animation_time ease-in;
               }
             }
 
-            ;
+          ;
           }
         }
       }
@@ -678,7 +681,8 @@ opacity $animation_time ease-in;
   }
 }
 
-.withFooter {}
+.withFooter {
+}
 
 
 .mobile-menu {
@@ -704,7 +708,8 @@ opacity $animation_time ease-in;
     height: 100%;
   }
 
-  &.show {}
+  &.show {
+  }
 
   .lang-area {
     height: px($HEADER_MOBILE_SIZE);
@@ -807,21 +812,16 @@ opacity $animation_time ease-in;
   @include flex;
   flex-direction: column;
 
-  @include max-min(min px(1080), max px(1440)) {
-    .text-color-primary {
-      transform: translateX(80px);
-    }
-  }
+  //@include max-min(min px(1080), max px(1440)) {
+  //  .text-color-primary {
+  //    transform: translateX(80px);
+  //  }
+  //}
 
   @include max-min(max px(1080)) {
-
-
-
     h4 {
       order: 2;
       padding-top: 40px;
-
-
     }
 
     ul {
@@ -831,23 +831,63 @@ opacity $animation_time ease-in;
   }
 }
 
-.user-infoarea {}
-
-
-.navItem{
+.navItem {
   margin-left: 16px;
 }
-.footerContainer{
+
+.footerContainer {
   padding-top: 80px;
   padding-bottom: 20px;
 }
-.items-center{
+
+.items-center {
   align-items: center;
 }
+
 .copyrightWrap p {
   text-align: center;
   color: #F7F9FB;
   opacity: 0.7;
   font-size: 14px;
   margin-top: 45px;
+}
+
+@media (max-width: 768px) {
+  .small-header {
+    display: none;
+  }
+}
+
+.pulse {
+  border-radius: 12px;
+  background-color: #DB0060;
+  animation: pulseAnimation 1s linear infinite;
+}
+
+.pulse:hover {
+  background-color: #f5006b !important;
+}
+
+.transformleft{
+  transform: translateX(120px);
+}
+
+
+@keyframes pulseAnimation {
+  0% {
+    box-shadow: 0 0 0 0 #DB0060;
+    background-color: #DB0060;
+  }
+  40% {
+    box-shadow: 0 0 0 10px rgba(255, 26, 67, 0);
+    background-color: #f5006b;
+  }
+  80% {
+    box-shadow: 0 0 0 20px rgba(255, 206, 67, 0);
+    background-color: #f5006b;
+  }
+  100% {
+    background-color: #DB0060;
+    box-shadow: 0 0 0 rgba(255, 206, 67, 0);
+  }
 }

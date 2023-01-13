@@ -308,7 +308,7 @@ const MainSection = ({ active: section, navigation = [] }) => {
               user && !user.id ? process.env.REGISTER_LINK : process.env.PROFILE_LINK
             }>
             <Button
-              text={'დაწყება'} variant={'primary'} size={'large'} />
+              text={'დაწყება'} pulse variant={'primary'} size={'large'} />
           </Link>
         </div>
       </motion.div>
@@ -354,7 +354,7 @@ const FaqSection = ({ active }) => {
               variants={textContainerTemplate2}
               initial={'show'}
               animate={isActive ? 'show' : 'hidden'}
-              className='text-color-primary m-left-auto'>ციფრული ეკოსისტემა</motion.p>
+              className='text-color-primary m-left-auto transformleft'>ციფრული ეკოსისტემა</motion.p>
           </h4>
           <ul className='flx flx-col gap-20'>
             <li className='flx flx-col gap-8'>
@@ -456,7 +456,7 @@ const FaqSectionSimple = ({ active }) => {
               variants={textContainerTemplate2}
               initial={'show'}
               animate={isActive ? 'show' : 'hidden'}
-              className='text-color-primary m-left-auto'>ციფრული ეკოსისტემა</motion.p>
+              className='text-color-primary m-left-auto transformleft'>ციფრული ეკოსისტემა</motion.p>
           </h4>
           <ul className='flx flx-col gap-20'>
             <li className='flx flx-col gap-8'>
@@ -742,7 +742,7 @@ export default function Home(props) {
       <CustomSection className="section-auto section-md-full relative z-3">
         <MainSection active={activeSection} navigation={props.appData.navigation} />
       </CustomSection>
-      <CustomSection className="section-auto section-md-full">
+      <CustomSection className="section-auto section-md-full faqSection">
         <FaqSection active={activeSection} />
       </CustomSection>
       {/* <CustomSection className="footer">
