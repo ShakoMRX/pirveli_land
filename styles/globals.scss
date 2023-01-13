@@ -852,11 +852,6 @@ opacity $animation_time ease-in;
   margin-top: 45px;
 }
 
-@media (max-width: 768px) {
-  .small-header {
-    display: none;
-  }
-}
 
 .pulse {
   border-radius: 12px;
@@ -871,7 +866,27 @@ opacity $animation_time ease-in;
 .transformleft{
   transform: translateX(120px);
 }
+.videoWrap{
+  width: 100%;
+  height: auto;
+  display:flex;
+}
+.videoWrap  img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: flex;
+}
 
+
+@media (max-width: 768px) {
+  .small-header {
+    display: none;
+  }
+  .transformleft{
+    transform: translateX(0px);
+  }
+}
 
 @keyframes pulseAnimation {
   0% {

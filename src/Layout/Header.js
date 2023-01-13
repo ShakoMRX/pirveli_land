@@ -188,7 +188,10 @@ export default function Header({navigation:_navigation,languages}){
 												<div className='p-left-16'>
 													<ImageComponent width={20} height={20} src={'/assets/img/coin.png'}/>
 												</div>
-												<div>{points?.amountOfPoints}</div>
+												<p style={{
+													fontFamily: "Avenir Next Georgian !important",
+													fontWeight:"700"
+												}}>{points?.amountOfPoints}</p>
 												{/* <div className='w-34 h-34 b-radius-inherit bg-color-yellow flx flx-all'
                     style={user?.avatar && user?.avatar?.code ? {
                       backgroundColor: `#${user?.avatar?.code}`
@@ -242,7 +245,8 @@ export default function Header({navigation:_navigation,languages}){
 											// animate={(_useScroll > indicatorRef.current) ? { y: -63 } : { y: 0 }}
 									>
 										<Link key="userInfo" href={process.env.PROFILE_LINK}>
-											<Button reset variant={'outline'} className="flx align-items-center gap-12">
+											<Button reset variant={'outline'} avatar={true} className="flx align-items-center gap-12"
+											>
 												<AnimatePresence>
 													{_useScroll < indicatorRef.current
 															? <motion.div

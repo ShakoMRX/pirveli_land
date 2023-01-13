@@ -380,7 +380,6 @@ const FaqSection = ({ active }) => {
       </div>
       <div className='section-auto section-md-auto divide-h flx flx-all md-block flex-g-1 p-top-80 p-bottom-56'>
 
-
       <motion.div
       
             variants={videoContainerTemplate}
@@ -388,33 +387,8 @@ const FaqSection = ({ active }) => {
             animate={isActive ? 'show' : 'hidden'}
             style={{ zIndex: 2 }}
             className='video-container'>
-          <div>
-            <div className='playBtn'>
-              <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="50" fill="#DB0060" />
-                <g clipPath="url(#clip0_3249_11327)">
-                  <path d="M45 42V58L58 50L45 42Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </g>
-                <defs>
-                  <clipPath id="clip0_3249_11327">
-                    <rect width="24" height="24" fill="white" transform="translate(38 38)" />
-                  </clipPath>
-                </defs>
-              </svg>
-            </div>
-            <div className='video-area'>
-            </div>
-
-            <motion.div
-              className='faqBird-bg'
-              variants={faqBirdMovement}
-              initial={'show'}
-              animate={isActive ? 'show' : active.activeSection > 1 ? 'hidden1' : 'hidden'}
-            >
-              <svg id={'bird'}>
-                <use href="#bird_3" />
-              </svg>
-            </motion.div>
+          <div className={"videoWrap"}>
+            <img src='/assets/img/video.png'/>
           </div>
           <div className='element'>
             <ImageComponent alt="Meet our Pirveli" width={227} height={137} src='/assets/img/meet-first.svg' />
