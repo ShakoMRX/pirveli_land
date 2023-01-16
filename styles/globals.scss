@@ -518,8 +518,8 @@ opacity $animation_time ease-in;
   position: relative;
   margin-bottom: 45%;
 
-  @include max-min(min px($BP_TABLET_SM + 1)) {
-    margin-bottom: 0;
+  @include max-min(min px(1080)) {
+    margin-bottom: 0px;
   }
 
 
@@ -863,30 +863,67 @@ opacity $animation_time ease-in;
   background-color: #f5006b !important;
 }
 
-.transformleft{
+.transformleft {
   transform: translateX(120px);
 }
-.videoWrap{
+
+.videoWrap {
   width: 100%;
   height: auto;
-  display:flex;
+  display: flex;
 }
-.videoWrap  img {
+
+.videoWrap img {
   width: 100%;
   height: auto;
   object-fit: contain;
   display: flex;
 }
 
+//.HEADER {
+//  min-height: 80px;
+//}
+.HEADER {
+  min-height: 80px;
+}
+
+.flag-wrap {
+  background-color: #FFFFFF80;
+  padding: 0 16px;
+  border: 1px solid #3838381A;
+  height: 42px;
+  border-radius: 28px;
+}
+
+.layout-wrap {
+  padding: 0 16px
+}
+
+//
+//@media (max-width: 1280px) {
+//  .layout-wrap {
+//    padding: 0 16px
+//  }
+//}
+@media (min-width: 1280px) {
+  .layout-wrap {
+    padding: 0 32px
+  }
+}
 
 @media (max-width: 768px) {
   .small-header {
     display: none;
   }
-  .transformleft{
+
+}
+
+@media (max-width: 1080px) {
+  .transformleft {
     transform: translateX(0px);
   }
 }
+
 
 @keyframes pulseAnimation {
   0% {

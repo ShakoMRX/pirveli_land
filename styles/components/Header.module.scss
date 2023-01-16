@@ -9,7 +9,6 @@
   :global {
     .header {
       &--wrap {
-        @extend %layout-wrap;
         min-height: px($HEADER_MOBILE_SIZE);
         position: relative;
         z-index: 55;

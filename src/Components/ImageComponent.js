@@ -5,7 +5,7 @@ import React from 'react'
 export default function ImageComponent({children, ...props}) {
   return (
     <div className='image-wrapper'>
-      <Image {...props} alt={'Pirverli'} />
+      <Image {...props} alt={'Pirverli'}  />
     </div>
   )
 }

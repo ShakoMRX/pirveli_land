@@ -14,16 +14,16 @@ import {isServer} from '../utils';
 import axios from "axios";
 import {useRouter} from 'next/router'
 
-const LanguageSwitchButton = ({className,close,variant = 'outline',animate,initial,exit,languages,reset}) => {
+const LanguageSwitchButton = ({className,bottom,close,variant = 'outline',animate,initial,exit,languages,reset}) => {
 	const [scroll] = useScrollValue();
 	const {ref,isOpen,setIsOpen} = useOutsideClick();
 
 	// axios.interceptors.request.use((config) => {
 	// 	config.headers = {
 	// 		...config.headers,
-	// 		'Access-Control-Allow-Origin':'*',
-	// 		'Content-Type':'application/json',
-	// 		Authorization:`Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJzRUNseXdhVnNxOURBMU1oMElNLTVFTUNsRU5WM1FMTnhuNlh1bDJoOVBnIn0.eyJleHAiOjE2NzM2MzU3MTMsImlhdCI6MTY3MzU5OTc0MCwiYXV0aF90aW1lIjoxNjczNTk5NzEzLCJqdGkiOiI3OGQ4MmQzNy1iOTdlLTQ0M2QtODE1MC1iYWRiZGJiMzk4N2QiLCJpc3MiOiJodHRwczovL2F1dGgucGlydmVsaS5jb20vcmVhbG1zL3hyYWNvb24tZGVtbyIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI1OTc0ZWE2Mi1iMTBiLTQ3NmEtYmViOC01OWVkYWEyMzg0ZDgiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJjcy1jYXJ0Iiwic2Vzc2lvbl9zdGF0ZSI6IjIxNDE2MGI2LWJkNmEtNDQzOS1iNmNjLTNkZDI1MDA1MmFiMCIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy14cmFjb29uLWRlbW8iLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiUFJPVklERVJfQURNSU4iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiIyMTQxNjBiNi1iZDZhLTQ0MzktYjZjYy0zZGQyNTAwNTJhYjAiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInVzZXJfaWQiOiI1OTc0ZWE2Mi1iMTBiLTQ3NmEtYmViOC01OWVkYWEyMzg0ZDgiLCJuYW1lIjoiaXJhODM2IGlyYTgzNiIsInByZWZlcnJlZF91c2VybmFtZSI6IjU5MTQwMTUxNSIsImdpdmVuX25hbWUiOiJpcmE4MzYiLCJmYW1pbHlfbmFtZSI6ImlyYTgzNiJ9.MVqZ1DULQCkQqhW-YvC14FgfHckTG38TrtiHrqhMbkUkC8STlG4TtYWHX_H2JhKPu_phPk0lse1wx1nl5M32fewpnEhtnObZu6a33-eAaaEydzS51kwszQRDcIKPZY9ArGqLM58UPa9-G9oa4WVdGaKdTQpfv8y5jRnYx-z01EaAMQynqBfUEV-kIiiX_9pXxSDvWWWFlEEKMQwxteMsliWkOJwlZoqJLkEZfiFiUWIxHwy9tNn_Dbn73k1y-4ZsxsL9Y1-k23TIsEF4V34QYaTozg01fbOMaIXQQLpqkfK9GLUC3POedkPnHkkNG20bzwpHphvHuomHdP5pFA4cvw`
+	// 		'Access-Control-Allow-Origin': '*',
+	// 		'Content-Type': 'application/json',
+	// 		Authorization: `Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJzRUNseXdhVnNxOURBMU1oMElNLTVFTUNsRU5WM1FMTnhuNlh1bDJoOVBnIn0.eyJleHAiOjE2NzM5MDI0ODEsImlhdCI6MTY3Mzg2NjQ4MSwianRpIjoiYWRiMWNiNDItOTU1Yi00NjFlLWFjMmUtOGE1ZTUzMWVjYzM3IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLnBpcnZlbGkuY29tL3JlYWxtcy94cmFjb29uLWRlbW8iLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiMGZjZDQ1NmEtNjc1MC00Yzk0LTlmMWEtODg2NDc5MTc0YjhhIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicGFzc3dvcmQtY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6ImYyYTA1NjI0LWQyYmMtNDc2MC1iOGYxLWM2ZjVhMmU1Y2Y5ZCIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy14cmFjb29uLWRlbW8iLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiUFJPVklERVJfQURNSU4iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiJmMmEwNTYyNC1kMmJjLTQ3NjAtYjhmMS1jNmY1YTJlNWNmOWQiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInVzZXJfaWQiOiIwZmNkNDU2YS02NzUwLTRjOTQtOWYxYS04ODY0NzkxNzRiOGEiLCJuYW1lIjoidmF0byBrb2J1bGlhIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiNTc5MTg5NjcyIiwiZ2l2ZW5fbmFtZSI6InZhdG8iLCJmYW1pbHlfbmFtZSI6ImtvYnVsaWEifQ.I2OVVgGdrh7dzt4YfqLv915ccjD6dd-4sEssbCri--wCFzT6En6cfZlvBGyRLC6V8JHraVffL9jMvE73XQUS63IF4nBFxlFYIa9Mjnfbhr3e5gpXU3mwR0ln0qUIhwCOMT4x152AngSYUbpcFaHW615UHYnfboCP5yWOLK2JQzCMRcp5pqnznp5wWgsJr8MtHqEv62nVnWCEiN3QDZJVMvXs2afAvbY9GpXEnIzvDbNkm4r35DGnuE0gBU5dK7x4aMUnY5TQhsK23qWm4cSPBrceJfr_Z0VsYwMq7IyZlnmF3C1K6jAl33RPGP_hNw-56S-KoSCLq9viinc5gExC3Q`
 	// 	};
 	// 	return config;
 	// });
@@ -41,19 +41,17 @@ const LanguageSwitchButton = ({className,close,variant = 'outline',animate,initi
 	return <motion.div
 			{...motionValues}
 			className={classNames('langBtn',className)}>
-		<Button
+		<div
 				onClick={() => setIsOpen( !isOpen)}
-				variant={'outline'}
-				{...buttonProps}
-
-				className="flx align-items-center gap-12 p-inline-16 p-block-10">
+				className={`flx align-items-center gap-12 p-block-10 ${bottom && 'flag-wrap'}`}
+		>
 			<Flag_GE/>
-			<div className='dropIcon' style={{
-				display:"flex",
-				alignItems:"center"
-			}}>
-				<ArrowIcon/>
-			</div>
+			{/*<div className='dropIcon' style={{*/}
+			{/*	display:"flex",*/}
+			{/*	alignItems:"center"*/}
+			{/*}}>*/}
+			{/*	<ArrowIcon/>*/}
+			{/*</div>*/}
 			{isOpen ? <motion.div
 					ref={ref}
 
@@ -73,7 +71,7 @@ const LanguageSwitchButton = ({className,close,variant = 'outline',animate,initi
 					})}
 				</ul>
 			</motion.div> : null}
-		</Button>
+		</div>
 	</motion.div>;
 }
 
@@ -169,7 +167,7 @@ export default function Header({navigation:_navigation,languages}){
 								: _useScroll > indicatorRef.current
 										? {marginTop:0} : {marginTop:-variables['smallHeader']}}
 				>
-					<div className='layout-wrap h-full HEADER'>
+					<div className='layout-wrap h-full '>
 						<div className='flx h-full'>
 							{width > 968 ? <ul>
 								{navigation.map((nav) => {
@@ -189,8 +187,9 @@ export default function Header({navigation:_navigation,languages}){
 													<ImageComponent width={20} height={20} src={'/assets/img/coin.png'}/>
 												</div>
 												<p style={{
-													fontFamily: "Avenir Next Georgian !important",
-													fontWeight:"700"
+													fontFamily:"Avenir Next Georgian !important",
+													fontWeight:"600",
+
 												}}>{points?.amountOfPoints}</p>
 												{/* <div className='w-34 h-34 b-radius-inherit bg-color-yellow flx flx-all'
                     style={user?.avatar && user?.avatar?.code ? {
@@ -226,10 +225,10 @@ export default function Header({navigation:_navigation,languages}){
 						// animate={_useScroll > 0
 						//   ? width > 768 ? { marginTop: 46, ...motionStyle } : user && !user.id ? { marginTop: 0, ...motionStyle
 						// } : { marginTop: 46, ...motionStyle } : { marginTop: 0, ...motionStyle }} style={{ marginTop: 500, }}
-						className={'header--wrap flx align-items-center' + (mobileMenu && userId ? ' bitmoere' : '')}>
+						className={'layout-wrap HEADER flx align-items-center' + (mobileMenu && userId ? ' bitmoere' : '')}>
 					<div className='logo-area'>
 						<Link href={'/'}>
-							<ImageComponent src={'/assets/img/pirveli-logo.png'} width={174} height={50}/>
+							<ImageComponent src={'/assets/img/logo.png'} quality={100} width={175} height={50}/>
 						</Link>
 					</div>
 					<div className='user-area m-left-auto flx align-items-center gap-12'>
@@ -260,7 +259,9 @@ export default function Header({navigation:_navigation,languages}){
 													{_useScroll < indicatorRef.current
 															? <motion.div
 																	animate={(_useScroll > indicatorRef.current) ? {x:63} : {x:0}}
-															>{points?.amountOfPoints}</motion.div>
+															>
+																<p>{points?.amountOfPoints}</p>
+													</motion.div>
 															: null}
 												</AnimatePresence>
 												<div className='b-radius-[50%] relative bg-color-yellow flx flx-all'
@@ -268,7 +269,7 @@ export default function Header({navigation:_navigation,languages}){
 													     width:"46px",
 													     height:"46px",
 													     borderRadius:"50%",
-													     paddingBottom: "5px",
+													     paddingBottom:"5px",
 													     backgroundColor:`#${avatar?.code}`
 												     } : {}}
 												>
@@ -284,7 +285,7 @@ export default function Header({navigation:_navigation,languages}){
 
 						<LanguageSwitchButton
 								close={_useScroll >= indicatorRef.current}
-
+								bottom={true}
 								languages={languages}
 								className={'langBtnmain'}
 								initial={_useScroll && _useScroll >= indicatorRef.current ? {y:-200} : {y:0}}
