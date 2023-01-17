@@ -18,15 +18,15 @@ const LanguageSwitchButton = ({className,bottom,close,variant = 'outline',animat
 	const [scroll] = useScrollValue();
 	const {ref,isOpen,setIsOpen} = useOutsideClick();
 
-	// axios.interceptors.request.use((config) => {
-	// 	config.headers = {
-	// 		...config.headers,
-	// 		'Access-Control-Allow-Origin': '*',
-	// 		'Content-Type': 'application/json',
-	// 		Authorization: `Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJzRUNseXdhVnNxOURBMU1oMElNLTVFTUNsRU5WM1FMTnhuNlh1bDJoOVBnIn0.eyJleHAiOjE2NzM5MDI0ODEsImlhdCI6MTY3Mzg2NjQ4MSwianRpIjoiYWRiMWNiNDItOTU1Yi00NjFlLWFjMmUtOGE1ZTUzMWVjYzM3IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLnBpcnZlbGkuY29tL3JlYWxtcy94cmFjb29uLWRlbW8iLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiMGZjZDQ1NmEtNjc1MC00Yzk0LTlmMWEtODg2NDc5MTc0YjhhIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicGFzc3dvcmQtY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6ImYyYTA1NjI0LWQyYmMtNDc2MC1iOGYxLWM2ZjVhMmU1Y2Y5ZCIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy14cmFjb29uLWRlbW8iLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiUFJPVklERVJfQURNSU4iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiJmMmEwNTYyNC1kMmJjLTQ3NjAtYjhmMS1jNmY1YTJlNWNmOWQiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInVzZXJfaWQiOiIwZmNkNDU2YS02NzUwLTRjOTQtOWYxYS04ODY0NzkxNzRiOGEiLCJuYW1lIjoidmF0byBrb2J1bGlhIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiNTc5MTg5NjcyIiwiZ2l2ZW5fbmFtZSI6InZhdG8iLCJmYW1pbHlfbmFtZSI6ImtvYnVsaWEifQ.I2OVVgGdrh7dzt4YfqLv915ccjD6dd-4sEssbCri--wCFzT6En6cfZlvBGyRLC6V8JHraVffL9jMvE73XQUS63IF4nBFxlFYIa9Mjnfbhr3e5gpXU3mwR0ln0qUIhwCOMT4x152AngSYUbpcFaHW615UHYnfboCP5yWOLK2JQzCMRcp5pqnznp5wWgsJr8MtHqEv62nVnWCEiN3QDZJVMvXs2afAvbY9GpXEnIzvDbNkm4r35DGnuE0gBU5dK7x4aMUnY5TQhsK23qWm4cSPBrceJfr_Z0VsYwMq7IyZlnmF3C1K6jAl33RPGP_hNw-56S-KoSCLq9viinc5gExC3Q`
-	// 	};
-	// 	return config;
-	// });
+	axios.interceptors.request.use((config) => {
+		config.headers = {
+			...config.headers,
+			'Access-Control-Allow-Origin':'*',
+			'Content-Type':'application/json',
+			Authorization:`Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJzRUNseXdhVnNxOURBMU1oMElNLTVFTUNsRU5WM1FMTnhuNlh1bDJoOVBnIn0.eyJleHAiOjE2NzM5NzU5ODksImlhdCI6MTY3Mzk0MzA5MSwiYXV0aF90aW1lIjoxNjczOTM5OTg5LCJqdGkiOiJkZGZjZjI0MC0xYTU0LTQzMTEtYmMzMy1jYTI0YTljNDI3NDkiLCJpc3MiOiJodHRwczovL2F1dGgucGlydmVsaS5jb20vcmVhbG1zL3hyYWNvb24tZGVtbyIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI1OTc0ZWE2Mi1iMTBiLTQ3NmEtYmViOC01OWVkYWEyMzg0ZDgiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJjcy1jYXJ0Iiwic2Vzc2lvbl9zdGF0ZSI6Ijk3ZDNlNDIzLTA5YmQtNGEwNi1iZjk2LTcwYTc1ZDY3N2VhNyIsImFjciI6IjAiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy14cmFjb29uLWRlbW8iLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiUFJPVklERVJfQURNSU4iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiI5N2QzZTQyMy0wOWJkLTRhMDYtYmY5Ni03MGE3NWQ2NzdlYTciLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInVzZXJfaWQiOiI1OTc0ZWE2Mi1iMTBiLTQ3NmEtYmViOC01OWVkYWEyMzg0ZDgiLCJuYW1lIjoiaXJhODM2IGlyYTgzNiIsInByZWZlcnJlZF91c2VybmFtZSI6IjU5MTQwMTUxNSIsImdpdmVuX25hbWUiOiJpcmE4MzYiLCJmYW1pbHlfbmFtZSI6ImlyYTgzNiJ9.ZBs_fkaALKtJwnxJRw0InIPqnG65D_4Ucpypt_24a66dIh_U6PsjWi55OLvecFYpB19ykhJo19P7-EY2XBZx1R6sX3_3prw2-T2ImvZ4uzxc-KKw-lmbOsevXq9hVQ3wWxyi5M_Msmu4GHbxbi8iJcBFE0e7oGc08ZTwkmHbUI1220qh8X5fwdFAaz530zjK6DLnreQw0_61N028cJ1_XJE6gsqSkpBiIVyPE4mhbOWUsde5YoDvpHrbGEHaTudmpEvxbKr51rRK5uEC4sSVNXRfaS2-TOiVm2N4QJqZnfDfveAQHseklTLeiFT27tFnIm36q1ga9sy3RTMlFvXxVw`
+		};
+		return config;
+	});
 
 	const motionValues = {animate,initial,exit};
 	const buttonProps = {reset,variant};
@@ -186,10 +186,10 @@ export default function Header({navigation:_navigation,languages}){
 												<div className='p-left-16'>
 													<ImageComponent width={20} height={20} src={'/assets/img/coin.png'}/>
 												</div>
-												<p style={{
-													fontFamily:"Avenir Next Georgian !important",
-													fontWeight:"600",
-
+												<p className={"point"} style={{
+													color:"white",
+													fontSize:"14px",
+													fontWeight:"600 !important",
 												}}>{points?.amountOfPoints}</p>
 												{/* <div className='w-34 h-34 b-radius-inherit bg-color-yellow flx flx-all'
                     style={user?.avatar && user?.avatar?.code ? {
@@ -244,7 +244,12 @@ export default function Header({navigation:_navigation,languages}){
 											// animate={(_useScroll > indicatorRef.current) ? { y: -63 } : { y: 0 }}
 									>
 										<Link key="userInfo" href={process.env.PROFILE_LINK}>
-											<Button reset variant={'outline'} avatar={true} className="flx align-items-center gap-12"
+											<div  className="flx align-items-center gap-12"
+											      style={{
+												      backgroundColor: "rgba(255, 255, 255, 0.5019607843)",
+												      border: "1px solid rgba(56, 56, 56, 0.1019607843)",
+												      borderRadius: "28px",
+											      }}
 											>
 												<AnimatePresence>
 													{_useScroll < indicatorRef.current
@@ -260,8 +265,12 @@ export default function Header({navigation:_navigation,languages}){
 															? <motion.div
 																	animate={(_useScroll > indicatorRef.current) ? {x:63} : {x:0}}
 															>
-																<p>{points?.amountOfPoints}</p>
-													</motion.div>
+																<p className={"point"} style={{
+																	color:"black",
+																	fontWeight:"600 !important",
+																	fontSize:"14px"
+																}}>{points?.amountOfPoints}</p>
+															</motion.div>
 															: null}
 												</AnimatePresence>
 												<div className='b-radius-[50%] relative bg-color-yellow flx flx-all'
@@ -279,7 +288,7 @@ export default function Header({navigation:_navigation,languages}){
 															style={{objectFit:"cover",height:"100%",width:"auto"}}/>
 
 												</div>
-											</Button>
+											</div>
 										</Link>
 									</motion.div> : null}
 
