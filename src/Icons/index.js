@@ -30,7 +30,5 @@ export function Flag_GE(){
 					</clipPath>
 				</defs>
 			</svg>
-
-
 	)
 }
