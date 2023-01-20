@@ -23,7 +23,7 @@ const LanguageSwitchButton = ({className,bottom,close,variant = 'outline',animat
 	// 		...config.headers,
 	// 		'Access-Control-Allow-Origin':'*',
 	// 		'Content-Type':'application/json',
-	// 		Authorization:`Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJzRUNseXdhVnNxOURBMU1oMElNLTVFTUNsRU5WM1FMTnhuNlh1bDJoOVBnIn0.eyJleHAiOjE2NzQwNjAyOTcsImlhdCI6MTY3NDAyNDMyMSwiYXV0aF90aW1lIjoxNjc0MDI0Mjk3LCJqdGkiOiI3NDA5MDc1OS00MzQyLTQ5ZTAtOTgyZi1lMDEyZjVmYmI1NjgiLCJpc3MiOiJodHRwczovL2F1dGgucGlydmVsaS5jb20vcmVhbG1zL3hyYWNvb24tZGVtbyIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI1OTc0ZWE2Mi1iMTBiLTQ3NmEtYmViOC01OWVkYWEyMzg0ZDgiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJjcy1jYXJ0Iiwic2Vzc2lvbl9zdGF0ZSI6ImEwYTE0Zjc1LWY3OGEtNGVmNC05OGQxLTA1OTFmN2UzMDU1MiIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy14cmFjb29uLWRlbW8iLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiUFJPVklERVJfQURNSU4iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiJhMGExNGY3NS1mNzhhLTRlZjQtOThkMS0wNTkxZjdlMzA1NTIiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInVzZXJfaWQiOiI1OTc0ZWE2Mi1iMTBiLTQ3NmEtYmViOC01OWVkYWEyMzg0ZDgiLCJuYW1lIjoiaXJhODM2IGlyYTgzNiIsInByZWZlcnJlZF91c2VybmFtZSI6IjU5MTQwMTUxNSIsImdpdmVuX25hbWUiOiJpcmE4MzYiLCJmYW1pbHlfbmFtZSI6ImlyYTgzNiJ9.KFa0PqomlsMpMp2RgWHE4iZ-BNHjSS9UMMJdtfQOQKm1E0CK7lbzHxE35dllyAeKkFGRNZJpfK84B2sN5AnnD3DBO7U0EGC-djWnuwVRDLFbNh1gcADeOzWerHUW2SgHsqelWVRZ9ueHE_u6UU939vY3T9Zg1uEbN5xQ4_bShFc3A91LX1C6tIqBa55WWEs9BGLBR4Upj1U67Xilw0Upoz-9Rx7s7WTGcjdbRJmOF7LD8WcYJH21bsmr1BdPygWYk9FEgJf8uay42hm_6wBji5HQHCXu65icXXt9AYzmU8_cmzPMQD7gt9a5sXwaNHbRrIAPwOM6R5URIuAs82jSIA`
+	// 		Authorization:`Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJzRUNseXdhVnNxOURBMU1oMElNLTVFTUNsRU5WM1FMTnhuNlh1bDJoOVBnIn0.eyJleHAiOjE2NzQyNTQyNTcsImlhdCI6MTY3NDIxODI2NywiYXV0aF90aW1lIjoxNjc0MjE4MjU3LCJqdGkiOiJhMDQ5YTdkMy02ZmFmLTQwYzUtODE3ZS05MDk4ZTVhMjEyNzAiLCJpc3MiOiJodHRwczovL2F1dGgucGlydmVsaS5jb20vcmVhbG1zL3hyYWNvb24tZGVtbyIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJmZWNlMmMwMC05NDlkLTQyMDAtYTBkMC1jYTYwODdiOTNmMjYiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJjcy1jYXJ0Iiwic2Vzc2lvbl9zdGF0ZSI6IjhmZGMwN2UxLTg0MTYtNGUyMi04OGE5LTkyYWM0OTQwNTBkNCIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy14cmFjb29uLWRlbW8iLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiUFJPVklERVJfQURNSU4iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiI4ZmRjMDdlMS04NDE2LTRlMjItODhhOS05MmFjNDk0MDUwZDQiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInVzZXJfaWQiOiJmZWNlMmMwMC05NDlkLTQyMDAtYTBkMC1jYTYwODdiOTNmMjYiLCJuYW1lIjoiZHNhZHNhZHNhIGRzYWRhc2RzYWQiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiI1Nzc5NjU1MTQiLCJnaXZlbl9uYW1lIjoiZHNhZHNhZHNhIiwiZmFtaWx5X25hbWUiOiJkc2FkYXNkc2FkIn0.JnNw570UK5Q2jCoqqPgSYq53JYDU7QMLO-c84qKiITmFn0HV1Bk-VwBTKToRv0wdvfaCmFREEzPfRw9NJ8eutbdXa_1-CKKYtZQWgCGG53-pJNdXJB9W4rT2KP_Pw7RpoPBqtcgAzK66RwlIxHtTgC78B07UbVQbd0tbMyPoeHRx9poJTuF2_wkkrUOCaHDUQF206QDX7zut3gBbgoxHLjkaaN3eC6eVwxD4bJ-PC7jdfWseNoimg9Or78CDXvscTpTNxJUkCeVRnL87pQ4xk-Fg6-1lMcsLcxy6YzNxYWh_lLnxxGvGPhG-DY3jSWf9qs1qti8P0m5dZBIKXRHr-w`
 	// 	};
 	// 	return config;
 	// });
@@ -43,6 +43,9 @@ const LanguageSwitchButton = ({className,bottom,close,variant = 'outline',animat
 			className={classNames('langBtn',className)}>
 		<div
 				onClick={() => setIsOpen( !isOpen)}
+				style={{
+					marginRight:"22px"
+				}}
 				className={`flx align-items-center gap-12 p-block-10 ${bottom && 'flag-wrap'}`}
 		>
 			<Flag_GE/>
@@ -182,7 +185,11 @@ export default function Header({navigation:_navigation,languages}){
 										{/* <Button reset className={'h-full w-full auth-btn'} size='small' variant='text' text="შესვლა" /> */}
 									</div>
 									: _useScroll > 0 && userId || mobileMenu && userId
-											? <div className='flx align-items-center gap-12 m-left-auto  b-radius-100'>
+											? <div className='flx align-items-center m-left-auto b-radius-100'
+												style={{
+													gap:"7px"
+												}}
+											>
 												<div className='p-left-16'>
 													<ImageComponent width={20} height={20} src={'/assets/img/coin.png'}/>
 												</div>
@@ -202,7 +209,7 @@ export default function Header({navigation:_navigation,languages}){
 							<motion.div
 									// animate={_useScroll >= indicatorRef.current ? { y: -100 } : { y: 0 }}
 									className='langBtn flx align-items-center gap-12 m-left-14'>
-								{userId ? <div className='line-h'></div> : null}
+								{userId ? <div className='line-h' style={{marginRight:"4px"}}></div> : null}
 								<LanguageSwitchButton
 										reset
 										close={_useScroll <= indicatorRef.current}

@@ -895,7 +895,9 @@ opacity $animation_time ease-in;
   background-color: #FFFFFF80;
   padding: 0 16px;
   border: 1px solid #3838381A;
-  height: 42px;
+  height: 48px;
+  display: flex;
+  align-items: center;
   border-radius: 28px;
 }
 
