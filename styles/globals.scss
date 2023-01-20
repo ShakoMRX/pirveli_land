@@ -45,6 +45,10 @@ body {
   font-family: 'Avenir Next Georgian';
 }
 
+.aveSofRegular {
+  font-family: avenirMedium, serif;
+}
+
 .app-navigation {
   // background-color: aquamarine;
   width: 100%;
@@ -568,9 +572,9 @@ opacity $animation_time ease-in;
 
   .element {
     position: absolute;
-    margin-top: 18px;
+    margin-top: -31px;
     top: 100%;
-    left: 0;
+    left: -69px;
   }
 }
 
@@ -880,11 +884,6 @@ opacity $animation_time ease-in;
   display: flex;
 }
 
-.point{
-  font-family: 'Avenir Next Georgian';
-  font-weight: 500;
-}
-
 //.HEADER {
 //  min-height: 80px;
 //}
@@ -902,6 +901,10 @@ opacity $animation_time ease-in;
 
 .layout-wrap {
   padding: 0 16px
+}
+
+.arrowDown {
+  display: none;
 }
 
 //
@@ -927,6 +930,10 @@ opacity $animation_time ease-in;
   .transformleft {
     transform: translateX(0px);
   }
+  .video-container .element {
+    left: 16px;
+  }
+
 }
 
 

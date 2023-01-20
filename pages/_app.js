@@ -6,6 +6,7 @@ import Layout from '../src/Layout/Layout'
 import { ScrollProvider, UserProvider } from '../src/store';
 import fetchApi from '../src/utils/fetch';
 import '../styles/globals.scss'
+import "../styles/font.scss"
 
 const Languages = [
   { name: 'GB', slug: 'gb' },

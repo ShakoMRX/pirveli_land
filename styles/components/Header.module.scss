@@ -6,6 +6,7 @@
   left: 0;
   width: 100%;
   z-index: 1000;
+
   :global {
     .header {
       &--wrap {
@@ -24,7 +25,7 @@
           // backdrop-filter: blur(1px);
         }
 
-        >div {
+        > div {
           position: relative;
         }
 
@@ -53,14 +54,15 @@
 
           .logo-area {
             height: initial;
-            
+
           }
         }
-        
+
       }
     }
   }
 }
+
 .scrolling {
   background-color: $color-gray;
   box-shadow: 0px 0px 24px -1px rgba(#383838, .12);
@@ -71,7 +73,12 @@
     .langBtnmain {
       display: none;
     }
+
+    .arrowDown {
+      display: flex;
+    }
   }
 }
 
-.userInfoBlock {}
+.userInfoBlock {
+}

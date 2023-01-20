@@ -287,7 +287,7 @@ const MainSection = ({active:section,navigation = []}) => {
 			ref={ref}
 			className={'section-auto section-md-full flx flx-col md-flx-all md-justify-content-evenly'}>
 		<div
-				className='p-top-180  section-md-auto divide-h flx flx-all flx-col relative'>
+				className='p-top-50 p-bottom-50 section-md-auto divide-h flx flx-all flx-col relative'>
 			<div className='page-bg'>
 				<motion.div
 						// variants={_birdTopTemplate}
