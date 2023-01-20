@@ -258,7 +258,7 @@ export default function Header({navigation:_navigation,languages}){
 											     style={{
 												     backgroundColor:"rgba(255, 255, 255, 0.5019607843)",
 												     border:"1px solid rgba(56, 56, 56, 0.1019607843)",
-												     borderRadius:"28px",
+												     borderRadius:"12px",
 											     }}
 											>
 												<AnimatePresence>
@@ -287,7 +287,7 @@ export default function Header({navigation:_navigation,languages}){
 												     style={avatar && avatar?.code ? {
 													     width:"46px",
 													     height:"46px",
-													     borderRadius:"50%",
+													     borderRadius:"12px",
 													     paddingBottom:"5px",
 													     backgroundColor:`#${avatar?.code}`
 												     } : {}}
