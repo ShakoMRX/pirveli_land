@@ -171,6 +171,9 @@ export function AppNavigation({navigation}){
 										<div
 												onMouseEnter={(e) => onMouseEnter(e,nav.slug)}
 												onMouseLeave={() => setHoverNav(null)}
+												style={{
+													paddingBottom:"10px"
+												}}
 												className='title text-s-16 md-text-s-28 text-weight-600'>
 											{nav.name}
 										</div>
@@ -287,7 +290,7 @@ const MainSection = ({active:section,navigation = []}) => {
 			ref={ref}
 			className={'section-auto section-md-full flx flx-col md-flx-all md-justify-content-evenly'}>
 		<div
-				className='p-top-50 p-bottom-50 section-md-auto divide-h flx flx-all flx-col relative'>
+				className='p-top-50  section-md-auto divide-h flx flx-all flx-col relative'>
 			<div className='page-bg'>
 				<motion.div
 						// variants={_birdTopTemplate}
@@ -379,7 +382,9 @@ const FaqSection = ({active}) => {
 								className='text-color-primary m-left-auto transformleft'>ციფრული ეკოსისტემა
 						</motion.p>
 					</h4>
-					<ul className='flx flx-col gap-20'>
+					<ul className='flx flx-col gap-20' style={{
+						marginTop:"8px"
+					}}>
 						<li className='flx flx-col gap-8'>
 							<p className='text-s-16 md-text-s-24 text-weight-700 text-color-primary'>01</p>
 							<span className='text-line-height-24'>
@@ -744,7 +749,7 @@ export default function Home(props){
 				                        // console.log('beforeLeave', e);
 				                        setActiveIndex(e);
 			                        }}>
-				<CustomSection className="section-auto section-md-full relative z-3">
+				<CustomSection className="section-auto section-md-full relative z-3 daagrove">
 					<MainSection active={activeSection} navigation={props.appData.navigation}/>
 				</CustomSection>
 				<CustomSection className="section-auto section-md-full faqSection">

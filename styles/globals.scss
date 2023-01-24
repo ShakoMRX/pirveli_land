@@ -49,6 +49,10 @@ body {
   font-family: avenirMedium, serif;
 }
 
+.aveSofBold {
+  font-family: avenirBold, serif !important;
+}
+
 .app-navigation {
   // background-color: aquamarine;
   width: 100%;
@@ -573,8 +577,8 @@ opacity $animation_time ease-in;
   .element {
     position: absolute;
     margin-top: -31px;
-    top: 100%;
-    left: -69px;
+    bottom:-108px;
+    left: -119px;
   }
 }
 
@@ -663,7 +667,6 @@ opacity $animation_time ease-in;
       @include flex-all;
       height: 100%;
       font-size: 14px;
-      font-weight: 600;
       outline: none;
 
       &:after {
@@ -909,12 +912,353 @@ opacity $animation_time ease-in;
   display: none;
 }
 
-//
-//@media (max-width: 1280px) {
-//  .layout-wrap {
-//    padding: 0 16px
-//  }
-//}
+.fullfooter {
+  display: flex;
+  margin: auto;
+  justify-content: space-between;
+  margin: auto;
+  /* max-width: calc(1440px - 100px);
+  padding-right: 30%; */
+  width: calc(100% - 100px);
+  /* padding-left: 50px; */
+}
+
+.footerContainer {
+  display: flex;
+  gap: 30px;
+  margin: auto;
+}
+
+.leftSideContainer {
+  display: flex;
+  flex-direction: row;
+  width: 23.28%;
+  min-width: 150px;
+}
+
+.headerIcon {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 16px;
+  /* padding: 35px 20px; */
+}
+
+.headerIcon img {
+  width: 47px;
+  height: 40px;
+  margin-bottom: 14px;
+}
+.textTitle {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  color: rgba(56, 56, 56, 0.7);
+  cursor: pointer;
+}
+.textStyle {
+  font-family: avenirMedium, serif;
+
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  color: rgba(56, 56, 56, 0.7);
+  cursor: pointer;
+}
+
+.iconContainer {
+  display: flex;
+  flex-direction: row;
+  margin-top: 40px;
+  gap: 22px;
+}
+
+.tooltip {
+  height: 24px;
+  width: 24px;
+}
+
+.toolTipCard {
+  background-color: #3a74d2;
+}
+
+.tooltipContainer:hover .tooltip,
+.tooltipContainer .tooltipActive {
+  display: none;
+}
+
+.tooltipContainer:hover .tooltipActive {
+  display: inline;
+  height: 24px;
+  width: 24px;
+}
+
+.iconContainer img {
+  width: 24px;
+  height: 24px;
+}
+
+.iconContainerTooltip {
+  font-family: 'Avenir Next Georgian';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  text-align: center;
+  color: #383838;
+}
+
+.tooltipContainer:hover .tooltip,
+.tooltipContainer .tooltipActive {
+  display: none;
+}
+
+.tooltipContainer:hover .tooltipActive {
+  display: inline;
+  height: 24px;
+  width: 24px;
+}
+
+.allRightTextStyle {
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #1e2837;
+  padding-top: 34px;
+}
+
+.firstRow {
+  display: flex;
+  flex-direction: row;
+  width: 23.28%;
+  min-width: 150px;
+  /* background-color: aquamarine; */
+}
+
+.secondRow {
+  display: flex;
+  flex-direction: column;
+  width: 23.28%;
+  min-width: 150px;
+  z-index: 1;
+  margin-left: 30px;
+  gap: 16px;
+  /* padding: 35px 20px; */
+}
+
+.companyConatiner {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  /* padding: 35px 20px; */
+}
+
+.companyConatiner img {
+  width: 30px;
+}
+
+.thirdRow {
+  position: absolute;
+  right: 0;
+  /* height: 380px; */
+  z-index: -1;
+}
+
+.iconsStyle {
+  cursor: pointer;
+}
+
+.allRightStyle {
+  display: none;
+}
+
+.textStyle {
+  font-family: 'Avenir Next Georgian';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 150%;
+  color: #383838;
+  cursor: pointer;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+.textStyle:hover {
+  //text-decoration: underline;
+  //text-decoration-color: "1px solid #ffbbb6";
+  color: #DB0060;
+}
+.textStyle img {
+  padding-right: 15px;
+}
+
+.daagrove{
+  padding-top: 200px;
+}
+@media only screen and (min-width: 1080px) {
+
+  .daagrove{
+    padding-top: 0px;
+  }
+}
+
+@media only screen and (max-width: 1415px) {
+  .iconsStyle {
+    width: 424px;
+    height: auto;
+    cursor: pointer;
+    margin-top: 147px;
+  }
+
+}
+
+@media only screen and (max-width: 1024px) {
+  .footerContainer {
+    grid-template-columns: repeat(12, 1fr);
+    gap: 30px;
+  }
+  .iconsStyle {
+    width: 324px;
+    cursor: pointer;
+    margin-top: 147px;
+    height: 222px;
+  }
+  .thirdRow {
+    right: 0;
+  }
+  .iconsStyle {
+    width: 324px;
+    cursor: pointer;
+    margin-top: 147px;
+    height: 222px;
+  }
+  .thirdRow {
+    right: 0;
+  }
+  .signInBtnStyle {
+    margin-right: 0;
+  }
+  .buyCardBtnStyle {
+    margin-right: 18.5px;
+  }
+  .mobileBottomNav {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .fullfooter {
+    display: none;
+  }
+  .searchInput {
+    display: none;
+  }
+  .burgerMenuicon {
+    display: block;
+  }
+  /* .footerContainer {
+      padding-left: 30px;
+      width: 100%;
+      min-height: 150px;
+  } */
+
+  .responsiveAuth {
+    display: block;
+  }
+  .headerContainerBg,
+  .smallheaderContainer {
+    padding-left: 46px;
+    padding-right: 46px;
+    top: 0;
+  }
+  .smallheaderContainer {
+    display: none;
+  }
+  .siteStatus {
+    display: none;
+  }
+  .thirdRow {
+    display: none;
+  }
+
+}
+
+@media only screen and (max-width: 800px) {
+  .headerIcon img {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .fullfooter {
+    display: none;
+  }
+  .allRightStyle {
+    background: #f7f9fb;
+    padding-left: 53px;
+    padding-top: -20px;
+    padding-bottom: 44px;
+    margin-left: 16px;
+    margin-right: 16px;
+    position: fixed;
+    bottom: 0;
+    background-color: #ff1c00;
+  }
+  .thirdRow {
+    display: none;
+  }
+  .secondRow {
+    display: flex;
+    flex-direction: column;
+    height: 220px;
+  }
+  .headerIcon img {
+    display: none;
+  }
+  .companyConatiner {
+    width: 100%;
+    margin-bottom: 34px;
+  }
+  .firstRow {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-left: 60px;
+  }
+  .iconContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  .headerIcon {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-left: -117px;
+    width: 100%;
+  }
+  .footerContainer {
+    display: flex;
+    overflow: hidden;
+    margin: auto;
+    height: 375px;
+    padding-top: 24px;
+    padding-left: 20px;
+    margin-left: 0;
+    margin-right: 0;
+    flex-direction: row;
+  }
+  .leftSideContainerText {
+    display: none;
+  }
+}
+
+
 @media (min-width: 1280px) {
   .layout-wrap {
     padding: 0 32px
@@ -957,3 +1301,7 @@ opacity $animation_time ease-in;
     box-shadow: 0 0 0 rgba(255, 206, 67, 0);
   }
 }
+
+
+
+

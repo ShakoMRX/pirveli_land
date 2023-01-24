@@ -43,18 +43,16 @@ const LanguageSwitchButton = ({className,bottom,close,variant = 'outline',animat
 			className={classNames('langBtn',className)}>
 		<div
 				onClick={() => setIsOpen( !isOpen)}
-				style={{
-					marginRight:"22px"
-				}}
+
 				className={`flx align-items-center gap-12 p-block-10 ${bottom && 'flag-wrap'}`}
 		>
 			<Flag_GE/>
-			{/*<div className='dropIcon' style={{*/}
-			{/*	display:"flex",*/}
-			{/*	alignItems:"center"*/}
-			{/*}}>*/}
-			{/*	<ArrowIcon/>*/}
-			{/*</div>*/}
+			<div className='dropIcon' style={{
+				display:"flex",
+				alignItems:"center"
+			}}>
+				<ArrowIcon/>
+			</div>
 			{isOpen ? <motion.div
 					ref={ref}
 
