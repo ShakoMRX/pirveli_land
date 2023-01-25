@@ -4,7 +4,7 @@ import Link from 'next/link';
 import React,{useEffect,useRef,useState} from 'react'
 import styles from '../../styles/components/Header.module.scss';
 import ImageComponent from '../Components/ImageComponent';
-import {ArrowIcon,Flag_GE} from '../Icons';
+import {ArrowIcon,ArrowIconBlack,Flag_GE} from '../Icons';
 import Button from '../Shared/Button';
 import {useScrollValue} from '../store';
 import {AnimatePresence,motion,useMotionValue,useScroll} from 'framer-motion';
@@ -23,10 +23,9 @@ const LanguageSwitchButton = ({className,bottom,close,variant = 'outline',animat
 	// 		...config.headers,
 	// 		'Access-Control-Allow-Origin':'*',
 	// 		'Content-Type':'application/json',
-	// 		Authorization:`Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJzRUNseXdhVnNxOURBMU1oMElNLTVFTUNsRU5WM1FMTnhuNlh1bDJoOVBnIn0.eyJleHAiOjE2NzQyNTQyNTcsImlhdCI6MTY3NDIxODI2NywiYXV0aF90aW1lIjoxNjc0MjE4MjU3LCJqdGkiOiJhMDQ5YTdkMy02ZmFmLTQwYzUtODE3ZS05MDk4ZTVhMjEyNzAiLCJpc3MiOiJodHRwczovL2F1dGgucGlydmVsaS5jb20vcmVhbG1zL3hyYWNvb24tZGVtbyIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJmZWNlMmMwMC05NDlkLTQyMDAtYTBkMC1jYTYwODdiOTNmMjYiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJjcy1jYXJ0Iiwic2Vzc2lvbl9zdGF0ZSI6IjhmZGMwN2UxLTg0MTYtNGUyMi04OGE5LTkyYWM0OTQwNTBkNCIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy14cmFjb29uLWRlbW8iLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiUFJPVklERVJfQURNSU4iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiI4ZmRjMDdlMS04NDE2LTRlMjItODhhOS05MmFjNDk0MDUwZDQiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInVzZXJfaWQiOiJmZWNlMmMwMC05NDlkLTQyMDAtYTBkMC1jYTYwODdiOTNmMjYiLCJuYW1lIjoiZHNhZHNhZHNhIGRzYWRhc2RzYWQiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiI1Nzc5NjU1MTQiLCJnaXZlbl9uYW1lIjoiZHNhZHNhZHNhIiwiZmFtaWx5X25hbWUiOiJkc2FkYXNkc2FkIn0.JnNw570UK5Q2jCoqqPgSYq53JYDU7QMLO-c84qKiITmFn0HV1Bk-VwBTKToRv0wdvfaCmFREEzPfRw9NJ8eutbdXa_1-CKKYtZQWgCGG53-pJNdXJB9W4rT2KP_Pw7RpoPBqtcgAzK66RwlIxHtTgC78B07UbVQbd0tbMyPoeHRx9poJTuF2_wkkrUOCaHDUQF206QDX7zut3gBbgoxHLjkaaN3eC6eVwxD4bJ-PC7jdfWseNoimg9Or78CDXvscTpTNxJUkCeVRnL87pQ4xk-Fg6-1lMcsLcxy6YzNxYWh_lLnxxGvGPhG-DY3jSWf9qs1qti8P0m5dZBIKXRHr-w`
-	// 	};
-	// 	return config;
-	// });
+	// 		Authorization:`Bearer
+	// eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJzRUNseXdhVnNxOURBMU1oMElNLTVFTUNsRU5WM1FMTnhuNlh1bDJoOVBnIn0.eyJleHAiOjE2NzQyNTQyNTcsImlhdCI6MTY3NDIxODI2NywiYXV0aF90aW1lIjoxNjc0MjE4MjU3LCJqdGkiOiJhMDQ5YTdkMy02ZmFmLTQwYzUtODE3ZS05MDk4ZTVhMjEyNzAiLCJpc3MiOiJodHRwczovL2F1dGgucGlydmVsaS5jb20vcmVhbG1zL3hyYWNvb24tZGVtbyIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJmZWNlMmMwMC05NDlkLTQyMDAtYTBkMC1jYTYwODdiOTNmMjYiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJjcy1jYXJ0Iiwic2Vzc2lvbl9zdGF0ZSI6IjhmZGMwN2UxLTg0MTYtNGUyMi04OGE5LTkyYWM0OTQwNTBkNCIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy14cmFjb29uLWRlbW8iLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiUFJPVklERVJfQURNSU4iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiI4ZmRjMDdlMS04NDE2LTRlMjItODhhOS05MmFjNDk0MDUwZDQiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInVzZXJfaWQiOiJmZWNlMmMwMC05NDlkLTQyMDAtYTBkMC1jYTYwODdiOTNmMjYiLCJuYW1lIjoiZHNhZHNhZHNhIGRzYWRhc2RzYWQiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiI1Nzc5NjU1MTQiLCJnaXZlbl9uYW1lIjoiZHNhZHNhZHNhIiwiZmFtaWx5X25hbWUiOiJkc2FkYXNkc2FkIn0.JnNw570UK5Q2jCoqqPgSYq53JYDU7QMLO-c84qKiITmFn0HV1Bk-VwBTKToRv0wdvfaCmFREEzPfRw9NJ8eutbdXa_1-CKKYtZQWgCGG53-pJNdXJB9W4rT2KP_Pw7RpoPBqtcgAzK66RwlIxHtTgC78B07UbVQbd0tbMyPoeHRx9poJTuF2_wkkrUOCaHDUQF206QDX7zut3gBbgoxHLjkaaN3eC6eVwxD4bJ-PC7jdfWseNoimg9Or78CDXvscTpTNxJUkCeVRnL87pQ4xk-Fg6-1lMcsLcxy6YzNxYWh_lLnxxGvGPhG-DY3jSWf9qs1qti8P0m5dZBIKXRHr-w`
+	// }; return config; });
 
 	const motionValues = {animate,initial,exit};
 	const buttonProps = {reset,variant};
@@ -43,7 +42,6 @@ const LanguageSwitchButton = ({className,bottom,close,variant = 'outline',animat
 			className={classNames('langBtn',className)}>
 		<div
 				onClick={() => setIsOpen( !isOpen)}
-
 				className={`flx align-items-center gap-12 p-block-10 ${bottom && 'flag-wrap'}`}
 		>
 			<Flag_GE/>
@@ -51,7 +49,7 @@ const LanguageSwitchButton = ({className,bottom,close,variant = 'outline',animat
 				display:"flex",
 				alignItems:"center"
 			}}>
-				<ArrowIcon/>
+				{bottom ? <ArrowIconBlack/> : <ArrowIcon/>}
 			</div>
 			{isOpen ? <motion.div
 					ref={ref}
@@ -184,9 +182,9 @@ export default function Header({navigation:_navigation,languages}){
 									</div>
 									: _useScroll > 0 && userId || mobileMenu && userId
 											? <div className='flx align-items-center m-left-auto b-radius-100'
-												style={{
-													gap:"7px"
-												}}
+											       style={{
+												       gap:"7px"
+											       }}
 											>
 												<div className='p-left-16'>
 													<ImageComponent width={20} height={20} src={'/assets/img/coin.png'}/>
@@ -360,6 +358,7 @@ export default function Header({navigation:_navigation,languages}){
 						<Button onClick={() => setMobileMenu(true)} variant='none' reset className={'flx flx-all md-hidden'}
 						        style={{width:34,height:34}}>
 							<ImageComponent width={20} height={20} src={'/assets/img/burger.svg'}/>
+
 						</Button>
 					</div>
 				</motion.div>

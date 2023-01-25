@@ -971,8 +971,8 @@ opacity $animation_time ease-in;
 .iconContainer {
   display: flex;
   flex-direction: row;
-  margin-top: 40px;
-  gap: 22px;
+  gap: 20px;
+  margin-left: -4px;
 }
 
 .tooltip {
@@ -1100,7 +1100,15 @@ opacity $animation_time ease-in;
 .daagrove{
   padding-top: 100px;
 }
+
+.footer{
+  margin-top: 160px;
+}
+
 @media only screen and (min-width: 1080px) {
+  .footer{
+    margin-top: 160px;
+  }
 
   .daagrove{
     padding-top: 0px;
@@ -1112,9 +1120,26 @@ opacity $animation_time ease-in;
     width: 424px;
     height: auto;
     cursor: pointer;
-    margin-top: 147px;
+    margin-top: 27px;
   }
+}
 
+@media only screen and (max-width: 1187px) {
+  .iconsStyle {
+    width: 380px;
+    height: auto;
+    cursor: pointer;
+    margin-top: 27px;
+  }
+}
+
+@media only screen and (max-width: 1115px) {
+  .iconsStyle {
+    width: 360px;
+    height: auto;
+    cursor: pointer;
+    margin-top: 27px;
+  }
 }
 
 @media only screen and (max-width: 1024px) {
@@ -1272,6 +1297,17 @@ opacity $animation_time ease-in;
 
 }
 
+@media (max-width: 1300px) {
+  .video-container .element{
+    bottom: -155px;
+  }
+}
+
+@media (max-width: 1135px) {
+  .video-container .element{
+    bottom: -172px;
+  }
+}
 @media (max-width: 1080px) {
   .transformleft {
     transform: translateX(0px);

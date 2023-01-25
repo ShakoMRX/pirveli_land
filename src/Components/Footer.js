@@ -39,80 +39,7 @@ export default function Footer() {
 								</span>
               </Link>
 
-              <div className={"iconContainer"}>
-                  <a
-                      className={"tooltipContainer"}
-                      target={'_blank'}
-                      rel='noopener noreferrer'
-                      href={
-                        'https://www.facebook.com/profile.php?id=100088325187616'
-                      }
-                  >
-                    <img
-                        src='assets/footerIcon/facebook.svg'
-                        alt='headerIcon'
-                        className={"tooltip"}
-                    />
-                    <img
-                        src='assets/footerIcon/FacebookActive.svg'
-                        alt='headerIcon'
-                        className={"tooltipActive"}
-                    />
-                  </a>
 
-                  <a
-                      className={"tooltipContainer"}
-                      target={'_blank'}
-                      rel='noopener noreferrer'
-                      href={'https://www.instagram.com/pirveli_pirveli/'}
-                  >
-                    <img
-                        src='assets/footerIcon/Instagram.svg'
-                        alt='headerIcon'
-                        className={"tooltip"}
-                    />
-                    <img
-                        src='assets/footerIcon/InstagramActive.svg'
-                        alt='headerIcon'
-                        className={"tooltipActive"}
-                    />
-                  </a>
-
-                  <a
-                      className={"tooltipContainer"}
-                      target={'_blank'}
-                      rel='noopener noreferrer'
-                      href={''}
-                  >
-                    <img
-                        src='assets/footerIcon/Youtube.svg'
-                        alt='headerIcon'
-                        className={"tooltip"}
-                    />
-                    <img
-                        src='assets/footerIcon/YoutubeActive.svg'
-                        alt='headerIcon'
-                        className={"tooltipActive"}
-                    />
-                  </a>
-                  <a
-                      className={"tooltipContainer"}
-                      target={'_blank'}
-                      rel='noopener noreferrer'
-                      href={'https://www.linkedin.com/company/88047011'}
-                  >
-                    <img
-                        src='assets/footerIcon/Linkdin.svg'
-                        alt='headerIcon'
-                        className={"tooltip"}
-                    />
-                    <img
-                        src='assets/footerIcon/LinkdinActive.svg'
-                        alt='headerIcon'
-                        className={"tooltipActive"}
-                    />
-                  </a>
-              </div>
               {/* <div className={classes.allRightsText}> */}
               <p className={"allRightTextStyle"}>
                 2022 © ყველა უფლება დაცულია. Pirveli.com
@@ -174,6 +101,82 @@ export default function Footer() {
                 <p className={"textStyle"}>თბილისი, ზოვრეთის ქ.#1</p>
               </p>
             </a>
+
+            <div className={"iconContainer"}>
+              <a
+                  className={"tooltipContainer"}
+                  target={'_blank'}
+                  rel='noopener noreferrer'
+                  href={
+                    'https://www.facebook.com/profile.php?id=100088325187616'
+                  }
+              >
+                <img
+                    src='assets/footerIcon/facebook.svg'
+                    alt='headerIcon'
+                    className={"tooltip"}
+                />
+                <img
+                    src='assets/footerIcon/FacebookActive.svg'
+                    alt='headerIcon'
+                    className={"tooltipActive"}
+                />
+              </a>
+
+              <a
+                  className={"tooltipContainer"}
+                  target={'_blank'}
+                  rel='noopener noreferrer'
+                  href={'https://www.instagram.com/pirveli_pirveli/'}
+              >
+                <img
+                    src='assets/footerIcon/Instagram.svg'
+                    alt='headerIcon'
+                    className={"tooltip"}
+                />
+                <img
+                    src='assets/footerIcon/InstagramActive.svg'
+                    alt='headerIcon'
+                    className={"tooltipActive"}
+                />
+              </a>
+
+              <a
+                  className={"tooltipContainer"}
+                  target={'_blank'}
+                  rel='noopener noreferrer'
+                  href={''}
+              >
+                <img
+                    src='assets/footerIcon/Youtube.svg'
+                    alt='headerIcon'
+                    className={"tooltip"}
+                />
+                <img
+                    src='assets/footerIcon/YoutubeActive.svg'
+                    alt='headerIcon'
+                    className={"tooltipActive"}
+                />
+              </a>
+              <a
+                  className={"tooltipContainer"}
+                  target={'_blank'}
+                  rel='noopener noreferrer'
+                  href={'https://www.linkedin.com/company/88047011'}
+              >
+                <img
+                    src='assets/footerIcon/Linkdin.svg'
+                    alt='headerIcon'
+                    className={"tooltip"}
+                />
+                <img
+                    src='assets/footerIcon/LinkdinActive.svg'
+                    alt='headerIcon'
+                    className={"tooltipActive"}
+                />
+              </a>
+            </div>
+
             {/* </div> */}
 
             {/* <div className={classes.companyConatiner}>
