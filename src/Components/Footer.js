@@ -21,13 +21,6 @@ export default function Footer() {
 								<Text style={classes.textStyle}>ხშირად დასმული კითხვები</Text>
 							</Link> */}
               <Link href={''}>
-								<span
-                    className={"textStyle"}
-                >
-									გახდი ჩვენი პარტნიორი
-								</span>
-              </Link>
-              <Link href={''}>
                 <p className={"textStyle"}>მიმდინარე ვაკანსიები</p>
               </Link>
               <Link href={''}>
@@ -64,9 +57,9 @@ export default function Footer() {
               <Link href='/'>
                 <p className={"textStyle"}>ხშირად დასმული კითხვები </p>
               </Link>
-              <Link href=''>
-                <p className={"textStyle"}>შეუკვეთე ჯანდაცვის ბარათი</p>
-              </Link>
+              {/*<Link href=''>*/}
+              {/*  <p className={"textStyle"}>შეუკვეთე ჯანდაცვის ბარათი</p>*/}
+              {/*</Link>*/}
             </div>
           </div>
           <div className={"secondRow"}>
