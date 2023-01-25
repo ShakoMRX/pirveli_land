@@ -41,10 +41,10 @@ $border-size: 1;
 
         &-primary {
           color: #FFF;
-          background-color: $color-primary;
+          background-color: #f5006b;
 
           &:hover {
-            background-color: lighten($color-primary, 5%);
+            background-color: #DB0060;
           }
         }
 

@@ -42,7 +42,7 @@ const LanguageSwitchButton = ({className,bottom,close,variant = 'outline',animat
 			className={classNames('langBtn',className)}>
 		<div
 				onClick={() => setIsOpen( !isOpen)}
-				className={`flx align-items-center gap-12 p-block-10 ${bottom && 'flag-wrap'}`}
+				className={`flx align-items-center gap-12 p-block-10 relative ${bottom && 'flag-wrap'}`}
 		>
 			<Flag_GE/>
 			<div className='dropIcon' style={{

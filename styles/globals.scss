@@ -768,9 +768,9 @@ opacity $animation_time ease-in;
     top: 100%;
     right: 0;
     color: #000;
-    background: rgba(255, 255, 255, 0.5);
-    background-color: rgba(255, 255, 255, 0.5);
-    box-shadow: 0 0 0 1px rgba(56, 56, 56, 0.1);
+    padding:10px 0;
+    background: white;
+    background-color: white;
     border-radius: 12px;
     margin-top: 4px;
   }
@@ -1029,6 +1029,7 @@ opacity $animation_time ease-in;
   line-height: 16px;
   color: #1e2837;
   padding-top: 34px;
+  margin-bottom: 48px;
 }
 
 .firstRow {
@@ -1064,7 +1065,7 @@ opacity $animation_time ease-in;
 .thirdRow {
   position: absolute;
   right: 0;
-  /* height: 380px; */
+  bottom: 0px;
   z-index: -1;
 }
 
@@ -1103,6 +1104,7 @@ opacity $animation_time ease-in;
 
 .footer{
   margin-top: 160px;
+  position: relative;
 }
 
 @media only screen and (min-width: 1080px) {
