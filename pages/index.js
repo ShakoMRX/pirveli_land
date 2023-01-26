@@ -383,7 +383,7 @@ const FaqSection = ({active}) => {
 						</motion.p>
 					</h4>
 					<ul className='flx flx-col gap-20' style={{
-						marginTop:"8px"
+						marginTop:"30px"
 					}}>
 						<li className='flx flx-col gap-8'>
 							<p className='text-s-16 md-text-s-24 text-weight-700 text-color-primary'>01</p>

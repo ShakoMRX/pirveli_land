@@ -34,7 +34,7 @@ export default function Footer() {
 
 
               {/* <div className={classes.allRightsText}> */}
-              <p className={"allRightTextStyle"}>
+              <p className={"allRightTextStyle aveSofRegular"}>
                 2022 © ყველა უფლება დაცულია. Pirveli.com
               </p>
               {/* </div> */}
