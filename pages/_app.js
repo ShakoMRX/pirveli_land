@@ -59,13 +59,7 @@ function MyApp(ctx){
 			<meta name="viewport" content="width=device-width,initial-scale=1"></meta>
 		</Head>
 
-
-		<script type="text/javascript">
-
-		</script>
-
-
-		<Script strategy="afterInteractive" dangerouslySetInnerHTML={{
+		<Script id="my-script" strategy="afterInteractive" dangerouslySetInnerHTML={{
 			__html:`(function(d, w, s) {
       var widgetHash = '6RbjV9Nq9riHUTrKPbFJ', bch = d.createElement(s); bch.type = 'text/javascript'; bch.async = true;
       bch.src = '//widgets.binotel.com/chat/widgets/' + widgetHash + '.js';
