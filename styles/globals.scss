@@ -10,7 +10,7 @@ bwchat#bwc-wrap #bwc-widget-action .bwc-chat .bwc-custom-icon svg * {
   fill: #ffffff !important;
 }
 #bwc-widget-action {
-  bottom: 97px !important;
+  bottom: 55px !important;
   right: 0px !important;
 }
 
@@ -657,7 +657,8 @@ opacity $animation_time ease-in;
 
           &.active {
             a {
-              color: $color;
+              color: #DB0060;
+              font-family: avenirMedium;
 
               &:after {
                 background-color: $color;
@@ -925,9 +926,8 @@ opacity $animation_time ease-in;
   margin: auto;
   justify-content: space-between;
   margin: auto;
-  /* max-width: calc(1440px - 100px);
-  padding-right: 30%; */
-  width: calc(100% - 100px);
+flex-direction: column;
+  //width: calc(100% - 100px);
   /* padding-left: 50px; */
 }
 
@@ -1023,8 +1023,12 @@ opacity $animation_time ease-in;
   font-size: 16px;
   line-height: 24px;
   color: #38383880;
-  padding-top: 93px;
-  margin-bottom: 48px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  max-width: 1594px;
+  width: 100%;
+  margin: auto;
+  padding-left: 16px;
 }
 
 .firstRow {
