@@ -533,7 +533,7 @@ opacity $animation_time ease-in;
 
   width: 100%;
   position: relative;
-  margin-bottom: 45%;
+  margin-bottom: 0%;
 
   @include max-min(min px(1080)) {
     margin-bottom: 0px;
@@ -818,11 +818,20 @@ opacity $animation_time ease-in;
 }
 
 .some-cntnr {
-  flex-direction: column;
+  flex-direction: column-reverse;
 
   @include max-min(min px(1080)) {
     flex-direction: row;
   }
+}
+
+@media only screen and (min-width: 1000px) {
+  .some-cntnr {
+    flex-direction: row;
+  }
+  //.video-container {
+  //  margin-bottom: 45%;
+  //}
 }
 
 .info-section {
@@ -937,7 +946,8 @@ opacity $animation_time ease-in;
   margin: auto;
   padding-right: calc(40% + 32px) !important;
 }
-.footerContainerInner{
+
+.footerContainerInner {
   display: flex;
   width: 100%;
   justify-content: space-between;

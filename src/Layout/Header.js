@@ -23,7 +23,7 @@ const LanguageSwitchButton = ({className,bottom,close,variant = 'outline',animat
 	// 		...config.headers,
 	// 		'Access-Control-Allow-Origin': '*',
 	// 		'Content-Type': 'application/json',
-	// 		Authorization: `Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJzRUNseXdhVnNxOURBMU1oMElNLTVFTUNsRU5WM1FMTnhuNlh1bDJoOVBnIn0.eyJleHAiOjE2NzQ3NTg2NjMsImlhdCI6MTY3NDcyMjY2MywianRpIjoiY2I3ODEwMTUtOGZiNy00YTZmLWI2YzktMGFhMWFlNjRjNDM2IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLnBpcnZlbGkuY29tL3JlYWxtcy94cmFjb29uLWRlbW8iLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiMWRlMGEyYTgtZDVkNC00OWQyLTg3YzctNjRkMjFhZDAyOWNhIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicGFzc3dvcmQtY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6IjQ2NWU0MzVkLTM1OTAtNDY1My04MTdhLTk0YTAzOTE2NDY3NiIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy14cmFjb29uLWRlbW8iLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiUFJPVklERVJfQURNSU4iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiI0NjVlNDM1ZC0zNTkwLTQ2NTMtODE3YS05NGEwMzkxNjQ2NzYiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInVzZXJfaWQiOiIxZGUwYTJhOC1kNWQ0LTQ5ZDItODdjNy02NGQyMWFkMDI5Y2EiLCJuYW1lIjoiVGF6byBEdmFsaXNodmlsaSIsInByZWZlcnJlZF91c2VybmFtZSI6IjU5MjI1MzI1MyIsImdpdmVuX25hbWUiOiJUYXpvIiwiZmFtaWx5X25hbWUiOiJEdmFsaXNodmlsaSJ9.JP5bLHY0OwNWy5w6OD8kmjwLUjAlc1qG6OBblZesA7TzkibQd4j82oMS8f86b1-ZxqDCldl1cuS9zh2jNpM_6kAyHVowL5E97uDQcrDliCzSmUqKMm-covwx6LlMqK8xV6xKkBLiJbC7dAmmIcZFAA3yzAzG1y4V3FHsPcXNbaUVMT9KCTBPg0VAMtMB1mbKYTJo4IvFemaVnZQLmstEq9s33wQYPUrxI5pUJsea50a78gzwctrmYj3_b3Cv4VsNBc1OGiVYrExmF93onK3vcKyCbO1bPemvZhgJjQEqLNvc2VyfpE2se_2Z-RHV5FnnAp6PiOdW6lpL5bme6FRpuQ`
+	// 		Authorization: `Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJzRUNseXdhVnNxOURBMU1oMElNLTVFTUNsRU5WM1FMTnhuNlh1bDJoOVBnIn0.eyJleHAiOjE2NzUxMDg3NTEsImlhdCI6MTY3NTA3Mjc1MSwianRpIjoiOWQyZTExYmYtMzYxYS00ZTExLTljZGEtNDYwMDViNzVjNzQzIiwiaXNzIjoiaHR0cHM6Ly9hdXRoLnBpcnZlbGkuY29tL3JlYWxtcy94cmFjb29uLWRlbW8iLCJzdWIiOiIxZGUwYTJhOC1kNWQ0LTQ5ZDItODdjNy02NGQyMWFkMDI5Y2EiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJwYXNzd29yZC1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiNjUxZDMwYjUtNTg2Zi00MzcwLTk1MzMtODQzZjYwMzYwODM5IiwiYWNyIjoiMSIsInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjY1MWQzMGI1LTU4NmYtNDM3MC05NTMzLTg0M2Y2MDM2MDgzOSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwidXNlcl9pZCI6IjFkZTBhMmE4LWQ1ZDQtNDlkMi04N2M3LTY0ZDIxYWQwMjljYSIsIm5hbWUiOiJUYXpvIER2YWxpc2h2aWxpIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiNTkyMjUzMjUzIiwiZ2l2ZW5fbmFtZSI6IlRhem8iLCJmYW1pbHlfbmFtZSI6IkR2YWxpc2h2aWxpIn0.Sq4k3bWbIqFHL7ouVR-HJupSMudkNvA9beqlAbZuJ80NsifUv6P2Vzhayk9xDklbfnk-Ph643c1C5FDRBKlgoy6z64EoKLyYe-g-lyy4xoBZ6zImxoPrmMv2YTWXoo2W57Xc7AIF3LGUPXnmVWruKc4pa_GsIi0Zwi26m5Jo8vJeQLPpGFV8SvUd3QgJFvrPeuZ7ATaAiU-cISlKswf-P3evUZnWJFtyR50nbVjngd18ddxcBoTz_Ck721ahLW-_8uxFKYI6HYhoewevQIG_0PosuakIBaRD-I5gTgOuJ9e1RJvNUtfm3N7fCyEfLdNoJW7BP0veqBvI3Sww7hseew`
 	// 	};
 	// 	return config;
 	// });
@@ -203,19 +203,19 @@ export default function Header({navigation:_navigation,languages}){
                   </div> */}
 											</div>
 											: null}
-							<motion.div
-									// animate={_useScroll >= indicatorRef.current ? { y: -100 } : { y: 0 }}
-									className='langBtn flx align-items-center gap-12 m-left-14'>
-								{userId ? <div className='line-h' style={{marginRight:"4px"}}></div> : null}
-								<LanguageSwitchButton
-										reset
-										close={_useScroll <= indicatorRef.current}
-										variant='none'
-										languages={languages}
-										className={'-'}
-										initial={_useScroll && _useScroll >= indicatorRef.current ? {y:-200} : {y:0}}
-								/>
-							</motion.div>
+							{/*<motion.div*/}
+							{/*		// animate={_useScroll >= indicatorRef.current ? { y: -100 } : { y: 0 }}*/}
+							{/*		className='langBtn flx align-items-center gap-12 m-left-14'>*/}
+							{/*	{userId ? <div className='line-h' style={{marginRight:"4px"}}></div> : null}*/}
+							{/*	<LanguageSwitchButton*/}
+							{/*			reset*/}
+							{/*			close={_useScroll <= indicatorRef.current}*/}
+							{/*			variant='none'*/}
+							{/*			languages={languages}*/}
+							{/*			className={'-'}*/}
+							{/*			initial={_useScroll && _useScroll >= indicatorRef.current ? {y:-200} : {y:0}}*/}
+							{/*	/>*/}
+							{/*</motion.div>*/}
 						</div>
 					</div>
 				</motion.div>
@@ -319,13 +319,13 @@ export default function Header({navigation:_navigation,languages}){
 
 									</div> : null}
 
-						<LanguageSwitchButton
-								close={_useScroll >= indicatorRef.current}
-								bottom={true}
-								languages={languages}
-								className={'langBtnmain'}
-								initial={_useScroll && _useScroll >= indicatorRef.current ? {y:-200} : {y:0}}
-						/>
+						{/*<LanguageSwitchButton*/}
+						{/*		close={_useScroll >= indicatorRef.current}*/}
+						{/*		bottom={true}*/}
+						{/*		languages={languages}*/}
+						{/*		className={'langBtnmain'}*/}
+						{/*		initial={_useScroll && _useScroll >= indicatorRef.current ? {y:-200} : {y:0}}*/}
+						{/*/>*/}
 
 						{/* <motion.div
             // initial={_useScroll && _useScroll >= indicatorRef.current ? { y: -200 } : { y: 0 }}
