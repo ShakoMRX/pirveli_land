@@ -819,7 +819,7 @@ opacity $animation_time ease-in;
 
 .some-cntnr {
   flex-direction: column-reverse;
-
+display: flex;
   @include max-min(min px(1080)) {
     flex-direction: row;
   }
