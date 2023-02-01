@@ -366,9 +366,10 @@ const FaqSection = ({active}) => {
 	return <div ref={ref}
 	            className='section-auto section-md-full md-flx md-flx-all size-full layout-wrap'>
 		<div className='some-cntnr md-flx md-flx-row gap-30 w-wide relative'>
-			<div className='section-auto section-md-auto divide-h p-top-80 relative z-3'>
+			<div className='section-auto section-md-auto divide-h p-top-80 relative z-3'
+			>
 				<div className='info-section w-full l-sm-w-490 lg-w-619'>
-					<h4 className='title-area flx flx-col text-weight-700 text-s-16 md-text-s-20 l-sm-text-s-28'>
+					<h4 className='texti title-area flx flx-col text-weight-700 text-s-16 md-text-s-20 l-sm-text-s-28'>
 						<motion.p
 
 								variants={textContainerTemplate}
@@ -408,9 +409,27 @@ const FaqSection = ({active}) => {
 					</ul>
 				</div>
 			</div>
-			<div className='section-auto section-md-auto divide-h flx flx-all md-block flex-g-1 p-top-80 ' style={{
-				paddingBottom:"150px"
+			<div className='section-auto section-md-auto divide-h flx flx-all md-block flex-g-1  ' style={{
+				paddingBottom:"150px",
+				paddingTop:"120px"
 			}}>
+
+				<h4 className='textii2 title-area flx flx-col text-weight-700 text-s-16 md-text-s-20 l-sm-text-s-28'>
+					<motion.p
+
+							variants={textContainerTemplate}
+							initial={'show'}
+							animate={isActive ? 'show' : 'hidden'}
+					>ლოიალურობაზე დაფუძნებული
+					</motion.p>
+					<motion.p
+
+							variants={textContainerTemplate2}
+							initial={'show'}
+							animate={isActive ? 'show' : 'hidden'}
+							className='text-color-primary m-left-auto transformleft'>ციფრული ეკოსისტემა
+					</motion.p>
+				</h4>
 
 				<motion.div
 
@@ -450,7 +469,7 @@ const FaqSectionSimple = ({active}) => {
 		<div className='row'>
 			<div className='col-md-6'>
 				<div className='info-section w-full l-sm-w-490 lg-w-619'>
-					<h4 className='title-area flx flx-col text-weight-700 text-s-16 md-text-s-20 l-sm-text-s-28'>
+					<h4 className='texti title-area flx flx-col text-weight-700 text-s-16 md-text-s-20 l-sm-text-s-28'>
 						<motion.p
 
 								variants={textContainerTemplate}

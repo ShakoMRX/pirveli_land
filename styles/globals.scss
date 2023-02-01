@@ -817,17 +817,35 @@ opacity $animation_time ease-in;
   }
 }
 
+
+
 .some-cntnr {
   flex-direction: column-reverse;
-display: flex;
+  display: flex;
   @include max-min(min px(1080)) {
     flex-direction: row;
   }
 }
 
+.texti {
+  display: none;
+}
+.textii2{
+  position: absolute;
+  display: flex;
+  top: 40px;
+  width: 100%;
+}
+
 @media only screen and (min-width: 1000px) {
   .some-cntnr {
     flex-direction: row;
+  }
+  .texti {
+    display: flex;
+  }
+  .textii2{
+    display: none;
   }
   //.video-container {
   //  margin-bottom: 45%;
@@ -1330,6 +1348,7 @@ display: flex;
   }
   .video-container .element {
     left: 16px;
+    bottom: -135px;
   }
 
 }

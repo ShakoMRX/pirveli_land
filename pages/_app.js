@@ -68,7 +68,6 @@ function MyApp(ctx){
 			<link rel="apple-touch-icon" sizes="180x180" href={fav.src}/>
 			<link rel="icon" type="image/png" sizes="32x32" href={fav.src}/>
 			<link rel="icon" type="image/png" sizes="16x16" href={fav.src}/>
-			<link rel="manifest" href={fav.src}/>
 
 		</Head>
 
