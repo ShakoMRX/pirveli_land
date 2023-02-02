@@ -18,16 +18,6 @@ const LanguageSwitchButton = ({className,bottom,close,variant = 'outline',animat
 	const [scroll] = useScrollValue();
 	const {ref,isOpen,setIsOpen} = useOutsideClick();
 
-	// axios.interceptors.request.use((config) => {
-	// 	config.headers = {
-	// 		...config.headers,
-	// 		'Access-Control-Allow-Origin': '*',
-	// 		'Content-Type': 'application/json',
-	// 		Authorization: `Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJzRUNseXdhVnNxOURBMU1oMElNLTVFTUNsRU5WM1FMTnhuNlh1bDJoOVBnIn0.eyJleHAiOjE2NzUxMDg3NTEsImlhdCI6MTY3NTA3Mjc1MSwianRpIjoiOWQyZTExYmYtMzYxYS00ZTExLTljZGEtNDYwMDViNzVjNzQzIiwiaXNzIjoiaHR0cHM6Ly9hdXRoLnBpcnZlbGkuY29tL3JlYWxtcy94cmFjb29uLWRlbW8iLCJzdWIiOiIxZGUwYTJhOC1kNWQ0LTQ5ZDItODdjNy02NGQyMWFkMDI5Y2EiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJwYXNzd29yZC1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiNjUxZDMwYjUtNTg2Zi00MzcwLTk1MzMtODQzZjYwMzYwODM5IiwiYWNyIjoiMSIsInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjY1MWQzMGI1LTU4NmYtNDM3MC05NTMzLTg0M2Y2MDM2MDgzOSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwidXNlcl9pZCI6IjFkZTBhMmE4LWQ1ZDQtNDlkMi04N2M3LTY0ZDIxYWQwMjljYSIsIm5hbWUiOiJUYXpvIER2YWxpc2h2aWxpIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiNTkyMjUzMjUzIiwiZ2l2ZW5fbmFtZSI6IlRhem8iLCJmYW1pbHlfbmFtZSI6IkR2YWxpc2h2aWxpIn0.Sq4k3bWbIqFHL7ouVR-HJupSMudkNvA9beqlAbZuJ80NsifUv6P2Vzhayk9xDklbfnk-Ph643c1C5FDRBKlgoy6z64EoKLyYe-g-lyy4xoBZ6zImxoPrmMv2YTWXoo2W57Xc7AIF3LGUPXnmVWruKc4pa_GsIi0Zwi26m5Jo8vJeQLPpGFV8SvUd3QgJFvrPeuZ7ATaAiU-cISlKswf-P3evUZnWJFtyR50nbVjngd18ddxcBoTz_Ck721ahLW-_8uxFKYI6HYhoewevQIG_0PosuakIBaRD-I5gTgOuJ9e1RJvNUtfm3N7fCyEfLdNoJW7BP0veqBvI3Sww7hseew`
-	// 	};
-	// 	return config;
-	// });
-
 	const motionValues = {animate,initial,exit};
 	const buttonProps = {reset,variant};
 
@@ -85,6 +75,10 @@ export default function Header({navigation:_navigation,languages}){
 	const [width,] = useWindow();
 	const [mobileMenu,setMobileMenu] = useState(false);
 	const [landDrop,openLangDrop] = useState(false);
+	const [isOpenDrop,setIsOpenDrop] = useState(false);
+	const wrapperRef = useRef(null);
+
+
 	useEffect(() => {
 		axios.get('https://pirveli.com/api/racoon-transactions/user').then((res) => {
 			setUserId(res.data)
@@ -133,18 +127,108 @@ export default function Header({navigation:_navigation,languages}){
 	useEffect(() => {
 	},[scroll])
 
-	// console.log('_useScroll && _useScroll > 0', _useScroll > 0)
 
 	const auth = () => {
-		// https://pirveli.com/api
-		// axios.get(`${process.env.API_URL}/main/page`).then((res)=>{
-		//   console.log("Res",res)
-		// }).catch((e)=>{
-		//   console.log("cathc",e)
-		// })
 
 		Router.push('/main/page')
 
+	}
+
+	useOutsideAlerter(wrapperRef);
+
+	function useOutsideAlerter(ref) {
+		useEffect(() => {
+			function handleClickOutside(event) {
+				if (ref.current && !ref.current.contains(event.target)) {
+					setIsOpenDrop(false)
+				}
+			}
+
+			// Bind the event listener
+			document.addEventListener("mousedown", handleClickOutside);
+			return () => {
+				// Unbind the event listener on clean up
+				document.removeEventListener("mousedown", handleClickOutside);
+			};
+		}, [ref]);
+	}
+
+
+	const dropdownJsx = () => {
+		return <div
+				ref={wrapperRef}
+				className={"dr1"}>
+			{/*<p className={"dr2 aveSofBold"}>bakuri kokhodze</p>*/}
+
+			<div className={"dr3 "}>
+				<p className={"dr4 aveSofRegular"}>ბალანსი</p>
+				<div className={"dr5"}>
+					<p className={"dr6 aveSofRegular"}>27</p>
+					{/*<Lari color={"#383838"} classes={"ml-1"}/>*/}
+				</div>
+			</div>
+
+			<Link href={"https://profile.pirveli.com/"} passHref={true}>
+				<div className={"dr7 "}
+				>
+					<ImageComponent width={20} height={20} src={'/assets/img/menu/liderboard.svg'}/>
+					<p className={"dr8 aveSofRegular"}>ლიდერბორდი</p>
+				</div>
+			</Link>
+
+			<Link href={"https://profile.pirveli.com/tickets"} passHref={true}>
+				<div className={"dr9"}
+				>
+					<ImageComponent width={20} height={20} src={'/assets/img/menu/tickets.svg'}/>
+					<p className={"dr8 aveSofRegular"}>ჩემი ბილეთები</p>
+				</div>
+			</Link>
+
+
+			<div className={"dr10 "}/>
+			<Link href={"https://profile.pirveli.com/orders"} passHref={true}>
+				<div className={"dr11"}
+				>
+					<div
+							style={{
+								display:"flex"
+							}}
+					>
+						<ImageComponent width={20} height={20} src={'/assets/img/menu/order.svg'}/>
+						<p className={"dr8 aveSofRegular"}>ჩემი ვაუჩერები</p>
+					</div>
+					<div
+							className={"dr12 "}>
+						<span className={"dr13 aveSofRegular"}>2</span>
+					</div>
+				</div>
+			</Link>
+
+			<div className={"dr10 "}/>
+
+			<Link href={"https://profile.pirveli.com/profile-edit"} passHref={true}>
+				<div className={"dr14 "}
+				>
+					<ImageComponent width={20} height={20} src={'/assets/img/menu/settings.svg'}/>
+					<p className={"dr8 aveSofRegular"}>რედაქტირება</p>
+				</div>
+			</Link>
+
+			<div className={"dr14 "}>
+				<ImageComponent width={20} height={20} src={'/assets/img/menu/logOut.svg'}/>
+				<form style={{marginLeft:"8px"}} action="https://pirveli.com/logout" method="post">
+					<button className={"text-[#383838] text-[14px] aveSofRegular"}
+					        style={{
+						        color:"#383838",
+						        fontSize:"14px",
+						        paddingLeft:"0px"
+					        }}
+					        type={"submit"}>გასვლა
+					</button>
+				</form>
+			</div>
+
+		</div>
 	}
 
 	return (
@@ -250,14 +334,30 @@ export default function Header({navigation:_navigation,languages}){
 											// initial={{ x: 0 }}
 											// animate={(_useScroll > indicatorRef.current) ? { y: -63 } : { y: 0 }}
 									>
-										<Link key="userInfo" href={process.env.PROFILE_LINK}>
-											<div className="flx align-items-center gap-12"
+										{/*href={process.env.PROFILE_LINK}*/}
+										<div key="userInfo" ref={wrapperRef} onClick={() => {
+											setIsOpenDrop( !isOpenDrop)
+										}}>
+											<div className="flx align-items-center gap-12 relative"
 											     style={{
 												     backgroundColor:"rgba(255, 255, 255, 0.5019607843)",
 												     border:"1px solid rgba(56, 56, 56, 0.1019607843)",
 												     borderRadius:"12px",
 											     }}
 											>
+
+												<div className={"dropdown absolute top-0"}
+												     // ref={wrapperRef}
+												     onClick={(e) => {
+													     e.stopPropagation()
+												     }}
+												     style={{
+													     display:isOpenDrop ? "flex" : "none"
+												     }}
+												>
+													{dropdownJsx()}
+												</div>
+
 												<AnimatePresence>
 													{_useScroll < indicatorRef.current
 															? <motion.div
@@ -297,25 +397,46 @@ export default function Header({navigation:_navigation,languages}){
 
 												</div>
 											</div>
-										</Link>
-										<div className={"arrowDown"}
-										     style={{
-											     height:"100%",
-											     alignItems:"center",
-											     position:"relative",
-											     marginLeft:"12px"
-										     }}
-										>
-											<svg style={{
-												transition:'0.5s',
-												transform:'rotate(180deg)'
-											}}
-											     width="8" height="5" viewBox="0 0 8 5" fill="none"
-											     xmlns="http://www.w3.org/2000/svg">
-												<path opacity="0.7" d="M0.75 4.25L4 0.75L7.25 4.25" stroke="#383838" strokeWidth="1.5"
-												      strokeLinecap="round" strokeLinejoin="round"/>
-											</svg>
 										</div>
+
+												<div className={"h-full flex items-center relative  pl-3"}
+												     style={{
+															 height:"100%",
+													     display:"flex",
+													     alignItems:"center",
+													     marginLeft:"12px",
+													     position:"relative"
+												     }}
+												>
+												<svg style={{
+													transition: '0.5s',
+													transform: isOpenDrop ? 'rotate(0deg)' : 'rotate(180deg)'
+												}}
+												     width="8" height="5" viewBox="0 0 8 5" fill="none"
+												     xmlns="http://www.w3.org/2000/svg">
+													<path opacity="0.7" d="M0.75 4.25L4 0.75L7.25 4.25" stroke="#383838" strokeWidth="1.5"
+													      strokeLinecap="round" strokeLinejoin="round"/>
+												</svg>
+											</div>
+
+										{/*<div className={"arrowDown"}*/}
+										{/*     style={{*/}
+										{/*	     height:"100%",*/}
+										{/*	     alignItems:"center",*/}
+										{/*	     position:"relative",*/}
+										{/*	     marginLeft:"12px"*/}
+										{/*     }}*/}
+										{/*>*/}
+										{/*	<svg style={{*/}
+										{/*		transition:'0.5s',*/}
+										{/*		transform:'rotate(180deg)'*/}
+										{/*	}}*/}
+										{/*	     width="8" height="5" viewBox="0 0 8 5" fill="none"*/}
+										{/*	     xmlns="http://www.w3.org/2000/svg">*/}
+										{/*		<path opacity="0.7" d="M0.75 4.25L4 0.75L7.25 4.25" stroke="#383838" strokeWidth="1.5"*/}
+										{/*		      strokeLinecap="round" strokeLinejoin="round"/>*/}
+										{/*	</svg>*/}
+										{/*</div>*/}
 
 									</div> : null}
 
