@@ -136,21 +136,21 @@ export default function Header({navigation:_navigation,languages}){
 
 	useOutsideAlerter(wrapperRef);
 
-	function useOutsideAlerter(ref) {
+	function useOutsideAlerter(ref){
 		useEffect(() => {
-			function handleClickOutside(event) {
+			function handleClickOutside(event){
 				if (ref.current && !ref.current.contains(event.target)) {
 					setIsOpenDrop(false)
 				}
 			}
 
 			// Bind the event listener
-			document.addEventListener("mousedown", handleClickOutside);
+			document.addEventListener("mousedown",handleClickOutside);
 			return () => {
 				// Unbind the event listener on clean up
-				document.removeEventListener("mousedown", handleClickOutside);
+				document.removeEventListener("mousedown",handleClickOutside);
 			};
-		}, [ref]);
+		},[ref]);
 	}
 
 
@@ -186,23 +186,23 @@ export default function Header({navigation:_navigation,languages}){
 
 
 			<div className={"dr10 "}/>
-			<Link href={"https://profile.pirveli.com/orders"} passHref={true}>
-				<div className={"dr11"}
-				>
-					<div
-							style={{
-								display:"flex"
-							}}
-					>
-						<ImageComponent width={20} height={20} src={'/assets/img/menu/order.svg'}/>
-						<p className={"dr8 aveSofRegular"}>ჩემი ვაუჩერები</p>
-					</div>
-					<div
-							className={"dr12 "}>
-						<span className={"dr13 aveSofRegular"}>2</span>
-					</div>
-				</div>
-			</Link>
+			{/*<Link href={"https://profile.pirveli.com/orders"} passHref={true}>*/}
+			{/*	<div className={"dr11"}*/}
+			{/*	>*/}
+			{/*		<div*/}
+			{/*				style={{*/}
+			{/*					display:"flex"*/}
+			{/*				}}*/}
+			{/*		>*/}
+			{/*			<ImageComponent width={20} height={20} src={'/assets/img/menu/order.svg'}/>*/}
+			{/*			<p className={"dr8 aveSofRegular"}>ჩემი ვაუჩერები</p>*/}
+			{/*		</div>*/}
+			{/*		<div*/}
+			{/*				className={"dr12 "}>*/}
+			{/*			<span className={"dr13 aveSofRegular"}>2</span>*/}
+			{/*		</div>*/}
+			{/*	</div>*/}
+			{/*</Link>*/}
 
 			<div className={"dr10 "}/>
 
@@ -267,17 +267,16 @@ export default function Header({navigation:_navigation,languages}){
 									</div>
 									: _useScroll > 0 && userId || mobileMenu && userId
 											? <div className='flx align-items-center m-left-auto b-radius-100'
-											       style={{
-												       gap:"7px"
-											       }}
+
 											>
-												<div className='p-left-16'>
-													<ImageComponent width={20} height={20} src={'/assets/img/coin.png'}/>
-												</div>
 												<p className={"point aveSofRegular"} style={{
 													color:"white",
 													fontSize:"14px",
+													marginRight:"7px"
 												}}>{points?.amountOfPoints}</p>
+												<div>
+													<ImageComponent width={20} height={20} src={'/assets/img/coin.png'}/>
+												</div>
 												{/* <div className='w-34 h-34 b-radius-inherit bg-color-yellow flx flx-all'
                     style={user?.avatar && user?.avatar?.code ? {
                       backgroundColor: `#${user?.avatar?.code}`
@@ -347,13 +346,13 @@ export default function Header({navigation:_navigation,languages}){
 											>
 
 												<div className={"dropdown absolute top-0"}
-												     // ref={wrapperRef}
-												     onClick={(e) => {
-													     e.stopPropagation()
-												     }}
-												     style={{
-													     display:isOpenDrop ? "flex" : "none"
-												     }}
+														// ref={wrapperRef}
+														 onClick={(e) => {
+															 e.stopPropagation()
+														 }}
+														 style={{
+															 display:isOpenDrop ? "flex" : "none"
+														 }}
 												>
 													{dropdownJsx()}
 												</div>
@@ -399,25 +398,25 @@ export default function Header({navigation:_navigation,languages}){
 											</div>
 										</div>
 
-												<div className={"h-full flex items-center relative  pl-3"}
-												     style={{
-															 height:"100%",
-													     display:"flex",
-													     alignItems:"center",
-													     marginLeft:"12px",
-													     position:"relative"
-												     }}
-												>
-												<svg style={{
-													transition: '0.5s',
-													transform: isOpenDrop ? 'rotate(0deg)' : 'rotate(180deg)'
-												}}
-												     width="8" height="5" viewBox="0 0 8 5" fill="none"
-												     xmlns="http://www.w3.org/2000/svg">
-													<path opacity="0.7" d="M0.75 4.25L4 0.75L7.25 4.25" stroke="#383838" strokeWidth="1.5"
-													      strokeLinecap="round" strokeLinejoin="round"/>
-												</svg>
-											</div>
+										<div className={"h-full flex items-center relative  pl-3"}
+										     style={{
+											     height:"100%",
+											     display:"flex",
+											     alignItems:"center",
+											     marginLeft:"12px",
+											     position:"relative"
+										     }}
+										>
+											<svg style={{
+												transition:'0.5s',
+												transform:isOpenDrop ? 'rotate(0deg)' : 'rotate(180deg)'
+											}}
+											     width="8" height="5" viewBox="0 0 8 5" fill="none"
+											     xmlns="http://www.w3.org/2000/svg">
+												<path opacity="0.7" d="M0.75 4.25L4 0.75L7.25 4.25" stroke="#383838" strokeWidth="1.5"
+												      strokeLinecap="round" strokeLinejoin="round"/>
+											</svg>
+										</div>
 
 										{/*<div className={"arrowDown"}*/}
 										{/*     style={{*/}
