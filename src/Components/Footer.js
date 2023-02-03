@@ -193,10 +193,9 @@ export default function Footer(){
 
 					<div className={"thirdRow"}>
 						<img
-								src='assets/footerIcon/footer.png'
+								src='assets/footerIcon/footer.webp'
 								alt='footer'
-								width='591px'
-								height='380px'
+								height='506'
 								className={"iconsStyle"}
 						/>
 					</div>
