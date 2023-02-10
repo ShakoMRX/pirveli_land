@@ -317,7 +317,11 @@ export default function Header({navigation:_navigation,languages}){
 							<ImageComponent src={'/assets/img/logo.png'} quality={100} width={175} height={50}/>
 						</Link>
 					</div>
-					<div className='user-area m-left-auto flx align-items-center gap-12'>
+					<div className=' user-area m-left-auto flx align-items-center gap-12'
+					     style={{
+						     cursor:"pointer"
+					     }}
+					>
 
 						{
 							!avatar?.code
@@ -357,16 +361,6 @@ export default function Header({navigation:_navigation,languages}){
 												>
 													{dropdownJsx()}
 												</div>
-
-												<AnimatePresence>
-													{_useScroll < indicatorRef.current
-															? <motion.div
-																	animate={(_useScroll > indicatorRef.current) ? {x:63} : {x:0}}
-																	className='p-left-16'>
-																<ImageComponent width={20} height={20} src={'/assets/img/coin.png'}/>
-															</motion.div>
-															: null}
-												</AnimatePresence>
 												<AnimatePresence>
 													{_useScroll < indicatorRef.current
 															? <motion.div
@@ -375,8 +369,18 @@ export default function Header({navigation:_navigation,languages}){
 																<p className={"point aveSofRegular"} style={{
 																	color:"black",
 																	fontWeight:"600 !important",
-																	fontSize:"14px"
+																	fontSize:"14px",
+																	paddingLeft:"16px"
 																}}>{points?.amountOfPoints}</p>
+															</motion.div>
+															: null}
+												</AnimatePresence>
+												<AnimatePresence>
+													{_useScroll < indicatorRef.current
+															? <motion.div
+																	animate={(_useScroll > indicatorRef.current) ? {x:63} : {x:0}}
+																	className=''>
+																<ImageComponent width={20} height={20} src={'/assets/img/coin.png'}/>
 															</motion.div>
 															: null}
 												</AnimatePresence>
