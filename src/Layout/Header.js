@@ -325,18 +325,19 @@ export default function Header({navigation:_navigation,languages}){
 									<a href={"/main/page"}>
 										<Button variant={'primary'} size={'normal'} text={'შესვლა'}/>
 									</a>
-									: width >= 768 ? <div
+									: <div
 											style={{
 												display:'flex',
 												alignItems:'center',
 											}}
+											ref={wrapperRef} onClick={() => {
+										setIsOpenDrop( !isOpenDrop)
+									}}
 											// initial={{ x: 0 }}
 											// animate={(_useScroll > indicatorRef.current) ? { y: -63 } : { y: 0 }}
 									>
 										{/*href={process.env.PROFILE_LINK}*/}
-										<div key="userInfo" ref={wrapperRef} onClick={() => {
-											setIsOpenDrop( !isOpenDrop)
-										}}>
+										<div key="userInfo">
 											<div className="flx align-items-center gap-12 relative"
 											     style={{
 												     backgroundColor:"rgba(255, 255, 255, 0.5019607843)",
@@ -398,7 +399,7 @@ export default function Header({navigation:_navigation,languages}){
 											</div>
 										</div>
 
-										<div className={"h-full flex items-center relative  pl-3"}
+										<div className={"h-full flex items-center relative pl-3"}
 										     style={{
 											     height:"100%",
 											     display:"flex",
@@ -437,7 +438,7 @@ export default function Header({navigation:_navigation,languages}){
 										{/*	</svg>*/}
 										{/*</div>*/}
 
-									</div> : null}
+									</div>}
 
 						{/*<LanguageSwitchButton*/}
 						{/*		close={_useScroll >= indicatorRef.current}*/}
@@ -477,11 +478,11 @@ export default function Header({navigation:_navigation,languages}){
               </motion.div> : null}
             </Button>
           </motion.div> */}
-						<Button onClick={() => setMobileMenu(true)} variant='none' reset className={'flx flx-all md-hidden'}
-						        style={{width:34,height:34}}>
-							<ImageComponent width={20} height={20} src={'/assets/img/burger.svg'}/>
+						{/*<Button onClick={() => setMobileMenu(true)} variant='none' reset className={'flx flx-all md-hidden'}*/}
+						{/*        style={{width:34,height:34}}>*/}
+						{/*	<ImageComponent width={20} height={20} src={'/assets/img/burger.svg'}/>*/}
 
-						</Button>
+						{/*</Button>*/}
 					</div>
 				</motion.div>
 

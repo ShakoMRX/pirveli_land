@@ -29,11 +29,7 @@ export default function Footer(){
 						<div className={"footerContainerInner"}>
 							<div className={"leftSideContainer"}>
 								<div className={"headerIcon"}>
-									{/* <img
-							src='/footerIcon.png'
-							alt='headerIcon'
-							className={classes.iconsStyle}
-						/> */}
+
 									<p className={"textTitle aveSofBold"}>პირველი</p>
 									<Link href={'/aboutUsPage'}>
 										<p className={"textStyle"}>ჩვენს შესახებ</p>
@@ -232,6 +228,12 @@ export default function Footer(){
 				</div>
 				<div className={"footer2 "}>
 					<div className={"layout-wrap"}>
+						<div className={"line"}
+						     style={{
+							     marginTop:"0px",
+							     marginBottom:"50px"
+						     }}
+						/>
 						<div className={"accordion"}
 						     onClick={() => toggle(1)}
 						     style={{
