@@ -62,7 +62,7 @@ function MyApp(ctx){
 	},[])
 
 	async function check() {
-		const response = await axios.post(`${baseApi}/secured-ip`);
+		const response = await axios.post(`https://pirveli.com/api/racoon-transactions/secured-ip`);
 		return response
 	}
 
