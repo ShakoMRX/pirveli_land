@@ -61,18 +61,16 @@ function MyApp(ctx){
 
 	},[])
 
-	async function check() {
-		const response = await axios.post(`https://pirveli.com/api/racoon-transactions/secured-ip`);
-		return response
-	}
+	// async function check() {
+	// 	const response = await axios.post(`https://pirveli.com/api/racoon-transactions/secured-ip`);
+	// 	return response
+	// }
+	//
+	// check().then((res) => console.log(res)).catch((error) => {
+	// 	// console.log('resposne status', error.response.status);
+	// 	setStatus(error.response.status)
+	// })
 
-	check().then((res) => console.log(res)).catch((error) => {
-		// console.log('resposne status', error.response.status);
-		setStatus(error.response.status)
-	})
-	if (status == null) {
-		return ''
-	}
 
 
 	return <div>
@@ -100,12 +98,19 @@ function MyApp(ctx){
 		}}/>
 		<UserProvider initialValue={userData}>
 			<ScrollProvider>
-				{status !== 404 ? <CountDown/> : <Layout>
+				{/*{status !== 404 ? <CountDown/> : <Layout>*/}
+				{/*	<Header languages={Languages} navigation={appData.navigation}/>*/}
+				{/*	<Component {...pageProps} appData={appData}/>*/}
+				{/*	/!* <MobileMenu /> *!/*/}
+				{/*	/!* <MessengerChatIcon /> *!/*/}
+				{/*</Layout>}*/}
+
+				<Layout>
 					<Header languages={Languages} navigation={appData.navigation}/>
 					<Component {...pageProps} appData={appData}/>
 					{/* <MobileMenu /> */}
 					{/* <MessengerChatIcon /> */}
-				</Layout>}
+				</Layout>
 			</ScrollProvider>
 		</UserProvider>
 	</div>
