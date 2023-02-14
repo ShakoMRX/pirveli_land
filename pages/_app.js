@@ -7,8 +7,12 @@ import {ScrollProvider,UserProvider} from '../src/store';
 import fetchApi from '../src/utils/fetch';
 import '../styles/globals.scss'
 import "../styles/font.scss"
+import "../styles/countdown.css"
+
 import Script from 'next/script'
 import fav from "/public/assets/img/fav.png"
+import axios from "axios";
+import CountDown from "../src/Components/countdown";
 
 const Languages = [
 	{name:'GB',slug:'gb'},
@@ -28,6 +32,8 @@ function MyApp(ctx){
 		isLoading: !false
 	});
 
+	const [status, setStatus] = useState(null);
+	const baseApi = process.env.API_URL;
 
 	useEffect(() => {
 		// setUserData({
@@ -55,6 +61,20 @@ function MyApp(ctx){
 
 	},[])
 
+	async function check() {
+		const response = await axios.post(`${baseApi}/secured-ip`);
+		return response
+	}
+
+	check().then((res) => console.log(res)).catch((error) => {
+		// console.log('resposne status', error.response.status);
+		setStatus(error.response.status)
+	})
+	if (status == null) {
+		return ''
+	}
+
+
 	return <div>
 
 		<Head>
@@ -80,12 +100,12 @@ function MyApp(ctx){
 		}}/>
 		<UserProvider initialValue={userData}>
 			<ScrollProvider>
-				<Layout>
+				{status !== 404 ? <CountDown/> : <Layout>
 					<Header languages={Languages} navigation={appData.navigation}/>
 					<Component {...pageProps} appData={appData}/>
 					{/* <MobileMenu /> */}
 					{/* <MessengerChatIcon /> */}
-				</Layout>
+				</Layout>}
 			</ScrollProvider>
 		</UserProvider>
 	</div>

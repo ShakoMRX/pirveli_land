@@ -222,7 +222,7 @@ export default function Footer(){
 
 					<div>
 						<p className={"allRightTextStyle layout-wrap aveSofRegular"}>
-							2022 © ყველა უფლება დაცულია. Pirveli.com
+							{new Date().getFullYear()} © ყველა უფლება დაცულია. Pirveli.com
 						</p>
 					</div>
 				</div>
@@ -467,7 +467,7 @@ export default function Footer(){
 						</div>
 
 						<p className={"allRightTextStyle2 aveSofRegular"}>
-							2022 © ყველა უფლება დაცულია. Pirveli.com
+							{new Date().getFullYear()} © ყველა უფლება დაცულია. Pirveli.com
 						</p>
 
 					</div>
